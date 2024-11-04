@@ -13,15 +13,15 @@ interface Book {
   dateRead: string;
   pubDate: string;
 }
-
+test;
 function BookSkeleton() {
   return (
-    <div className="space-y-4 animate-pulse">
+    <div className="animate-pulse space-y-4">
       {[1, 2, 3].map((i) => (
         <div key={i} className="border-b pb-4">
-          <div className="h-6 bg-muted rounded w-3/4 mb-2"></div>
-          <div className="h-4 bg-muted rounded w-1/2 mb-2"></div>
-          <div className="h-4 bg-muted rounded w-1/4"></div>
+          <div className="mb-2 h-6 w-3/4 rounded bg-muted"></div>
+          <div className="mb-2 h-4 w-1/2 rounded bg-muted"></div>
+          <div className="h-4 w-1/4 rounded bg-muted"></div>
         </div>
       ))}
     </div>
@@ -45,17 +45,17 @@ function BookList({ books }: { books: Book[] }) {
         >
           <article className="flex items-start justify-between gap-2">
             <div className="space-y-1">
-              <h3 className="text-lg font-medium group-hover:text-primary transition-colors">
+              <h3 className="text-lg font-medium transition-colors group-hover:text-primary">
                 {book.title}
               </h3>
               <p className="text-sm text-muted-foreground">by {book.author}</p>
               {book.dateRead && (
-                <time className="text-sm text-muted-foreground block">
+                <time className="block text-sm text-muted-foreground">
                   Read {formatDistanceToNow(new Date(book.dateRead), { addSuffix: true })}
                 </time>
               )}
             </div>
-            <ArrowUpRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0" />
+            <ArrowUpRight className="h-5 w-5 flex-shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
           </article>
         </Link>
       ))}
@@ -84,10 +84,10 @@ export default function BooksPage() {
   }, []);
 
   return (
-    <main className="py-20 min-h-screen mt-8">
+    <main className="mt-8 min-h-screen py-20">
       <div className="container mx-auto px-4">
         <motion.div
-          className="max-w-2xl mx-auto"
+          className="mx-auto max-w-2xl"
           initial="hidden"
           animate="visible"
           variants={{
@@ -95,8 +95,8 @@ export default function BooksPage() {
             visible: { opacity: 1, transition: { duration: 0.5 } },
           }}
         >
-          <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Reading List</h1>
-          <p className="text-muted-foreground text-center mb-8">Books I&apos;ve read recently</p>
+          <h1 className="mb-4 text-center text-3xl font-bold md:text-4xl">Reading List</h1>
+          <p className="mb-8 text-center text-muted-foreground">Books I&apos;ve read recently</p>
           <Suspense fallback={<BookSkeleton />}>
             {isLoading ? <BookSkeleton /> : <BookList books={books} />}
           </Suspense>
