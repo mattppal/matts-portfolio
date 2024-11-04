@@ -1,7 +1,6 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
@@ -26,7 +25,7 @@ export function HeroSection() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.2 }}
                 >
-                    👋 Hi, I'm Matt
+                    👋 Hi, I&apos;m Matt
                 </motion.h1>
                 <motion.p
                     className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-8"

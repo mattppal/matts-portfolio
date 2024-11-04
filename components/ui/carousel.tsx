@@ -58,7 +58,8 @@ export function Carousel({
             <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-background to-transparent z-10" />
 
             <motion.div
-                className={cn("flex", `gap-${gap}`, "scale-75 sm:scale-100")}
+                className="flex scale-75 sm:scale-100"
+                style={{ gap: `${gap * 4}px` }}
                 animate={{
                     x: [`0%`, `-${100 / 3}%`]
                 }}
