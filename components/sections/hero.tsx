@@ -1,12 +1,11 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { LogoCarousel } from "@/components/logo-carousel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export function Hero() {
     return (
-        <section className="min-h-[calc(100vh-16rem)] flex flex-col justify-center">
+        <section className="min-h-[calc(100vh-32rem)] flex flex-col justify-center">
             <div className="container mx-auto px-4 flex flex-col items-center text-center gap-8">
                 <motion.div
                     initial={{ scale: 0.5, opacity: 0 }}
@@ -35,8 +34,6 @@ export function Hero() {
                 >
                     Developer, creator, and technologist building beautiful digital experiences
                 </motion.p>
-                <p className="text-center text-muted-foreground">Trusted by content teams at</p>
-                <LogoCarousel />
             </div>
         </section>
     )

@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 export function CreatorPill() {
     return (
         <motion.div
-            className="w-full flex justify-center mt-24 mb-16"
+            className="w-full flex justify-center mb-8"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}

@@ -55,7 +55,7 @@ export function Carousel({
     const duplicatedItems = [...items, ...items, ...items]
 
     return (
-        <div className="relative w-full overflow-hidden sm:h-[auto] h-[70%]">
+        <div className="relative w-full overflow-hidden sm:h-[auto] h-[70%] mt-4">
             <div className="absolute inset-y-0 left-0 w-16 sm:w-32 bg-gradient-to-r from-background to-transparent z-10" />
             <div className="absolute inset-y-0 right-0 w-16 sm:w-32 bg-gradient-to-l from-background to-transparent z-10" />
 
