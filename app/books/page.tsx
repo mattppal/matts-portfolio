@@ -13,6 +13,7 @@ interface Book {
   dateRead: string;
   pubDate: string;
 }
+
 function BookSkeleton() {
   return (
     <div className="animate-pulse space-y-4">
