@@ -7,16 +7,16 @@ import { Badge } from '@/components/ui/badge';
 export function CreatorPill() {
   return (
     <motion.div
-      className="w-full flex justify-center mb-8"
+      className="mb-8 flex w-full justify-center"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
       <Badge
         variant="secondary"
-        className="px-4 py-2 flex items-center gap-2 text-base shadow-lg hover:shadow-xl transition-shadow"
+        className="flex items-center gap-2 px-4 py-2 text-base shadow-lg transition-shadow hover:shadow-xl"
       >
-        <span>technical marketer behind</span>
+        <span>the technical marketer behind</span>
         <Image
           src="/replit.svg"
           alt="Replit"
