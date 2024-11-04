@@ -1,4 +1,7 @@
-node_modules
 .next
-public
+.cache
+package-lock.yaml
 pnpm-lock.yaml
+public
+node_modules
+next-env.d.ts
