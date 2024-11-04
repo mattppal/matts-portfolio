@@ -21,6 +21,7 @@ export const assets = {
     squat: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/squat.mp4',
   },
   'logo-carousel': {
+    '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/.DS_Store',
     Linkedin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/Linkedin.svg',
     a16z: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/a16z.svg',
     bytewax: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/bytewax.svg',
@@ -34,8 +35,6 @@ export const assets = {
     tobiko: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/tobiko.svg',
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
     yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/yc.svg',
-    ycombinator:
-      'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/ycombinator.svg',
   },
   replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/replit.svg',
 } as const;
