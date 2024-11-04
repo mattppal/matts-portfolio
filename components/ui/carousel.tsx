@@ -28,6 +28,20 @@ export function Carousel({
 }: CarouselProps) {
     const [items, setItems] = useState<string[]>([])
 
+    // Generate SVG blur placeholder
+    const blurSvg = `
+        <svg width="400" height="300" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="g" gradientTransform="rotate(45)">
+                    <stop offset="0%" stop-color="#333" stop-opacity="0.2" />
+                    <stop offset="100%" stop-color="#222" stop-opacity="0.3" />
+                </linearGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#g)" />
+        </svg>
+    `
+    const blurDataURL = `data:image/svg+xml;base64,${Buffer.from(blurSvg).toString('base64')}`
+
     useEffect(() => {
         const fetchItems = async () => {
             try {
@@ -51,7 +65,6 @@ export function Carousel({
         return null
     }
 
-    // Triple the items to ensure smooth infinite scrolling
     const duplicatedItems = [...items, ...items, ...items]
 
     return (
@@ -73,13 +86,6 @@ export function Carousel({
                         ease: "linear",
                     },
                 }}
-                onAnimationComplete={() => {
-                    // Reset position when animation completes
-                    const element = document.querySelector('.motion-div') as HTMLElement
-                    if (element) {
-                        element.style.transform = 'translateX(0%)'
-                    }
-                }}
             >
                 {duplicatedItems.map((src, index) => (
                     <div
@@ -95,15 +101,15 @@ export function Carousel({
                             alt={`Carousel item ${(index % items.length) + 1}`}
                             fill
                             priority={priority && index < items.length}
-                            loading={priority ? "lazy" : "eager"}
+                            loading={priority ? "eager" : "lazy"}
                             placeholder="blur"
-                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQrJyEwPENBLzMzLy0zPVBCR0JHMy1LVEVZWVlBSVtTW2GBg2VYd2BJWWr/2wBDARUXFyAeIBohHB8hMSgmKVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVH/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+                            blurDataURL={blurDataURL}
                             className={cn(
-                                "object-contain",
+                                "object-contain transition-opacity duration-500",
                                 imageClassName
                             )}
-                            sizes="(max-width: 640px) 75vw, 100vw"
-                            quality={90}
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            quality={80}
                         />
                     </div>
                 ))}
