@@ -22,6 +22,8 @@ export const assets = {
   },
   'logo-carousel': {
     Linkedin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/Linkedin.svg',
+    a16z: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/a16z.svg',
+    bytewax: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/bytewax.svg',
     'coalesce-logo':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/coalesce-logo.svg',
     databricks:
@@ -29,6 +31,11 @@ export const assets = {
     hex: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/hex.svg',
     oreilly: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/oreilly.svg',
     replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/replit.svg',
+    tobiko: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/tobiko.svg',
+    xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
+    yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/yc.svg',
+    ycombinator:
+      'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/ycombinator.svg',
   },
   replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/replit.svg',
 } as const;
