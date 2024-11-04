@@ -1,19 +1,17 @@
 import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+
+const logos = [
+    {
+        src: "/path/to/logo1.png",
+        alt: "Logo 1"
+    },
+    {
+        src: "/path/to/logo2.png",
+        alt: "Logo 2"
+    },
+    // Add more logos as needed
+]
 
 export async function GET() {
-    try {
-        const logoDirectory = path.join(process.cwd(), 'public/logo-carousel')
-        const files = fs.readdirSync(logoDirectory)
-
-        const logos = files
-            .filter(file => file.match(/\.(jpg|jpeg|png|svg)$/i))
-            .map(file => `/logo-carousel/${file}`)
-
-        return NextResponse.json({ logos })
-    } catch (error) {
-        console.error('Error reading logos directory:', error)
-        return NextResponse.json({ logos: [] }, { status: 500 })
-    }
+    return NextResponse.json(logos)
 } 

@@ -6,14 +6,12 @@ import { ProjectsSection } from "@/components/sections/projects"
 import { ContactSection } from "@/components/sections/contact"
 import { ImageGallery } from "@/components/image-gallery"
 import { Skeleton } from "@/components/ui/skeleton"
-import { NavBar } from "@/components/nav-bar"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { CreatorPill } from "@/components/creator-pill"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <NavBar />
 
       <CreatorPill />
       <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
