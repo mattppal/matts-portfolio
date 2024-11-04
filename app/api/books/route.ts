@@ -1,15 +1,16 @@
 import { NextResponse } from 'next/server'
 import Parser from 'rss-parser'
 
-type CustomBook = {
-    title: string
-    link: string
-    author: string
-    dateRead: string
-    pubDate: string
+interface CustomBook {
+    title?: string
+    link?: string
+    content?: string
+    author?: string
+    user_read_at?: string
+    book_published?: string
 }
 
-const parser = new Parser({
+const parser = new Parser<CustomBook>({
     customFields: {
         item: [
             ['author_name', 'author'],
@@ -30,14 +31,14 @@ export async function GET() {
 
                 // Extract author name from the content if available
                 const authorMatch = item.content?.match(/by\s+([^<]+)/) || []
-                const author = authorMatch[1] || (item as any).author || 'Unknown Author'
+                const author = authorMatch[1] || item.author || 'Unknown Author'
 
                 return {
                     title,
                     link: item.link || '',
                     author: author.trim(),
-                    dateRead: (item as any).user_read_at || '',
-                    pubDate: (item as any).book_published || ''
+                    dateRead: item.user_read_at || '',
+                    pubDate: item.book_published || ''
                 }
             })
             .sort((a, b) => {
@@ -51,4 +52,4 @@ export async function GET() {
         console.error('Error fetching books:', error)
         return NextResponse.json([], { status: 500 })
     }
-} 
+}

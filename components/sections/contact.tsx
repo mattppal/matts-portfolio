@@ -33,7 +33,7 @@ const socials = [
     {
         name: "Email",
         icon: MdEmail,
-        url: "mailto:hello@mattpalmer.dev",
+        url: "mailto:hello@mattpalmer.io",
         alt: "Email Matt"
     },
     {

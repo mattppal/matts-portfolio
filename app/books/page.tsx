@@ -98,7 +98,7 @@ export default function BooksPage() {
                     }}
                 >
                     <h1 className="text-3xl md:text-4xl font-bold mb-4 text-center">Reading List</h1>
-                    <p className="text-muted-foreground text-center mb-8">Books I've read recently</p>
+                    <p className="text-muted-foreground text-center mb-8">Books I&apos;ve read recently</p>
                     <Suspense fallback={<BookSkeleton />}>
                         {isLoading ? (
                             <BookSkeleton />
