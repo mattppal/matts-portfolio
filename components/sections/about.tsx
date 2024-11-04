@@ -30,7 +30,7 @@ const itemVariants = {
     visible: { opacity: 1, y: 0 }
 }
 
-export function AboutSection() {
+export function About() {
     return (
         <section id="about" className="py-24">
             <div className="container mx-auto px-4">

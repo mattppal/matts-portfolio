@@ -7,8 +7,20 @@ import { cn } from "@/lib/utils";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Matt Palmer - Developer & Creator",
-  description: "Portfolio and personal site of Matt Palmer - Developer, creator and technologist",
+  metadataBase: new URL('https://your-domain.com'),
+  title: {
+    default: 'Your Name | Portfolio',
+    template: '%s | Your Name'
+  },
+  description: 'Your portfolio description',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://your-domain.com',
+    title: 'Your Name | Portfolio',
+    description: 'Your portfolio description',
+    siteName: 'Your Name'
+  }
 };
 
 export default function RootLayout({

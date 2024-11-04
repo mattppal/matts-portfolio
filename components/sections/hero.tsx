@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
-export function HeroSection() {
+export function Hero() {
     return (
         <section className="min-h-[calc(100vh-16rem)] flex flex-col justify-center">
             <div className="container mx-auto px-4 flex flex-col items-center text-center gap-8">

@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import { formatDistanceToNow } from "date-fns"
 import Link from "next/link"
 import { ArrowUpRight } from "lucide-react"
-import { Suspense } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 interface BlogPost {
     title: string
@@ -27,6 +27,10 @@ function BlogSkeleton() {
 }
 
 function BlogList({ posts }: { posts: BlogPost[] }) {
+    if (!posts || posts.length === 0) {
+        return <div className="text-center text-muted-foreground">No posts available</div>
+    }
+
     return (
         <div className="space-y-6">
             {posts.map((post) => (
@@ -44,7 +48,7 @@ function BlogList({ posts }: { posts: BlogPost[] }) {
                             </h3>
                             {post.date && (
                                 <time className="text-sm text-muted-foreground">
-                                    {formatDistanceToNow(post.date, { addSuffix: true })}
+                                    {formatDistanceToNow(new Date(post.date), { addSuffix: true })}
                                 </time>
                             )}
                         </div>
@@ -56,9 +60,28 @@ function BlogList({ posts }: { posts: BlogPost[] }) {
     )
 }
 
-export function BlogSection({ posts }: { posts: BlogPost[] }) {
+export function BlogSection() {
+    const [posts, setPosts] = useState<BlogPost[]>([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        async function fetchPosts() {
+            try {
+                const response = await fetch('/api/blog')
+                const data = await response.json()
+                setPosts(data)
+            } catch (error) {
+                console.error('Error fetching blog posts:', error)
+            } finally {
+                setIsLoading(false)
+            }
+        }
+
+        fetchPosts()
+    }, [])
+
     return (
-        <section id="writing" className="py-24">
+        <section id="writing" className="py-20 min-h-screen">
             <div className="container mx-auto px-4">
                 <motion.div
                     className="max-w-2xl mx-auto"
@@ -72,7 +95,11 @@ export function BlogSection({ posts }: { posts: BlogPost[] }) {
                 >
                     <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">Latest Writing</h2>
                     <Suspense fallback={<BlogSkeleton />}>
-                        <BlogList posts={posts} />
+                        {isLoading ? (
+                            <BlogSkeleton />
+                        ) : (
+                            <BlogList posts={posts} />
+                        )}
                     </Suspense>
                 </motion.div>
             </div>

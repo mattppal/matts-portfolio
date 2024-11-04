@@ -1,28 +1,41 @@
-import { getPosts } from "@/lib/blog"
-import { HeroSection } from "@/components/sections/hero"
-import { AboutSection } from "@/components/sections/about"
-import { ProjectsSection } from "@/components/sections/projects"
+import { Suspense } from "react"
+import { Hero } from "@/components/sections/hero"
+import { About } from "@/components/sections/about"
 import { BlogSection } from "@/components/sections/blog"
-import { ContactSection } from "@/components/sections/contact"
-import { NavBar } from "@/components/nav-bar"
-import { CreatorPill } from "@/components/creator-pill"
 import { ImageGallery } from "@/components/image-gallery"
+import { Skeleton } from "@/components/ui/skeleton"
+import { NavBar } from "@/components/nav-bar"
 
-export default async function Home() {
-  const posts = await getPosts()
-
+export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <NavBar />
-      <CreatorPill />
-      <div className="container mx-auto px-4">
-        <ImageGallery />
-        <HeroSection />
-        <AboutSection />
-        <ProjectsSection />
-        <BlogSection posts={posts} />
-        <ContactSection />
-      </div>
+      <ImageGallery />
+      <Suspense fallback={
+        <div className="space-y-4">
+          <Skeleton className="h-12 w-[300px]" />
+          <Skeleton className="h-6 w-[500px]" />
+        </div>
+      }>
+        <Hero />
+      </Suspense>
+
+      <Suspense fallback={
+        <div className="flex gap-4 py-8">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <Skeleton key={i} className="h-12 w-32" />
+          ))}
+        </div>
+      }>
+      </Suspense>
+
+      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+        <About />
+      </Suspense>
+
+      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+        <BlogSection />
+      </Suspense>
     </main>
   )
 }
