@@ -4,6 +4,7 @@ import "./globals.css";
 import { NavBar } from "@/components/nav-bar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { LogoCarousel } from "@/components/logo-carousel"
 import { CreatorPill } from "@/components/creator-pill"
 
+
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
