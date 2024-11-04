@@ -1,19 +1,19 @@
-import { NextResponse } from 'next/server'
-import fs from 'fs'
-import path from 'path'
+import { NextResponse } from 'next/server';
+import fs from 'fs';
+import path from 'path';
 
 export async function GET() {
-    try {
-        const logoDirectory = path.join(process.cwd(), 'public/logo-carousel')
-        const files = fs.readdirSync(logoDirectory)
+  try {
+    const logoDirectory = path.join(process.cwd(), 'public/logo-carousel');
+    const files = fs.readdirSync(logoDirectory);
 
-        const logos = files
-            .filter(file => file.match(/\.(svg)$/i))
-            .map(file => `/logo-carousel/${file}`)
+    const logos = files
+      .filter((file) => file.match(/\.(svg)$/i))
+      .map((file) => `/logo-carousel/${file}`);
 
-        return NextResponse.json({ logos })
-    } catch (error) {
-        console.error('Error reading logos directory:', error)
-        return NextResponse.json({ logos: [] }, { status: 500 })
-    }
-} 
+    return NextResponse.json({ logos });
+  } catch (error) {
+    console.error('Error reading logos directory:', error);
+    return NextResponse.json({ logos: [] }, { status: 500 });
+  }
+}
