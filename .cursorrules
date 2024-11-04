@@ -1,0 +1,10 @@
+This is a Next.js project using Next 15 and shadcn, along with framer-motion for animations.
+
+- Use Tailwind CSS for styling.
+- Use shadcn for components.
+- Use framer-motion for animations.
+- Use Next 15 for the framework.
+
+My goal is to create a beautiful, responsive portfolio site to share what I've been working on and advertise my services.
+
+I am using pnpm for the package manager.
