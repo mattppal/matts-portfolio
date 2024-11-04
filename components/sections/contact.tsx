@@ -34,7 +34,7 @@ const socials = [
         name: "Email",
         icon: MdEmail,
         url: "mailto:hello@mattpalmer.io",
-        alt: "Email Matt"
+        alt: "Email"
     },
     {
         name: "Calendar",
