@@ -68,6 +68,9 @@ async function processDirectory(
   const entries = await fs.readdir(dirPath, { withFileTypes: true });
 
   for (const entry of entries) {
+    // Skip .DS_Store files
+    if (entry.name === '.DS_Store') continue;
+
     const fullPath = path.join(dirPath, entry.name);
     const relativePath = path.join(baseDir, entry.name);
 

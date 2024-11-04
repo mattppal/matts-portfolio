@@ -1,5 +1,4 @@
 export const assets = {
-  '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.DS_Store',
   headshot: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/headshot.jpg',
   'hero-carousel': {
     eatin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/eatin.png',
@@ -21,7 +20,6 @@ export const assets = {
     squat: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/squat.mp4',
   },
   'logo-carousel': {
-    '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/.DS_Store',
     Linkedin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/Linkedin.svg',
     a16z: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/a16z.svg',
     bytewax: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/bytewax.svg',
