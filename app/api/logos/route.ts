@@ -1,19 +1,13 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { assets } from '@/config/assets';
 
 export async function GET() {
   try {
-    const logoDirectory = path.join(process.cwd(), 'public/logo-carousel');
-    const files = fs.readdirSync(logoDirectory);
-
-    const logos = files
-      .filter((file) => file.match(/\.(svg)$/i))
-      .map((file) => `/logo-carousel/${file}`);
-
+    // Get all values from logo-carousel
+    const logos = Object.values(assets['logo-carousel']);
     return NextResponse.json({ logos });
   } catch (error) {
-    console.error('Error reading logos directory:', error);
+    console.error('Error reading logos:', error);
     return NextResponse.json({ logos: [] }, { status: 500 });
   }
 }

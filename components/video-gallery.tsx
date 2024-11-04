@@ -2,24 +2,21 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
+import { assets } from '@/config/assets';
 
 interface Video {
   src: string;
-  title: string;
 }
 
 const videos: Video[] = [
   {
-    src: '/lifts/dead.mp4',
-    title: '405lb Deadlift',
+    src: assets.lifts.dead,
   },
   {
-    src: '/lifts/squat.mp4',
-    title: '275lb Bench Press',
+    src: assets.lifts.bench,
   },
   {
-    src: '/lifts/bench.mp4',
-    title: '315lb Squat',
+    src: assets.lifts.squat,
   },
 ];
 
@@ -72,12 +69,12 @@ export function VideoGallery() {
       onViewportEnter={() => setIsInView(true)}
       onViewportLeave={() => setIsInView(false)}
       viewport={{ once: false, margin: '-20%' }}
-      className="grid grid-cols-1 md:grid-cols-3 gap-4 rounded-lg overflow-hidden"
+      className="grid grid-cols-1 gap-4 overflow-hidden rounded-lg md:grid-cols-3"
     >
       {videos.map((video, index) => (
         <motion.div
           key={video.src}
-          className="relative rounded-lg overflow-hidden bg-black"
+          className="relative overflow-hidden rounded-lg bg-black"
           style={{ aspectRatio: '9/16' }}
           animate={{
             opacity: currentIndex === index ? 1 : 0.5,
@@ -90,7 +87,7 @@ export function VideoGallery() {
               if (el) videoRefs.current[index] = el;
             }}
             src={video.src}
-            className="w-full h-full object-cover"
+            className="h-full w-full object-cover"
             muted
             playsInline
             onEnded={playNextVideo}

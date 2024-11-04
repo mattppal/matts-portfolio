@@ -5,6 +5,7 @@ import { formatDistanceToNow } from 'date-fns';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 import { Suspense, useEffect, useState } from 'react';
+import { assets } from '@/config/assets';
 
 interface Book {
   title: string;
