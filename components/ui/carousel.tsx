@@ -102,6 +102,8 @@ export function Carousel({
                                 "object-contain",
                                 imageClassName
                             )}
+                            sizes="(max-width: 640px) 75vw, 100vw"
+                            quality={90}
                         />
                     </div>
                 ))}
