@@ -14,4 +14,3 @@ if [ $build_result -ne 0 ]; then
 fi
 
 echo "\n✅ Build successful - proceeding with push"
-exit 0
