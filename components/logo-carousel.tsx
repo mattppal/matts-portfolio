@@ -13,7 +13,7 @@ export function LogoCarousel() {
         dataKey="logos"
         options={{
           type: 'loop',
-          drag: 'free',
+          drag: true,
           perPage: 5,
           gap: '.5rem',
           arrows: false,

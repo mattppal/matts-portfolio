@@ -16,7 +16,7 @@ export function ImageGallery() {
         shuffle={true}
         options={{
           type: 'loop',
-          drag: 'free',
+          drag: true,
           perPage: 5,
           gap: '1rem',
           arrows: false,
