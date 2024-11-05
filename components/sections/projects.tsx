@@ -12,6 +12,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github } from 'lucide-react';
+import Image from 'next/image';
+import { assets } from '@/config/assets';
 
 interface Project {
   title: string;
@@ -20,16 +22,27 @@ interface Project {
   liveUrl?: string;
   githubUrl?: string;
   imageUrl?: string;
+  imageAlt?: string;
 }
 
 const projects: Project[] = [
   {
-    title: 'Portfolio Website',
-    description:
-      'A modern portfolio website built with Next.js 15, Shadcn, and Framer Motion. Features smooth animations and a responsive design.',
-    technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion'],
+    title: 'Replit + Y Combinator',
+    description: "Replit's biggest event of 2024, hosted at Y Combinator in partnership with a16z.",
+    technologies: ['event planning', 'speaking', 'photography'],
     githubUrl: 'https://github.com/yourusername/portfolio',
-    liveUrl: 'https://mattpalmer.io',
+    liveUrl: 'https://www.youtube.com/watch?v=vw727qcskUQ',
+    imageUrl: assets.headshot,
+    imageAlt: 'Replit and Y Combinator event showcase',
+  },
+  {
+    title: 'xAI Hackathon',
+    description:
+      'The first hackathon at xAI, located in their new office at the historic Pioneer Building in Mission.',
+    technologies: ['photography', 'videography', 'speaking'],
+    imageUrl: assets.headshot,
+    githubUrl: 'https://github.com/yourusername/portfolio',
+    liveUrl: 'https://x.com/mattppal/status/1845583077692903884',
   },
   // Add more projects here
 ];
@@ -69,10 +82,16 @@ export function ProjectsSection() {
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((project) => (
               <motion.div key={project.title} variants={itemVariants}>
-                <Card className="flex h-full flex-col">
+                <Card className="flex h-full flex-col overflow-hidden">
                   {project.imageUrl && (
                     <div className="relative h-48 w-full">
-                      {/* Add image component here if needed */}
+                      <Image
+                        src={project.imageUrl}
+                        alt={project.imageAlt || project.title}
+                        fill
+                        className="object-cover transition-transform duration-300 hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
                     </div>
                   )}
                   <CardHeader>
@@ -82,7 +101,7 @@ export function ProjectsSection() {
                   <CardContent className="flex-grow">
                     <div className="flex flex-wrap gap-2">
                       {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary">
+                        <Badge key={tech} variant="secondary" className="bg-secondary/80">
                           {tech}
                         </Badge>
                       ))}
@@ -90,7 +109,7 @@ export function ProjectsSection() {
                   </CardContent>
                   <CardFooter className="gap-4">
                     {project.liveUrl && (
-                      <Button variant="outline" asChild>
+                      <Button variant="secondary" asChild>
                         <a
                           href={project.liveUrl}
                           target="_blank"
@@ -98,12 +117,12 @@ export function ProjectsSection() {
                           className="flex items-center gap-2"
                         >
                           <ExternalLink size={16} />
-                          Live Demo
+                          See it in action
                         </a>
                       </Button>
                     )}
                     {project.githubUrl && (
-                      <Button variant="outline" asChild>
+                      <Button variant="secondary" asChild>
                         <a
                           href={project.githubUrl}
                           target="_blank"
