@@ -23,7 +23,6 @@ const videos: Video[] = [
 export function VideoGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
-  const [videosLoaded, setVideosLoaded] = useState<boolean[]>([]);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
   const playNextVideo = () => {
@@ -33,37 +32,19 @@ export function VideoGallery() {
     // Play the next video after a short delay to ensure state update
     setTimeout(() => {
       const nextVideo = videoRefs.current[nextIndex];
-      if (nextVideo && isInView && videosLoaded[nextIndex]) {
+      if (nextVideo && isInView) {
         nextVideo.currentTime = 0;
         nextVideo.play().catch((err) => console.log('Playback error:', err));
       }
     }, 100);
   };
 
-  // Handle video loading
-  const handleVideoLoaded = (index: number) => {
-    setVideosLoaded((prev) => {
-      const newLoaded = [...prev];
-      newLoaded[index] = true;
-      return newLoaded;
-    });
-  };
-
   useEffect(() => {
-    // Initialize video refs array and loading state
+    // Initialize video refs array
     videoRefs.current = videoRefs.current.slice(0, videos.length);
-    setVideosLoaded(new Array(videos.length).fill(false));
 
-    // Preload all videos
-    videos.forEach((_, index) => {
-      const video = videoRefs.current[index];
-      if (video) {
-        video.load();
-      }
-    });
-
-    // Start playing the first video if in view and loaded
-    if (isInView && videosLoaded[0]) {
+    // Start playing the first video if in view
+    if (isInView) {
       const firstVideo = videoRefs.current[0];
       if (firstVideo) {
         firstVideo.play().catch((err) => console.log('Initial playback error:', err));
@@ -74,7 +55,7 @@ export function VideoGallery() {
       // Cleanup: pause all videos
       videoRefs.current.forEach((video) => video?.pause());
     };
-  }, [isInView, videosLoaded]);
+  }, [isInView]);
 
   // Pause videos when out of view
   useEffect(() => {
@@ -112,8 +93,6 @@ export function VideoGallery() {
             className="h-full w-full object-cover"
             muted
             playsInline
-            preload="auto"
-            onLoadedData={() => handleVideoLoaded(index)}
             onEnded={playNextVideo}
           />
         </motion.div>
