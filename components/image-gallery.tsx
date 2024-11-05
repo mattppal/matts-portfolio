@@ -26,6 +26,14 @@ export function ImageGallery() {
             pauseOnHover: true,
           },
           breakpoints: {
+            3840: {
+              perPage: 10,
+              gap: '1rem',
+            },
+            2560: {
+              perPage: 8,
+              gap: '1rem',
+            },
             1920: {
               perPage: 7,
               gap: '1rem',
