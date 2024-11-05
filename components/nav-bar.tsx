@@ -8,12 +8,12 @@ import Link from 'next/link';
 export function NavBar() {
   return (
     <motion.header
-      className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-sm border-b"
+      className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-sm"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <nav className="container mx-auto px-4 h-16 flex items-center justify-between">
+      <nav className="container mx-auto flex h-16 items-center justify-between px-4">
         <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
           <Link href="/">🤙</Link>
         </motion.div>
@@ -47,6 +47,11 @@ export function NavBar() {
             }
           >
             Contact
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/books">
+              <span className="text-2xl">📚</span>
+            </Link>
           </Button>
           <ModeToggle />
         </div>

@@ -63,7 +63,7 @@ const itemVariants = {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-24">
+    <section id="contact" className="section-padding">
       <motion.div
         className="container mx-auto px-4"
         initial="hidden"
@@ -72,14 +72,14 @@ export function ContactSection() {
         variants={containerVariants}
       >
         <motion.h2
-          className="text-3xl md:text-4xl font-bold mb-12 text-center"
+          className="mb-12 text-center text-3xl font-bold md:text-4xl"
           variants={itemVariants}
         >
           Let&apos;s Connect
         </motion.h2>
 
         <motion.div
-          className="flex justify-center items-center gap-8 flex-wrap"
+          className="flex flex-wrap items-center justify-center gap-8"
           variants={itemVariants}
         >
           {socials.map((social) => {
@@ -92,7 +92,7 @@ export function ContactSection() {
                 rel="noopener noreferrer"
                 className="transition-all hover:scale-110 hover:opacity-70"
               >
-                <Icon className="w-8 h-8" />
+                <Icon className="h-8 w-8" />
               </Link>
             );
           })}

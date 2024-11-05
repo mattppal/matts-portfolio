@@ -51,7 +51,7 @@ const itemVariants = {
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="section-padding">
       <div className="container mx-auto px-4">
         <motion.div
           initial="hidden"
@@ -60,16 +60,16 @@ export function ProjectsSection() {
           variants={containerVariants}
         >
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-12 text-center"
+            className="mb-12 text-center text-3xl font-bold md:text-4xl"
             variants={itemVariants}
           >
             Featured Projects
           </motion.h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
             {projects.map((project) => (
               <motion.div key={project.title} variants={itemVariants}>
-                <Card className="h-full flex flex-col">
+                <Card className="flex h-full flex-col">
                   {project.imageUrl && (
                     <div className="relative h-48 w-full">
                       {/* Add image component here if needed */}

@@ -11,8 +11,10 @@ import { CreatorPill } from '@/components/creator-pill';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <CreatorPill />
+    <main className="flex min-h-screen flex-col items-center justify-between p-2">
+      <div className="mt-20">
+        <CreatorPill />
+      </div>
       <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
         <ImageGallery />
       </Suspense>
@@ -25,13 +27,13 @@ export default function Home() {
         }
       >
         <Hero />
-        <p className="text-center text-muted-foreground pb-4">Trusted by content teams at</p>
+        <p className="text-center text-muted-foreground">Trusted by content teams at</p>
         <LogoCarousel />
       </Suspense>
 
       <Suspense
         fallback={
-          <div className="flex gap-4 py-8">
+          <div className="flex gap-4 py-8 sm:py-4 md:py-4">
             {Array.from({ length: 5 }).map((_, i) => (
               <Skeleton key={i} className="h-12 w-32" />
             ))}

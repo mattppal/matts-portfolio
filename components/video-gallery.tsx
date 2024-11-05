@@ -69,13 +69,16 @@ export function VideoGallery() {
       onViewportEnter={() => setIsInView(true)}
       onViewportLeave={() => setIsInView(false)}
       viewport={{ once: false, margin: '-20%' }}
-      className="grid grid-cols-1 gap-4 overflow-hidden rounded-lg md:grid-cols-3"
+      className="mx-auto grid w-full grid-cols-3 gap-2 overflow-hidden rounded-lg sm:gap-4"
     >
       {videos.map((video, index) => (
         <motion.div
           key={video.src}
-          className="relative overflow-hidden rounded-lg bg-black"
-          style={{ aspectRatio: '9/16' }}
+          className="relative w-full overflow-hidden rounded-lg bg-black"
+          style={{
+            aspectRatio: '9/16',
+            height: 'auto',
+          }}
           animate={{
             opacity: currentIndex === index ? 1 : 0.5,
             scale: currentIndex === index ? 1 : 0.95,

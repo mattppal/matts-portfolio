@@ -76,3 +76,29 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.carousel-container {
+  padding: 0 !important;
+  display: flex !important;
+}
+
+.slider-class {
+  display: flex !important;
+  gap: 1rem;
+}
+
+.react-multi-carousel-track {
+  display: flex !important;
+  gap: 1rem;
+  transition: transform var(--carousel-duration) linear !important;
+}
+
+.react-multi-carousel-list {
+  display: flex !important;
+}
+
+@layer components {
+  .section-padding {
+    @apply py-20 sm:py-12 md:py-12 lg:py-12;
+  }
+}
