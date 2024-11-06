@@ -8,6 +8,7 @@ import { ImageGallery } from '@/components/image-gallery';
 import { Skeleton } from '@/components/ui/skeleton';
 import { LogoCarousel } from '@/components/logo-carousel';
 import { CreatorPill } from '@/components/creator-pill';
+import { Footer } from '@/components/footer';
 
 export default function Home() {
   return (
@@ -56,6 +57,8 @@ export default function Home() {
       <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
         <ContactSection />
       </Suspense>
+
+      <Footer />
     </main>
   );
 }

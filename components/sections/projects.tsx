@@ -11,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, Calendar, Code, Film } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/config/assets';
 
@@ -25,14 +25,13 @@ interface Project {
   imageAlt?: string;
 }
 
-const projects: Project[] = [
+const events: Project[] = [
   {
     title: 'Replit + Y Combinator',
     description: "Replit's biggest event of 2024, hosted at Y Combinator in partnership with a16z.",
     technologies: ['event planning', 'speaking', 'photography'],
-    githubUrl: 'https://github.com/yourusername/portfolio',
     liveUrl: 'https://www.youtube.com/watch?v=vw727qcskUQ',
-    imageUrl: assets.headshot,
+    imageUrl: 'https://placehold.co/640x360',
     imageAlt: 'Replit and Y Combinator event showcase',
   },
   {
@@ -40,11 +39,45 @@ const projects: Project[] = [
     description:
       'The first hackathon at xAI, located in their new office at the historic Pioneer Building in Mission.',
     technologies: ['photography', 'videography', 'speaking'],
-    imageUrl: assets.headshot,
-    githubUrl: 'https://github.com/yourusername/portfolio',
+    imageUrl: 'https://placehold.co/640x360',
     liveUrl: 'https://x.com/mattppal/status/1845583077692903884',
   },
-  // Add more projects here
+];
+
+const codeProjects: Project[] = [
+  {
+    title: 'vid2gif',
+    description: 'A simple web app that converts video files to animated GIFs.',
+    technologies: ['Next.js', 'TypeScript', 'FFmpeg'],
+    imageUrl: 'https://placehold.co/640x360',
+    githubUrl: 'https://github.com/yourusername/vid2gif',
+    liveUrl: 'https://vid2gif.replit.app/',
+  },
+  {
+    title: "what's the wifi",
+    description: 'QR code generator for sharing WiFi credentials easily.',
+    technologies: ['React', 'QR Code', 'PWA'],
+    imageUrl: 'https://placehold.co/640x360',
+    githubUrl: 'https://github.com/yourusername/whats-the-wifi',
+    liveUrl: 'https://whats-the-wifi.app',
+  },
+];
+
+const content: Project[] = [
+  {
+    title: 'Replit YouTube Videos',
+    description: 'Educational content and tutorials about coding and development.',
+    technologies: ['video production', 'education', 'technical writing'],
+    imageUrl: 'https://placehold.co/640x360',
+    liveUrl: 'https://youtube.com/@replit',
+  },
+  {
+    title: 'Technical Blog Posts',
+    description: 'In-depth articles about software development and tech trends.',
+    technologies: ['technical writing', 'documentation'],
+    imageUrl: 'https://placehold.co/640x360',
+    liveUrl: 'https://blog.example.com',
+  },
 ];
 
 const containerVariants = {
@@ -62,6 +95,79 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
+const ProjectCard = ({ project }: { project: Project }) => (
+  <Card className="flex h-full flex-col overflow-hidden">
+    {project.imageUrl && (
+      <div className="relative aspect-video w-full">
+        <Image
+          src={project.imageUrl}
+          alt={project.imageAlt || project.title}
+          fill
+          className="object-cover transition-transform duration-300 hover:scale-105"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
+        />
+      </div>
+    )}
+    <CardHeader className="md:p-4 md:pb-2">
+      <CardTitle className="text-lg md:text-base">{project.title}</CardTitle>
+      <CardDescription className="text-sm">{project.description}</CardDescription>
+    </CardHeader>
+    <CardContent className="flex-grow md:p-4 md:pb-2 md:pt-0"></CardContent>
+    <CardFooter className="flex gap-2 md:p-4 md:pt-2">
+      {project.liveUrl && (
+        <Button variant="secondary" size="sm" asChild className="flex-1">
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2"
+          >
+            <ExternalLink size={14} />
+            View
+          </a>
+        </Button>
+      )}
+      {project.githubUrl && (
+        <Button variant="secondary" size="sm" asChild className="flex-1">
+          <a
+            href={project.githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2"
+          >
+            <Github size={14} />
+            Code
+          </a>
+        </Button>
+      )}
+    </CardFooter>
+  </Card>
+);
+
+const CategorySection = ({
+  title,
+  icon,
+  projects,
+}: {
+  title: string;
+  icon: React.ReactNode;
+  projects: Project[];
+}) => (
+  <div className="space-y-4 md:space-y-3">
+    <h3 className="flex items-center gap-2 text-xl font-semibold md:text-lg">
+      {icon}
+      {title}
+    </h3>
+    <div className="grid gap-4 md:gap-3">
+      {projects.map((project) => (
+        <motion.div key={project.title} variants={itemVariants}>
+          <ProjectCard project={project} />
+        </motion.div>
+      ))}
+    </div>
+  </div>
+);
+
 export function ProjectsSection() {
   return (
     <section id="projects" className="section-padding">
@@ -73,71 +179,28 @@ export function ProjectsSection() {
           variants={containerVariants}
         >
           <motion.h2
-            className="mb-12 text-center text-3xl font-bold md:text-4xl"
+            className="mb-8 text-center text-3xl font-bold md:text-3xl"
             variants={itemVariants}
           >
-            Featured Projects
+            Featured Work
           </motion.h2>
 
-          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2">
-            {projects.map((project) => (
-              <motion.div key={project.title} variants={itemVariants}>
-                <Card className="flex h-full flex-col overflow-hidden">
-                  {project.imageUrl && (
-                    <div className="relative h-48 w-full">
-                      <Image
-                        src={project.imageUrl}
-                        alt={project.imageAlt || project.title}
-                        fill
-                        className="object-cover transition-transform duration-300 hover:scale-105"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                    </div>
-                  )}
-                  <CardHeader>
-                    <CardTitle>{project.title}</CardTitle>
-                    <CardDescription>{project.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary" className="bg-secondary/80">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <CardFooter className="gap-4">
-                    {project.liveUrl && (
-                      <Button variant="secondary" asChild>
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <ExternalLink size={16} />
-                          See it in action
-                        </a>
-                      </Button>
-                    )}
-                    {project.githubUrl && (
-                      <Button variant="secondary" asChild>
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2"
-                        >
-                          <Github size={16} />
-                          Code
-                        </a>
-                      </Button>
-                    )}
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3 md:gap-4">
+            <CategorySection
+              title="Events"
+              icon={<Calendar className="h-5 w-5" />}
+              projects={events}
+            />
+            <CategorySection
+              title="Code"
+              icon={<Code className="h-5 w-5" />}
+              projects={codeProjects}
+            />
+            <CategorySection
+              title="Content"
+              icon={<Film className="h-5 w-5" />}
+              projects={content}
+            />
           </div>
         </motion.div>
       </div>

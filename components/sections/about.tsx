@@ -61,6 +61,16 @@ export function About() {
                   That includes everything from demos & tutorial videos to product marketing assets,
                   blog posts, event planning, and more.
                 </p>
+
+                <p className="text-base leading-relaxed sm:text-lg">
+                  In my free time, I express my creativity through coding, writing, photography, and
+                  videography. I&apos;m extremely passionate about fitness, weightlifting, & all
+                  things outdoors.
+                </p>
+
+                <p className="text-base leading-relaxed sm:text-lg">
+                  I live in San Francisco, California.
+                </p>
               </CardContent>
             </Card>
           </motion.div>
