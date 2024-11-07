@@ -1,4 +1,5 @@
 export const assets = {
+  favicon: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/favicon.ico',
   headshot: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/headshot.jpg',
   'hero-carousel': {
     eatin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/eatin.png',
