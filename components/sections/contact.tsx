@@ -12,12 +12,7 @@ const socials = [
     url: 'https://linkedin.com/in/matt-palmer',
     alt: 'LinkedIn',
   },
-  {
-    name: 'GitHub',
-    icon: FaGithub,
-    url: 'https://github.com/mattppal',
-    alt: 'GitHub',
-  },
+
   {
     name: 'X',
     icon: FaXTwitter,

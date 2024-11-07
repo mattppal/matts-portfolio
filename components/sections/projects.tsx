@@ -10,7 +10,6 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { ExternalLink, Github, Calendar, Code, Film } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/config/assets';
@@ -18,7 +17,6 @@ import { assets } from '@/config/assets';
 interface Project {
   title: string;
   description: string;
-  technologies: string[];
   liveUrl?: string;
   githubUrl?: string;
   imageUrl?: string;
@@ -29,17 +27,15 @@ const events: Project[] = [
   {
     title: 'Replit + Y Combinator',
     description: "Replit's biggest event of 2024, hosted at Y Combinator in partnership with a16z.",
-    technologies: ['event planning', 'speaking', 'photography'],
     liveUrl: 'https://www.youtube.com/watch?v=vw727qcskUQ',
-    imageUrl: 'https://placehold.co/640x360',
+    imageUrl: assets.projects.yc,
     imageAlt: 'Replit and Y Combinator event showcase',
   },
   {
     title: 'xAI Hackathon',
     description:
       'The first hackathon at xAI, located in their new office at the historic Pioneer Building in Mission.',
-    technologies: ['photography', 'videography', 'speaking'],
-    imageUrl: 'https://placehold.co/640x360',
+    imageUrl: assets.projects.xai,
     liveUrl: 'https://x.com/mattppal/status/1845583077692903884',
   },
 ];
@@ -48,35 +44,32 @@ const codeProjects: Project[] = [
   {
     title: 'vid2gif',
     description: 'A simple web app that converts video files to animated GIFs.',
-    technologies: ['Next.js', 'TypeScript', 'FFmpeg'],
-    imageUrl: 'https://placehold.co/640x360',
-    githubUrl: 'https://github.com/yourusername/vid2gif',
+    imageUrl: assets.projects.vid2gif,
+    githubUrl: 'https://replit.com/@matt/vid2gif?v=1',
     liveUrl: 'https://vid2gif.replit.app/',
   },
   {
-    title: "what's the wifi",
+    title: "What's the WiFi",
     description: 'QR code generator for sharing WiFi credentials easily.',
-    technologies: ['React', 'QR Code', 'PWA'],
-    imageUrl: 'https://placehold.co/640x360',
-    githubUrl: 'https://github.com/yourusername/whats-the-wifi',
-    liveUrl: 'https://whats-the-wifi.app',
+    imageUrl: assets.projects.wtw,
+    githubUrl: 'https://replit.com/@matt/Whats-the-WiFi',
+    liveUrl: 'https://whats-the-wifi.replit.app/',
   },
 ];
 
 const content: Project[] = [
   {
-    title: 'Replit YouTube Videos',
-    description: 'Educational content and tutorials about coding and development.',
-    technologies: ['video production', 'education', 'technical writing'],
-    imageUrl: 'https://placehold.co/640x360',
+    title: 'Replit Content',
+    description: 'Educational content and tutorials about coding and deployment on Replit.',
+    imageUrl: assets.projects.youtube,
     liveUrl: 'https://youtube.com/@replit',
   },
   {
-    title: 'Technical Blog Posts',
-    description: 'In-depth articles about software development and tech trends.',
-    technologies: ['technical writing', 'documentation'],
-    imageUrl: 'https://placehold.co/640x360',
-    liveUrl: 'https://blog.example.com',
+    title: 'Technical Whitepapers',
+    description:
+      "Technical whitepapers, written in collaboration with O'Reilly Media for Coalesce & Databricks",
+    imageUrl: assets.projects.uetl,
+    liveUrl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-uetl.pdf',
   },
 ];
 
@@ -171,7 +164,7 @@ const CategorySection = ({
 export function ProjectsSection() {
   return (
     <section id="projects" className="section-padding">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-12">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -182,7 +175,7 @@ export function ProjectsSection() {
             className="mb-8 text-center text-3xl font-bold md:text-3xl"
             variants={itemVariants}
           >
-            Featured Work
+            Fun Projects
           </motion.h2>
 
           <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-3 md:gap-4">

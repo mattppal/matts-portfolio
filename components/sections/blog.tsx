@@ -15,9 +15,9 @@ interface BlogPost {
 
 function BlogSkeleton() {
   return (
-    <div className="animate-pulse space-y-4">
+    <div className="animate-pulse space-y-4 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
       {[1, 2, 3].map((i) => (
-        <div key={i} className="border-b pb-4">
+        <div key={i} className="border-b pb-4 md:border-none">
           <div className="mb-2 h-6 w-3/4 rounded bg-muted"></div>
           <div className="h-4 w-1/4 rounded bg-muted"></div>
         </div>
@@ -32,14 +32,14 @@ function BlogList({ posts }: { posts: BlogPost[] }) {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
       {posts.map((post) => (
         <Link
           key={post.link}
           href={post.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="group block border-b pb-6 last:border-0"
+          className="group block border-b pb-6 last:border-0 md:border-none"
         >
           <article className="flex items-center justify-between gap-2">
             <div className="space-y-1">
@@ -84,7 +84,7 @@ export function BlogSection() {
     <section id="writing" className="section-padding">
       <div className="container mx-auto px-4">
         <motion.div
-          className="mx-auto max-w-2xl"
+          className="mx-auto max-w-4xl"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}

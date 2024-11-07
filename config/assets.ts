@@ -34,7 +34,20 @@ export const assets = {
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
     yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/yc.svg',
   },
+  projects: {
+    uetl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/uetl.png',
+    vid2gif: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/vid2gif.gif',
+    wtw: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/wtw.gif',
+    xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/xai.jpeg',
+    yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/yc.jpeg',
+    youtube: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/youtube.jpg',
+  },
   replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/replit.svg',
+  whitepapers: {
+    'orm-data-transformation':
+      'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-data-transformation.pdf',
+    'orm-uetl': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-uetl.pdf',
+  },
 } as const;
 
 export type AssetUrl = string;
