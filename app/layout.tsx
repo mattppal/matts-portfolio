@@ -1,33 +1,21 @@
-import type { Metadata } from 'next';
+import { baseMetadata } from './metadata';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { NavBar } from '@/components/nav-bar';
-import { ThemeProvider } from '@/components/theme-provider';
-import { cn } from '@/lib/utils';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import JsonLd from '@/components/JsonLd';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
-  title: 'Your Name - Portfolio',
-  description: 'Portfolio and blog showcasing my work and thoughts',
-};
+export const metadata = baseMetadata;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn('min-h-screen bg-background antialiased', inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NavBar />
-          {children}
-          <SpeedInsights />
-        </ThemeProvider>
-      </body>
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="canonical" href="https://your-domain.com" />
+        <JsonLd />
+      </head>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

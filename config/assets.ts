@@ -43,6 +43,8 @@ export const assets = {
     youtube: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/youtube.jpg',
   },
   replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/replit.svg',
+  robots: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/robots.txt',
+  sitemap: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/sitemap.xml',
   whitepapers: {
     'orm-data-transformation':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-data-transformation.pdf',

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      
+            <url>
+              <loc>https://mattpalmer.io/layout</loc>
+              <lastmod>2024-11-07T17:17:50.397Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+            </url>
+          
+            <url>
+              <loc>https://mattpalmer.io/loading</loc>
+              <lastmod>2024-11-07T17:17:50.400Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+            </url>
+          
+            <url>
+              <loc>https://mattpalmer.io</loc>
+              <lastmod>2024-11-07T17:17:50.400Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+            </url>
+          
+            <url>
+              <loc>https://mattpalmer.io/books</loc>
+              <lastmod>2024-11-07T17:17:50.400Z</lastmod>
+              <changefreq>monthly</changefreq>
+              <priority>0.7</priority>
+            </url>
+          
+    </urlset>
+  

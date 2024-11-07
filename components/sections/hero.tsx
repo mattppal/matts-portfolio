@@ -37,7 +37,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Developer, creator, and technologist building beautiful digital experiences
+          Developer, creator, and technologist building beautiful digital experiences.
         </motion.p>
       </div>
     </section>
