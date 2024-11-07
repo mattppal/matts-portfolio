@@ -4,7 +4,7 @@ export default function JsonLd() {
     '@type': 'Person',
     name: 'Your Name',
     url: 'https://mattpalmer.io',
-    image: 'https://your-domain.com/profile-image.jpg',
+    image: 'https://mattpalmer.io/profile-image.jpg',
     sameAs: ['https://linkedin.com/in/matt-palmer', 'https://x.com/mattppal'],
     jobTitle: 'Developer Relations Engineer',
     worksFor: {
