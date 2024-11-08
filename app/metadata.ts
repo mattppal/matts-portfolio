@@ -1,11 +1,12 @@
 import { Metadata } from 'next';
 
-const siteConfig = {
+export const siteConfig = {
+  name: 'Matt Palmer',
+  baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   title: 'Matt Palmer',
   description: 'Developer, creator, and technologist building beautiful digital experiences.',
   author: 'Matt Palmer',
-  siteUrl: 'https://mattpalmer.io',
-  //   socialImage: '/og-image.jpg', // You'll need to create this
+  siteUrl: process.env.NEXT_PUBLIC_BASE_URL,
   keywords: [
     'software engineer',
     'web developer',
@@ -34,18 +35,20 @@ export const baseMetadata: Metadata = {
     title: siteConfig.title,
     description: siteConfig.description,
     siteName: siteConfig.title,
-    // images: [{
-    //   url: siteConfig.socialImage,
-    //   width: 1200,
-    //   height: 630,
-    //   alt: siteConfig.title
-    // }]
+    images: [
+      {
+        url: `/api/og?title=${encodeURIComponent(siteConfig.title)}`,
+        width: 1200,
+        height: 630,
+        alt: siteConfig.title,
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteConfig.title,
     description: siteConfig.description,
-    // images: [siteConfig.socialImage],
+    images: [`/api/og?title=${encodeURIComponent(siteConfig.title)}`],
     creator: '@mattppal',
   },
   robots: {
