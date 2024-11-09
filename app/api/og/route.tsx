@@ -19,11 +19,11 @@ export async function GET(request: Request) {
 
     // Load the Inter font files
     const interRegular = await fetch(
-      new URL('../../assets/fonts/Inter-Regular.ttf', import.meta.url)
+      new URL('../../assets/fonts/Inter-Regular.woff', import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     const interBold = await fetch(
-      new URL('../../assets/fonts/Inter-Bold.ttf', import.meta.url)
+      new URL('../../assets/fonts/Inter-Bold.woff', import.meta.url)
     ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(
