@@ -11,7 +11,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "upload-assets": "tsx scripts/upload-assets.ts",
-    "generate-og-backgrounds": "tsx scripts/generate-og-backgrounds.ts"
+    "generate-og-backgrounds": "tsx scripts/generate-og-backgrounds.ts",
     "ts": "tsc --noEmit --incremental"
   },
   "dependencies": {
