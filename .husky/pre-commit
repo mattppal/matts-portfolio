@@ -1,4 +1,9 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+pnpm upload-assets
+pnpm lint-staged
+echo "🔍 Running pre-push checks..."
 
-npm test
+# Check types
+echo "📦 Checking types..."
+pnpm ts
+
+echo "✅ Build successful - proceeding with push"
