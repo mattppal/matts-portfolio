@@ -4,7 +4,7 @@ export default function JsonLd() {
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: siteConfig.name,
+    name: siteConfig.author,
     url: siteConfig.baseUrl,
     image: `${siteConfig.baseUrl}/profile-image.jpg`,
     sameAs: ['https://linkedin.com/in/matt-palmer', 'https://x.com/mattppal'],
