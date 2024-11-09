@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-
+import { assets } from '@/config/assets';
 export const siteConfig = {
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
   description: 'Developer, creator, and marketer building engaging technical experiences.',
@@ -37,7 +37,7 @@ export const baseMetadata: Metadata = {
       {
         url: `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
           siteConfig.description
-        )}`,
+        )}&${assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg]}`,
         width: 1200,
         height: 630,
         alt: siteConfig.author,
@@ -51,7 +51,7 @@ export const baseMetadata: Metadata = {
     images: [
       `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
         siteConfig.description
-      )}`,
+      )}&${assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg]}`,
     ],
     creator: '@mattppal',
   },
