@@ -12,6 +12,7 @@
     "format:check": "prettier --check .",
     "upload-assets": "tsx scripts/upload-assets.ts",
     "generate-og-backgrounds": "tsx scripts/generate-og-backgrounds.ts"
+    "ts": "tsc --noEmit --incremental"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
