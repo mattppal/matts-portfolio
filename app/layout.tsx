@@ -14,7 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
-        <link rel="canonical" href="https://mattpalmer.io" />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_BASE_URL} />
         <JsonLd />
       </head>
       <body className={inter.className}>

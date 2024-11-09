@@ -3,12 +3,30 @@ import fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv';
 import crypto from 'crypto';
+import ignore from 'ignore';
+import { promises as fsPromises } from 'fs';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
 
 const PUBLIC_DIR = path.join(process.cwd(), 'public');
 const ASSETS_FILE = path.join(process.cwd(), 'config', 'assets.ts');
+
+// Initialize ignore instance
+let ig: ReturnType<typeof ignore>;
+
+async function initializeGitignore() {
+  ig = ignore();
+  try {
+    const gitignoreContent = await fsPromises.readFile(
+      path.join(process.cwd(), '.gitignore'),
+      'utf8'
+    );
+    ig.add(gitignoreContent);
+  } catch (error) {
+    console.warn('No .gitignore file found, proceeding without ignore rules');
+  }
+}
 
 // Helper to calculate file hash
 async function calculateFileHash(filePath: string): Promise<string> {
@@ -83,6 +101,13 @@ async function getAllLocalFiles(dir: string, baseDir: string = ''): Promise<stri
     const fullPath = path.join(dir, entry.name);
     const relativePath = path.join(baseDir, entry.name);
 
+    // Check if path is ignored by gitignore
+    const relativeToRoot = path.relative(process.cwd(), fullPath);
+    if (ig.ignores(relativeToRoot)) {
+      console.log(`Skipping ignored path: ${relativeToRoot}`);
+      continue;
+    }
+
     if (entry.isDirectory()) {
       files.push(...(await getAllLocalFiles(fullPath, relativePath)));
     } else {
@@ -147,6 +172,8 @@ async function processFiles(localFiles: string[], existingBlobs: Map<string, str
 
 async function uploadAssets() {
   try {
+    await initializeGitignore();
+
     // Get all existing blobs
     const existingBlobs = await list();
     const existingUrlMap = new Map(
