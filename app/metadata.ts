@@ -1,28 +1,26 @@
 import { Metadata } from 'next';
 
 export const siteConfig = {
-  name: 'Matt Palmer',
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-  title: 'Matt Palmer',
-  description: 'Developer, creator, and technologist building beautiful digital experiences.',
+  description: 'Developer, creator, and marketer building engaging technical experiences.',
   author: 'Matt Palmer',
   siteUrl: process.env.NEXT_PUBLIC_BASE_URL,
   keywords: [
+    'developer relations',
+    'developer marketing',
     'software engineer',
-    'web developer',
-    'full stack developer',
     'data engineer',
-    'AI solutions',
-    'portfolio',
-    'freelance developer',
+    'ai',
+    'artificial intelligence',
+    'developer advocate',
   ],
 };
 
 export const baseMetadata: Metadata = {
-  metadataBase: new URL(siteConfig.siteUrl),
+  metadataBase: new URL(siteConfig.siteUrl || ''),
   title: {
-    default: siteConfig.title,
-    template: `%s | ${siteConfig.title}`,
+    default: siteConfig.author,
+    template: `%s | ${siteConfig.author}`,
   },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
@@ -32,23 +30,29 @@ export const baseMetadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: siteConfig.siteUrl,
-    title: siteConfig.title,
+    title: siteConfig.author,
     description: siteConfig.description,
-    siteName: siteConfig.title,
+    siteName: siteConfig.author,
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent(siteConfig.title)}`,
+        url: `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
+          siteConfig.description
+        )}`,
         width: 1200,
         height: 630,
-        alt: siteConfig.title,
+        alt: siteConfig.author,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: siteConfig.title,
+    title: siteConfig.author,
     description: siteConfig.description,
-    images: [`/api/og?title=${encodeURIComponent(siteConfig.title)}`],
+    images: [
+      `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
+        siteConfig.description
+      )}`,
+    ],
     creator: '@mattppal',
   },
   robots: {

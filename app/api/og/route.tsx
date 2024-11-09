@@ -10,6 +10,15 @@ export async function GET(request: Request) {
     const subtitle = searchParams.get('subtitle');
     const { origin } = new URL(request.url);
 
+    // Load the Inter font files
+    const interRegular = await fetch(
+      new URL('../../assets/fonts/Inter-Regular.ttf', import.meta.url)
+    ).then((res) => res.arrayBuffer());
+
+    const interBold = await fetch(
+      new URL('../../assets/fonts/Inter-Bold.ttf', import.meta.url)
+    ).then((res) => res.arrayBuffer());
+
     return new ImageResponse(
       (
         <div
@@ -26,18 +35,8 @@ export async function GET(request: Request) {
             position: 'relative',
           }}
         >
-          {/* Subtle gradient overlay */}
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              background: 'linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%)',
-              zIndex: 1,
-            }}
-          />
+          {/* Gradient overlay remains the same */}
+          <div />
 
           {/* Content container */}
           <div
@@ -49,17 +48,15 @@ export async function GET(request: Request) {
               padding: '60px',
               paddingBottom: '120px',
               gap: '32px',
-              fontFamily:
-                'SF Pro Display, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+              fontFamily: 'Inter',
             }}
           >
             {/* Title */}
             <h1
               style={{
                 fontSize: subtitle ? 80 : 100,
-                fontFamily:
-                  'SF Pro Display, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
-                fontWeight: 900,
+                fontFamily: 'Inter',
+                fontWeight: 700,
                 color: '#ffffff',
                 margin: 0,
                 lineHeight: 1,
@@ -75,9 +72,8 @@ export async function GET(request: Request) {
               <p
                 style={{
                   fontSize: 40,
-                  fontFamily:
-                    'SF Pro Display, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
-                  fontWeight: 700,
+                  fontFamily: 'Inter',
+                  fontWeight: 400,
                   color: '#e2e8f0',
                   margin: 0,
                   lineHeight: 1.3,
@@ -89,7 +85,7 @@ export async function GET(request: Request) {
               </p>
             )}
 
-            {/* Site URL - Positioned at bottom with more spacing */}
+            {/* Site URL */}
             <div
               style={{
                 position: 'absolute',
@@ -118,8 +114,7 @@ export async function GET(request: Request) {
               <p
                 style={{
                   fontSize: 28,
-                  fontFamily:
-                    'SF Pro Display, -apple-system, BlinkMacSystemFont, system-ui, sans-serif',
+                  fontFamily: 'Inter',
                   fontWeight: 600,
                   color: '#e2e8f0',
                   margin: 0,
@@ -134,6 +129,20 @@ export async function GET(request: Request) {
       {
         width: 1200,
         height: 630,
+        fonts: [
+          {
+            name: 'Inter',
+            data: interRegular,
+            weight: 400,
+            style: 'normal',
+          },
+          {
+            name: 'Inter',
+            data: interBold,
+            weight: 700,
+            style: 'normal',
+          },
+        ],
       }
     );
   } catch (error: unknown) {
