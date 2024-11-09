@@ -1,14 +1,21 @@
 import { ImageResponse } from 'next/og';
 import { siteConfig } from '@/app/metadata';
+import { assets } from '@/config/assets';
 
 export const runtime = 'edge';
 
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const title = searchParams.get('title') ?? 'Matt Palmer';
-    const subtitle = searchParams.get('subtitle');
-    const { origin } = new URL(request.url);
+    const title = searchParams.get('title') ?? siteConfig.author;
+    const subtitle = searchParams.get('subtitle') ?? siteConfig.description;
+    const bgNumber = searchParams.get('bg');
+
+    // Use specific bg if provided and valid, otherwise use random
+    const background =
+      bgNumber && Number(bgNumber) >= 0 && Number(bgNumber) <= 19
+        ? assets.bg[`bg-${bgNumber}` as keyof typeof assets.bg]
+        : assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg];
 
     // Load the Inter font files
     const interRegular = await fetch(
@@ -29,13 +36,12 @@ export async function GET(request: Request) {
             flexDirection: 'column',
             alignItems: 'center',
             justifyContent: 'center',
-            background: `url(${origin}/og-base.png)`,
+            background: `url(${background})`,
             backgroundSize: '100% 100%',
             backgroundPosition: 'center',
             position: 'relative',
           }}
         >
-          {/* Gradient overlay remains the same */}
           <div />
 
           {/* Content container */}
@@ -120,7 +126,7 @@ export async function GET(request: Request) {
                   margin: 0,
                 }}
               >
-                {new URL(siteConfig.baseUrl || '').host}
+                {new URL(siteConfig.baseUrl || '').href}
               </p>
             </div>
           </div>

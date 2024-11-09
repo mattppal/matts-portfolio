@@ -10,7 +10,8 @@
     "lint:fix": "next lint --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "upload-assets": "tsx scripts/upload-assets.ts"
+    "upload-assets": "tsx scripts/upload-assets.ts",
+    "generate-og-backgrounds": "tsx scripts/generate-og-backgrounds.ts"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.1",
