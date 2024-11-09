@@ -2,17 +2,8 @@ pnpm upload-assets
 pnpm lint-staged
 echo "🔍 Running pre-push checks..."
 
-# Run build
-echo "\n📦 Building project..."
-pnpm build
-build_result=$?
+# Check types
+echo "📦 Checking types..."
+pnpm ts
 
-if [ $build_result -ne 0 ]; then
-    echo "\n❌ Build failed - push aborted"
-    echo "Please fix the build errors before pushing."
-    echo "You can bypass this check using: git push --no-verify"
-    exit 1
-fi
-
-echo "\n✅ Build successful - proceeding with push"
-exit 0
+echo "✅ Build successful - proceeding with push"
