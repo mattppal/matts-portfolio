@@ -4,6 +4,7 @@ import './globals.css';
 import JsonLd from '@/components/JsonLd';
 import { NavBar } from '@/components/nav-bar';
 import { ThemeProvider } from '@/components/theme-provider';
+import { Analytics } from '@vercel/analytics/react';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd />
       </head>
       <body className={inter.className}>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
