@@ -1,4 +1,27 @@
 export const assets = {
+  ".og-backgrounds": {
+    "": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/.gitignore",
+    "bg-0": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-0.png",
+    "bg-1": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-1.png",
+    "bg-10": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-10.png",
+    "bg-11": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-11.png",
+    "bg-12": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-12.png",
+    "bg-13": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-13.png",
+    "bg-14": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-14.png",
+    "bg-15": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-15.png",
+    "bg-16": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-16.png",
+    "bg-17": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-17.png",
+    "bg-18": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-18.png",
+    "bg-19": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-19.png",
+    "bg-2": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-2.png",
+    "bg-3": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-3.png",
+    "bg-4": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-4.png",
+    "bg-5": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-5.png",
+    "bg-6": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-6.png",
+    "bg-7": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-7.png",
+    "bg-8": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-8.png",
+    "bg-9": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-9.png"
+  },
   "bg": {
     "bg-0": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-0.jpg",
     "bg-1": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-1.jpg",
