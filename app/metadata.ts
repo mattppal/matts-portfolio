@@ -15,7 +15,9 @@ export const siteConfig = {
     'developer advocate',
   ],
 };
-
+export const ogURL = `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
+  siteConfig.description
+)}&${assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg]}`;
 export const baseMetadata: Metadata = {
   metadataBase: new URL(siteConfig.siteUrl || ''),
   title: {
@@ -35,9 +37,7 @@ export const baseMetadata: Metadata = {
     siteName: siteConfig.author,
     images: [
       {
-        url: `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
-          siteConfig.description
-        )}&${assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg]}`,
+        url: ogURL,
         width: 1200,
         height: 630,
         alt: siteConfig.author,
@@ -48,11 +48,7 @@ export const baseMetadata: Metadata = {
     card: 'summary_large_image',
     title: siteConfig.author,
     description: siteConfig.description,
-    images: [
-      `/api/og?title=${encodeURIComponent(siteConfig.author)}&subtitle=${encodeURIComponent(
-        siteConfig.description
-      )}&${assets.bg[`bg-${Math.floor(Math.random() * 20)}` as keyof typeof assets.bg]}`,
-    ],
+    images: [ogURL],
     creator: '@mattppal',
   },
   robots: {
