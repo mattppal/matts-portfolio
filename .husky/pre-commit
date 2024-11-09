@@ -1,8 +1,9 @@
+echo "📦 Uploading assets..."
 pnpm upload-assets
-pnpm lint-staged
-echo "🔍 Running pre-push checks..."
 
-# Check types
+echo "📁 Linting staged files..."
+pnpm lint-staged
+
 echo "📦 Checking types..."
 pnpm ts
 
