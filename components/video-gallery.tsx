@@ -93,6 +93,7 @@ export function VideoGallery() {
             className="h-full w-full object-cover"
             muted
             playsInline
+            preload="metadata"
             onEnded={playNextVideo}
           />
         </motion.div>
