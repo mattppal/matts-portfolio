@@ -93,6 +93,7 @@ export function VideoGallery() {
             className="h-full w-full object-cover"
             muted
             playsInline
+            autoPlay
             preload="metadata"
             onEnded={playNextVideo}
           />
