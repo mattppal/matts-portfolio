@@ -9,6 +9,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const title = searchParams.get('title') ?? siteConfig.author;
     const subtitle = searchParams.get('subtitle') ?? siteConfig.description;
+    const url = searchParams.get('url') ?? siteConfig.baseUrl;
     const bgNumber = searchParams.get('bg');
 
     // Use specific bg if provided and valid, otherwise use random
@@ -126,7 +127,7 @@ export async function GET(request: Request) {
                   margin: 0,
                 }}
               >
-                {new URL(siteConfig.baseUrl || '').href}
+                {new URL(url || siteConfig.baseUrl || '').href}
               </p>
             </div>
           </div>
