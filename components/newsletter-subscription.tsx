@@ -39,7 +39,7 @@ export function NewsletterSubscription() {
               action="https://buttondown.com/api/emails/embed-subscribe/mattpalmer"
               method="post"
               target="popupwindow"
-              onSubmit={(e) => {
+              onSubmit={() => {
                 window.open('https://buttondown.com/mattpalmer', 'popupwindow');
               }}
               className="mx-auto w-full max-w-sm space-y-2"
