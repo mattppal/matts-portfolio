@@ -1,3 +1,4 @@
+const MillionLint = require('@million/lint');
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -15,8 +16,11 @@ const nextConfig = {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
   },
 };
 
-module.exports = nextConfig;
+module.exports = MillionLint.next({
+  enabled: true,
+  rsc: true
+})(nextConfig);
