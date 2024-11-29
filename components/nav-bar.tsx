@@ -13,6 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
 
 const menuItems = [
   { name: 'About', id: 'about' },
@@ -62,11 +63,23 @@ function NavigationContent() {
 
   return (
     <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-      <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
-        <Link href="/" scroll={false}>
-          🤙
-        </Link>
-      </motion.div>
+      <div className="flex items-center gap-4">
+        <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
+          <Link href="/" scroll={false}>
+            🤙
+          </Link>
+        </motion.div>
+        <motion.div whileHover={{ scale: 1.05 }} className="hidden sm:block">
+          <Link href="/pricing">
+            <Badge
+              variant="secondary"
+              className="flex items-center gap-2 bg-secondary/50 px-4 py-2 text-sm font-medium shadow-sm transition-all hover:bg-secondary/80 hover:shadow-md"
+            >
+              Work with me
+            </Badge>
+          </Link>
+        </motion.div>
+      </div>
 
       {/* Desktop Navigation */}
       <div className="hidden items-center gap-4 md:flex">
@@ -103,6 +116,9 @@ function NavigationContent() {
                 {item.name}
               </DropdownMenuItem>
             ))}
+            <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
+              <Link href="/pricing">Work with me</Link>
+            </DropdownMenuItem>
             <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
               <Link href="/books" scroll={false}>
                 <span className="text-xl">📚</span>
