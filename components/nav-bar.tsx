@@ -73,7 +73,7 @@ function NavigationContent() {
           <Link href="/pricing">
             <Badge
               variant="secondary"
-              className="flex items-center gap-2 bg-secondary/50 px-4 py-2 text-sm font-medium shadow-sm transition-all hover:bg-secondary/80 hover:shadow-md"
+              className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
             >
               Work with me
             </Badge>

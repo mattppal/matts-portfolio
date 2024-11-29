@@ -77,7 +77,7 @@ export default function PricingPage() {
         <motion.div className="mb-8 flex w-full justify-center">
           <Badge
             variant="secondary"
-            className="flex items-center gap-2 px-4 py-2 text-base shadow-lg transition-shadow hover:shadow-xl"
+            className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-base text-primary shadow-lg transition-shadow hover:bg-primary/20 hover:shadow-xl"
           >
             Slots available in {getNextMonth()}
           </Badge>
@@ -95,7 +95,10 @@ export default function PricingPage() {
         className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2"
       >
         {/* Standard Plan */}
-        <motion.div variants={item} className="rounded-lg border p-8">
+        <motion.div
+          variants={item}
+          className="rounded-lg border p-8 transition-colors hover:border-primary/20"
+        >
           <h3 className="mb-4 text-2xl font-bold">Standard</h3>
           <div className="mb-4">
             <span className="text-4xl font-bold">$4,995</span>
@@ -124,7 +127,10 @@ export default function PricingPage() {
         </motion.div>
 
         {/* Pro Plan */}
-        <motion.div variants={item} className="rounded-lg border bg-secondary p-8">
+        <motion.div
+          variants={item}
+          className="rounded-lg border border-primary/20 bg-primary/5 p-8 transition-colors hover:bg-primary/10"
+        >
           <h3 className="mb-4 text-2xl font-bold">Pro</h3>
           <div className="mb-4">
             <span className="text-4xl font-bold">$7,995</span>
@@ -158,7 +164,7 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mt-24 max-w-xl rounded-lg border p-8"
+        className="mx-auto mt-24 max-w-xl rounded-lg border border-primary/20 bg-primary/5 p-8"
         id="contact-form"
       >
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -224,7 +230,7 @@ export default function PricingPage() {
             </div>
           </div>
 
-          <Button type="submit" className="h-12 w-full">
+          <Button type="submit" className="h-12 w-full" variant="default">
             Submit
           </Button>
         </form>
@@ -240,7 +246,7 @@ export default function PricingPage() {
           Not sure which plan is right for you?{' '}
           <Link
             href="https://calendar.app.google/4Aoa3R1HKFPF48rU6"
-            className="underline hover:text-primary"
+            className="text-primary underline transition-colors hover:text-primary/80"
             target="_blank"
             rel="noopener noreferrer"
           >

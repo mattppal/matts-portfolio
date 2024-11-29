@@ -11,7 +11,7 @@ export function ImageGallery() {
       <ImageCarousel
         fetchUrl="/api/gallery"
         dataKey="images"
-        itemClassName="relative aspect-[4/3] max-h-[200px] rounded-lg bg-muted/40 overflow-hidden px-2"
+        itemClassName="relative aspect-[4/3] max-h-[200px] rounded-[var(--radius)] bg-muted/40 overflow-hidden px-2"
         imageClassName="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-500"
         shuffle={true}
         options={{

@@ -91,7 +91,7 @@ const itemVariants = {
 const ProjectCard = ({ project }: { project: Project }) => (
   <Card className="flex h-full flex-col overflow-hidden">
     {project.imageUrl && (
-      <div className="relative aspect-video w-full">
+      <div className="relative aspect-video w-full overflow-hidden rounded-[var(--radius)]">
         <Image
           src={project.imageUrl}
           alt={project.imageAlt || project.title}
