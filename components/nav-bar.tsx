@@ -13,7 +13,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-
+import { AnimatedLogo } from '@/components/animated-logo';
 const menuItems = [
   { name: 'About', id: 'about' },
   { name: 'Projects', id: 'projects' },
@@ -64,7 +64,7 @@ function NavigationContent() {
     <nav className="container mx-auto flex h-16 items-center justify-between px-4">
       <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
         <Link href="/" scroll={false}>
-          🤙
+          <AnimatedLogo />
         </Link>
       </motion.div>
 

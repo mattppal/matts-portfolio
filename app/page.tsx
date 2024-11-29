@@ -9,6 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { LogoCarousel } from '@/components/logo-carousel';
 import { CreatorPill } from '@/components/creator-pill';
 import { Footer } from '@/components/footer';
+import { NewsletterSubscription } from '@/components/newsletter-subscription';
 
 export default function Home() {
   return (
@@ -31,7 +32,7 @@ export default function Home() {
         <p className="text-center text-muted-foreground">Trusted by content teams at</p>
         <LogoCarousel />
       </Suspense>
-
+      <NewsletterSubscription />
       <Suspense
         fallback={
           <div className="flex gap-4 py-8 sm:py-4 md:py-4">
