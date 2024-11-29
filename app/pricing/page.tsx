@@ -167,13 +167,16 @@ export default function PricingPage() {
               {selectedPlan ? `Get started with ${selectedPlan} plan` : 'Get started'}
             </h3>
             <p className="text-muted-foreground">
-              Fill out the form below and I'll get back to you within 24 hours.
+              Fill out the form below and I&apos;ll get back to you within 24 hours.
             </p>
           </div>
-          
+
           <div className="space-y-4">
             <div className="space-y-2">
-              <label htmlFor="email" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              <label
+                htmlFor="email"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
                 Email <span className="text-red-500">*</span>
               </label>
               <Input
@@ -181,14 +184,17 @@ export default function PricingPage() {
                 type="email"
                 placeholder="you@example.com"
                 value={formData.email}
-                onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
                 required
                 className="h-12"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              <label
+                htmlFor="name"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
                 Name
               </label>
               <Input
@@ -196,26 +202,29 @@ export default function PricingPage() {
                 type="text"
                 placeholder="Your name"
                 value={formData.name}
-                onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
                 className="h-12"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <label htmlFor="notes" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              <label
+                htmlFor="notes"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              >
                 Additional notes
               </label>
               <textarea
                 id="notes"
                 placeholder="Tell me a bit about your project..."
                 value={formData.notes}
-                onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
+                onChange={(e) => setFormData((prev) => ({ ...prev, notes: e.target.value }))}
                 className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
               />
             </div>
           </div>
 
-          <Button type="submit" className="w-full h-12">
+          <Button type="submit" className="h-12 w-full">
             Submit
           </Button>
         </form>
