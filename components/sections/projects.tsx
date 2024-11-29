@@ -108,7 +108,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
     <CardContent className="flex-grow md:p-4 md:pb-2 md:pt-0"></CardContent>
     <CardFooter className="flex gap-2 md:p-4 md:pt-2">
       {project.liveUrl && (
-        <Button variant="secondary" size="sm" asChild className="flex-1">
+        <Button variant="secondary" size="sm" asChild className="flex-1 btn-scale">
           <a
             href={project.liveUrl}
             target="_blank"
@@ -121,7 +121,7 @@ const ProjectCard = ({ project }: { project: Project }) => (
         </Button>
       )}
       {project.githubUrl && (
-        <Button variant="secondary" size="sm" asChild className="flex-1">
+        <Button variant="secondary" size="sm" asChild className="flex-1 btn-scale">
           <a
             href={project.githubUrl}
             target="_blank"

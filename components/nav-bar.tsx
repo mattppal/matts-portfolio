@@ -84,11 +84,16 @@ function NavigationContent() {
       {/* Desktop Navigation */}
       <div className="hidden items-center gap-4 md:flex">
         {menuItems.map((item) => (
-          <Button key={item.id} variant="ghost" onClick={() => handleNavigation(item.id)}>
+          <Button 
+            key={item.id} 
+            variant="ghost" 
+            onClick={() => handleNavigation(item.id)}
+            className="btn-scale"
+          >
             {item.name}
           </Button>
         ))}
-        <Button variant="ghost" asChild>
+        <Button variant="ghost" asChild className="btn-scale">
           <Link href="/books" scroll={false}>
             <span className="text-2xl">📚</span>
           </Link>

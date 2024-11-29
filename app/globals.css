@@ -102,4 +102,24 @@ body {
   .section-padding {
     @apply py-20 sm:py-12 md:py-12 lg:py-12;
   }
+  
+  .btn-scale {
+    @apply transform transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98];
+  }
+}
+
+number-flow-react {
+  display: inline-block;
+}
+
+number-flow-react::part(char) {
+  display: inline-block;
+  text-align: center;
+}
+
+/* Optional: Customize the fade-out masks */
+number-flow-react {
+  --number-flow-mask-height: 0.25em;
+  --number-flow-mask-width: 0.5em;
+  --number-flow-char-height: 1em;
 }
