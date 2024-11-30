@@ -54,8 +54,6 @@ export function GradientBlur({
   const intensityStyles = intensityMap[intensity];
   const positionStyles = positionMap[position];
 
-  const primaryY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
-  const primaryX = useTransform(scrollYProgress, [0, 1], ['-50%', '-45%']);
   const secondaryY = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
   const secondaryX = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
   const scaleValue = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
@@ -73,8 +71,8 @@ export function GradientBlur({
 
   const item = {
     hidden: { opacity: 0, scale: 0.8 },
-    show: { 
-      opacity: 1, 
+    show: {
+      opacity: 1,
       scale: 1,
       transition: {
         duration: 1.2,
@@ -93,7 +91,7 @@ export function GradientBlur({
   };
 
   type MotionDivStyle = NonNullable<HTMLMotionProps<'div'>['style']>;
-  
+
   const secondaryStyle: MotionDivStyle = {
     transform: 'none',
     y: secondaryY,
@@ -106,10 +104,7 @@ export function GradientBlur({
       variants={container}
       initial="hidden"
       animate="show"
-      className={cn(
-        'pointer-events-none fixed inset-0 -z-10 overflow-hidden',
-        className
-      )}
+      className={cn('pointer-events-none fixed inset-0 -z-10 overflow-hidden', className)}
     >
       <Element
         variants={item}
@@ -122,7 +117,7 @@ export function GradientBlur({
       />
       <Element
         variants={item}
-        style={secondaryStyle as any}
+        style={secondaryStyle as CSSProperties}
         className={cn(
           'absolute h-[600px] w-[600px] rounded-full',
           intensityStyles.secondary,
@@ -132,4 +127,4 @@ export function GradientBlur({
       />
     </Wrapper>
   );
-} 
+}
