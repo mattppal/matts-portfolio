@@ -69,7 +69,7 @@ function NavigationContent() {
             <AnimatedLogo />
           </Link>
         </motion.div>
-        <motion.div whileHover={{ scale: 1.05 }} className="hidden sm:block">
+        {/* <motion.div whileHover={{ scale: 1.05 }} className="hidden sm:block">
           <Link href="/pricing">
             <Badge
               variant="secondary"
@@ -78,15 +78,15 @@ function NavigationContent() {
               Work with me
             </Badge>
           </Link>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       {/* Desktop Navigation */}
       <div className="hidden items-center gap-4 md:flex">
         {menuItems.map((item) => (
-          <Button 
-            key={item.id} 
-            variant="ghost" 
+          <Button
+            key={item.id}
+            variant="ghost"
             onClick={() => handleNavigation(item.id)}
             className="btn-scale"
           >
