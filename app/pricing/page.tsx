@@ -1,12 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
 import { useState } from 'react';
-import { useToast } from '@/hooks/use-toast';
 import {
   Clock,
   Pause,
@@ -21,8 +16,7 @@ import {
   Camera,
   GraduationCap,
 } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
-import NumberFlow, { NumberFlowGroup } from '@number-flow/react';
+import NumberFlow from '@number-flow/react';
 import { ProjectGrid, type Project } from '@/components/project-grid';
 import { assets } from '@/config/assets';
 import {
@@ -263,7 +257,7 @@ export default function PricingPage() {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-semibold">What&apos;s included</h3>
-              <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-base text-primary rounded-full">
+              <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-base text-primary">
                 <motion.div
                   className="h-2 w-2 rounded-full bg-primary"
                   animate={{
@@ -273,7 +267,7 @@ export default function PricingPage() {
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: "easeInOut",
+                    ease: 'easeInOut',
                   }}
                 />
                 Slots available in {getNextMonth()}
@@ -353,8 +347,8 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Events & Media */}
-            <motion.div 
-              variants={item} 
+            <motion.div
+              variants={item}
               className={`space-y-4 ${!isPro ? 'opacity-40' : ''}`}
               transition={{ duration: 0.2 }}
             >
