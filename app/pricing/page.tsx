@@ -7,9 +7,27 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
-import { Clock, Users, Pause, Image, Zap, Briefcase, MessageSquare } from 'lucide-react';
-import { Switch } from "@/components/ui/switch"
+import {
+  Clock,
+  Users,
+  Pause,
+  Zap,
+  Briefcase,
+  MessageSquare,
+  Video,
+  Code2,
+  PlaySquare,
+  Sparkles,
+  Layout,
+  CalendarDays,
+  Camera,
+  GraduationCap,
+} from 'lucide-react';
+import { Switch } from '@/components/ui/switch';
 import NumberFlow, { NumberFlowGroup } from '@number-flow/react';
+import Image from 'next/image';
+import { VideoModal } from '@/components/video-modal';
+import { ProjectGrid, type Project } from '@/components/project-grid';
 
 const container = {
   hidden: { opacity: 0 },
@@ -46,6 +64,30 @@ function getNextMonth() {
   return months[nextMonth.getMonth()];
 }
 
+const projects: Project[] = [
+  {
+    title: 'Agent + Assistant Explainer',
+    description: 'An explainer video breaking down the differences between AI agents and assistants.',
+    liveUrl: 'https://www.youtube.com/watch?v=1a1-B4kIWpA',
+    videoId: '1a1-B4kIWpA',
+    imageUrl: 'https://i.ytimg.com/vi/1a1-B4kIWpA/maxresdefault.jpg',
+    imageAlt: 'Agent + Assistant Explainer thumbnail',
+    badges: ['Video Production', 'AI Education'],
+    category: 'content',
+  },
+  {
+    title: 'Replit + Y Combinator + a16z',
+    description: "Replit's biggest event of 2024, hosted at Y Combinator in partnership with a16z.",
+    liveUrl: 'https://www.youtube.com/watch?v=vw727qcskUQ',
+    videoId: 'vw727qcskUQ',
+    imageUrl: 'https://i.ytimg.com/vi/vw727qcskUQ/maxresdefault.jpg',
+    imageAlt: 'Replit and Y Combinator event showcase',
+    badges: ['Event', 'Partnership'],
+    category: 'event',
+  },
+  // ... other projects with their categories
+];
+
 export default function PricingPage() {
   const [formData, setFormData] = useState({
     email: '',
@@ -55,7 +97,7 @@ export default function PricingPage() {
   const [isPro, setIsPro] = useState(false);
   const { toast } = useToast();
 
-  const currentPriceValue = isPro ? 7995 : 4995;
+  const currentPriceValue = isPro ? 6995 : 3995;
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -73,11 +115,6 @@ export default function PricingPage() {
 
   return (
     <div className="container relative mx-auto px-4 py-24">
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-primary/5 blur-3xl" />
-        <div className="absolute right-0 top-1/3 h-[300px] w-[300px] rounded-full bg-primary/10 blur-2xl" />
-      </div>
-
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -98,7 +135,9 @@ export default function PricingPage() {
         </p>
 
         <div className="mx-auto mt-8 flex items-center justify-center gap-4">
-          <span className={`text-sm font-medium ${!isPro ? 'text-primary' : 'text-muted-foreground'}`}>
+          <span
+            className={`text-sm font-medium ${!isPro ? 'text-primary' : 'text-muted-foreground'}`}
+          >
             Standard
           </span>
           <Switch
@@ -106,26 +145,28 @@ export default function PricingPage() {
             onCheckedChange={setIsPro}
             className="data-[state=checked]:bg-primary"
           />
-          <span className={`text-sm font-medium flex items-center gap-1 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}>
+          <span
+            className={`flex items-center gap-1 text-sm font-medium ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+          >
             Pro <Zap className="h-3.5 w-3.5" />
           </span>
         </div>
 
         <div className="mt-8 flex items-center justify-center">
           <NumberFlowGroup>
-            <div className="flex items-start relative">
-              <span className="text-4xl font-bold absolute -left-6 top-[0.6em]">$</span>
+            <div className="relative flex items-start">
+              <span className="absolute -left-8 top-[0.6em] text-4xl font-bold">$</span>
               <NumberFlow
                 value={currentPriceValue}
                 className="text-6xl font-bold tabular-nums"
-                format={{ 
+                format={{
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 0,
                 }}
                 transformTiming={{ duration: 600, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
                 continuous
               />
-              <span className="ml-2 text-xl text-muted-foreground self-start mt-4">/m</span>
+              <span className="ml-2 mt-4 self-start text-xl text-muted-foreground">/m</span>
             </div>
           </NumberFlowGroup>
         </div>
@@ -143,30 +184,52 @@ export default function PricingPage() {
             <motion.li variants={item} className="flex items-center gap-3">
               <MessageSquare className="h-5 w-5 text-primary" />
               <span>
-                <NumberFlow 
-                  value={isPro ? 2 : 1} 
-                  className="font-medium tabular-nums"
-                  continuous
-                /> request{isPro ? 's' : ''} at a time
+                <NumberFlow value={isPro ? 2 : 1} className="font-medium tabular-nums" continuous />{' '}
+                request{isPro ? 's' : ''} at a time
               </span>
             </motion.li>
             <motion.li variants={item} className="flex items-center gap-3">
               <Clock className="h-5 w-5 text-primary" />
               <span>
-                Average <NumberFlow value={48} className="font-medium tabular-nums" /> hour delivery
+                Average <NumberFlow value={isPro ? 48 : 72} className="font-medium tabular-nums" />{' '}
+                hour delivery
               </span>
             </motion.li>
             <motion.li variants={item} className="flex items-center gap-3">
-              <Briefcase className="h-5 w-5 text-primary" />
-              <span>Unlimited brands</span>
+              <MessageSquare className="h-5 w-5 text-primary" />
+              <span>Product marketing & strategy</span>
             </motion.li>
             <motion.li variants={item} className="flex items-center gap-3">
-              <Image className="h-5 w-5 text-primary" />
-              <span>Unlimited stock photos</span>
+              <Video className="h-5 w-5 text-primary" />
+              <span>Product launch videos</span>
             </motion.li>
             <motion.li variants={item} className="flex items-center gap-3">
-              <Users className="h-5 w-5 text-primary" />
-              <span>Unlimited users</span>
+              <PlaySquare className="h-5 w-5 text-primary" />
+              <span>Animated product demos</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <Code2 className="h-5 w-5 text-primary" />
+              <span>Developer Relations consulting</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <GraduationCap className="h-5 w-5 text-primary" />
+              <span>Developer education assets</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <Sparkles className="h-5 w-5 text-primary" />
+              <span>Product GIFs & animations</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <CalendarDays className="h-5 w-5 text-primary" />
+              <span>Event planning & coordination</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <Camera className="h-5 w-5 text-primary" />
+              <span>Professional photography</span>
+            </motion.li>
+            <motion.li variants={item} className="flex items-center gap-3">
+              <Layout className="h-5 w-5 text-primary" />
+              <span>Responsive website design</span>
             </motion.li>
             <motion.li variants={item} className="flex items-center gap-3">
               <Pause className="h-5 w-5 text-primary" />
@@ -174,13 +237,23 @@ export default function PricingPage() {
             </motion.li>
           </ul>
 
-          <motion.div className="mt-8">
-            <Button 
-              className="w-full bg-primary text-primary-foreground hover:bg-primary/90 btn-scale" 
-              size="lg" 
+          <motion.div className="mt-8 flex gap-4">
+            <Button
+              className="btn-scale flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+              size="lg"
               onClick={scrollToForm}
             >
               Get started
+            </Button>
+            <Button
+              className="btn-scale flex-1 bg-background text-foreground hover:bg-accent"
+              size="lg"
+              variant="outline"
+              onClick={() =>
+                document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
+              Learn more
             </Button>
           </motion.div>
         </div>
@@ -196,9 +269,9 @@ export default function PricingPage() {
       >
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2 text-center">
-            <h3 className="text-2xl font-bold flex items-center justify-center gap-2">
+            <h3 className="flex items-center justify-center gap-2 text-2xl font-bold">
               Get started with{' '}
-              <span className="text-primary inline-flex items-center gap-1">
+              <span className="inline-flex items-center gap-1 text-primary">
                 {isPro ? 'Pro' : 'Standard'}
                 {isPro && <Zap className="h-5 w-5" />}
               </span>
@@ -261,13 +334,48 @@ export default function PricingPage() {
             </div>
           </div>
 
-          <Button 
-            type="submit" 
-            className="h-12 w-full bg-primary text-primary-foreground hover:bg-primary/90 btn-scale"
-          >
-            Submit
-          </Button>
+          <div className="flex gap-4">
+            <Button
+              type="submit"
+              className="btn-scale h-12 flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Submit
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              className="btn-scale h-12 flex-1 bg-background hover:bg-accent"
+              onClick={() => window.open('https://calendar.app.google/4Aoa3R1HKFPF48rU6', '_blank')}
+            >
+              <span className="flex items-center gap-2">
+                <MessageSquare className="h-4 w-4" />
+                Book a call
+              </span>
+            </Button>
+          </div>
         </form>
+      </motion.div>
+
+      {/* Add Showcase Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        className="mx-auto mt-24 max-w-4xl"
+        id="showcase"
+      >
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 text-3xl font-bold">Recent Work</h2>
+          <p className="text-muted-foreground">
+            A selection of recent projects and collaborations.
+          </p>
+        </div>
+
+        <ProjectGrid 
+          projects={projects.slice(0, 4)} 
+          columns={2}
+          className="max-w-4xl mx-auto"
+        />
       </motion.div>
 
       <motion.div
