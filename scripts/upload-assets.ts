@@ -5,6 +5,9 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import ignore from 'ignore';
 import { promises as fsPromises } from 'fs';
+import { execSync } from 'child_process';
+import chalk from 'chalk';
+import ora from 'ora';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -118,85 +121,145 @@ async function getAllLocalFiles(dir: string, baseDir: string = ''): Promise<stri
   return files;
 }
 
+// Add this helper function to check git status
+async function isFileModifiedInGit(relativePath: string): Promise<boolean> {
+  try {
+    // Check if file is tracked by git
+    const isTracked =
+      execSync(`git ls-files ${relativePath}`, {
+        encoding: 'utf8',
+        stdio: ['pipe', 'pipe', 'ignore'],
+      }).length > 0;
+
+    if (!isTracked) {
+      return true; // New file, needs upload
+    }
+
+    // Check if file is modified
+    const status = execSync(`git status --porcelain ${relativePath}`, {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+
+    return status.length > 0; // Returns true if file is modified
+  } catch (error) {
+    logWarning(`Unable to check git status for ${chalk.bold(relativePath)}`);
+    return true;
+  }
+}
+
+// Add these helper functions at the top level
+function logSuccess(message: string) {
+  console.log(chalk.green('✓'), message);
+}
+
+function logInfo(message: string) {
+  console.log(chalk.blue('ℹ'), message);
+}
+
+function logWarning(message: string) {
+  console.log(chalk.yellow('⚠'), message);
+}
+
+function logError(message: string) {
+  console.log(chalk.red('✖'), message);
+}
+
+// Update the processFiles function with better logging
 async function processFiles(localFiles: string[], existingBlobs: Map<string, string>) {
   const processedFiles = new Set<string>();
+  const spinner = ora();
+
+  console.log(chalk.bold('\n🚀 Processing files...\n'));
 
   for (const relativePath of localFiles) {
-    console.log(`Processing: ${relativePath}`);
+    spinner.start(chalk.dim(`Checking ${relativePath}`));
     const fullPath = path.join(PUBLIC_DIR, relativePath);
 
-    // Calculate hash of local file
-    const localHash = await calculateFileHash(fullPath);
-
     if (existingBlobs.has(relativePath)) {
-      // Check if file content has changed by downloading and comparing hash
-      const existingUrl = existingBlobs.get(relativePath)!;
-      const response = await fetch(existingUrl);
-      const existingBuffer = await response.arrayBuffer();
-      const existingHash = crypto
-        .createHash('sha256')
-        .update(Buffer.from(existingBuffer))
-        .digest('hex');
+      const isModified = await isFileModifiedInGit(path.join('public', relativePath));
 
-      if (localHash !== existingHash) {
-        console.log(`File changed, re-uploading: ${relativePath}`);
+      if (isModified) {
+        spinner.text = chalk.dim(`Uploading ${relativePath}`);
         const file = await fs.readFile(fullPath);
         await put(relativePath, file, {
           access: 'public',
           addRandomSuffix: false,
         });
+        spinner.stop();
+        logSuccess(`Updated ${chalk.bold(relativePath)}`);
       } else {
-        console.log(`File unchanged: ${relativePath}`);
+        spinner.stop();
+        logInfo(`Skipped ${chalk.bold(relativePath)} (unchanged)`);
       }
     } else {
-      // New file, upload it
-      console.log(`New file, uploading: ${relativePath}`);
+      spinner.text = chalk.dim(`Uploading ${relativePath}`);
       const file = await fs.readFile(fullPath);
       await put(relativePath, file, {
         access: 'public',
         addRandomSuffix: false,
       });
+      spinner.stop();
+      logSuccess(`Uploaded ${chalk.bold(relativePath)} (new)`);
     }
 
     processedFiles.add(relativePath);
   }
 
-  // Delete remote files that don't exist locally
-  for (const [remotePath] of existingBlobs.entries()) {
-    if (!processedFiles.has(remotePath)) {
-      console.log(`Deleting removed file: ${remotePath}`);
+  // Handle deletions
+  const deletions = Array.from(existingBlobs.entries()).filter(
+    ([remotePath]) => !processedFiles.has(remotePath)
+  );
+
+  if (deletions.length > 0) {
+    console.log(chalk.bold('\n🧹 Cleaning up removed files...\n'));
+
+    for (const [remotePath] of deletions) {
+      spinner.start(chalk.dim(`Removing ${remotePath}`));
       await del(existingBlobs.get(remotePath)!);
+      spinner.stop();
+      logSuccess(`Removed ${chalk.bold(remotePath)}`);
     }
   }
 }
 
+// Update uploadAssets function with better logging
 async function uploadAssets() {
-  try {
-    await initializeGitignore();
+  const mainSpinner = ora();
 
-    // Get all existing blobs
+  try {
+    console.log(chalk.bold('\n📦 Starting asset upload process...\n'));
+
+    mainSpinner.start('Initializing gitignore rules');
+    await initializeGitignore();
+    mainSpinner.succeed('Gitignore rules loaded');
+
+    mainSpinner.start('Fetching existing assets');
     const existingBlobs = await list();
     const existingUrlMap = new Map(
       existingBlobs.blobs
         .filter((blob) => !blob.pathname.includes('.DS_Store'))
         .map((blob) => [blob.pathname, blob.url])
     );
+    mainSpinner.succeed(`Found ${existingBlobs.blobs.length} existing assets`);
 
-    // Get all local files
+    mainSpinner.start('Scanning local files');
     const localFiles = await getAllLocalFiles(PUBLIC_DIR);
+    mainSpinner.succeed(`Found ${localFiles.length} local files`);
 
-    // Process files - upload new/changed and delete removed
     await processFiles(localFiles, existingUrlMap);
 
-    // Get final list of blobs and generate assets file
+    mainSpinner.start('Generating assets.ts');
     const finalBlobs = await list();
     const assetStructure = organizeByDirectory(finalBlobs.blobs);
     const tsCode = generateTypeScriptCode(assetStructure);
     await fs.writeFile(ASSETS_FILE, tsCode);
+    mainSpinner.succeed('Generated assets.ts');
 
-    console.log('Asset upload complete and assets.ts updated!');
+    console.log(chalk.bold.green('\n✨ Asset upload complete!\n'));
   } catch (error) {
-    console.error('Error uploading assets:', error);
+    mainSpinner.fail('Error during asset upload');
+    logError(error instanceof Error ? error.message : 'Unknown error occurred');
     process.exit(1);
   }
 }

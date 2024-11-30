@@ -6,6 +6,7 @@ import { NavBar } from '@/components/nav-bar';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/next';
+import { GradientBlur } from '@/components/gradient-blur';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,8 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar />
-          {children}
+          <div className="relative min-h-screen">
+            <GradientBlur intensity="medium" position="top" />
+            <NavBar />
+            {children}
+          </div>
         </ThemeProvider>
         <SpeedInsights />
       </body>

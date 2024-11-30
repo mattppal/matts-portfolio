@@ -60,6 +60,7 @@ export const assets = {
     uetl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/uetl.png',
     vid2gif: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/vid2gif.gif',
     wtw: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/wtw.gif',
+    'x-receipts': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/x-receipts.gif',
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/xai.jpeg',
     yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/yc.jpeg',
     youtube: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/youtube.jpg',

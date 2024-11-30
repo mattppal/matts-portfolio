@@ -83,7 +83,7 @@ export function About() {
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm"
+                    className="bg-background px-2 py-0.5 text-xs transition-all hover:bg-primary/10 hover:text-primary btn-scale sm:px-3 sm:py-1 sm:text-sm"
                   >
                     {skill}
                   </Badge>
@@ -98,7 +98,7 @@ export function About() {
                   <Badge
                     key={passion}
                     variant="secondary"
-                    className="px-2 py-0.5 text-xs sm:px-3 sm:py-1 sm:text-sm"
+                    className="bg-background px-2 py-0.5 text-xs transition-all hover:bg-primary/10 hover:text-primary btn-scale sm:px-3 sm:py-1 sm:text-sm"
                   >
                     {passion}
                   </Badge>

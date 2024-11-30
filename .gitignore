@@ -37,5 +37,3 @@ next-env.d.ts
 
 # assets
 /public/og-backgrounds/*
-# Million Lint
-.million
