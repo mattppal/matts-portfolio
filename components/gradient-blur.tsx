@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform, type HTMLMotionProps } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import type { CSSProperties } from 'react';
 
 interface GradientBlurProps {
   className?: string;
@@ -53,7 +54,6 @@ export function GradientBlur({
   const intensityStyles = intensityMap[intensity];
   const positionStyles = positionMap[position];
 
-  // Create smooth parallax effects based on scroll
   const primaryY = useTransform(scrollYProgress, [0, 1], ['0%', '20%']);
   const primaryX = useTransform(scrollYProgress, [0, 1], ['-50%', '-45%']);
   const secondaryY = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
@@ -86,13 +86,16 @@ export function GradientBlur({
   const Wrapper = animate ? motion.div : 'div';
   const Element = animate ? motion.div : 'div';
 
-  const primaryStyle: HTMLMotionProps<"div">["style"] = {
-    y: primaryY,
-    x: primaryX,
-    scale: scaleValue,
+  const primaryStyle: CSSProperties = {
+    background: `radial-gradient(circle at center, ${intensityStyles.primary} 0%, transparent 100%)`,
+    filter: 'blur(100px)',
+    opacity: 0.15,
   };
 
-  const secondaryStyle: HTMLMotionProps<"div">["style"] = {
+  type MotionDivStyle = NonNullable<HTMLMotionProps<'div'>['style']>;
+  
+  const secondaryStyle: MotionDivStyle = {
+    transform: 'none',
     y: secondaryY,
     x: secondaryX,
     scale: scaleValue,
@@ -114,13 +117,12 @@ export function GradientBlur({
         className={cn(
           'absolute h-[800px] w-[800px] rounded-full',
           intensityStyles.primary,
-          intensityStyles.blur,
-          positionStyles.primary
+          'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
         )}
       />
       <Element
         variants={item}
-        style={secondaryStyle}
+        style={secondaryStyle as any}
         className={cn(
           'absolute h-[600px] w-[600px] rounded-full',
           intensityStyles.secondary,

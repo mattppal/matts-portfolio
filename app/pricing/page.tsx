@@ -9,10 +9,8 @@ import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 import {
   Clock,
-  Users,
   Pause,
   Zap,
-  Briefcase,
   MessageSquare,
   Video,
   Code2,
@@ -25,9 +23,8 @@ import {
 } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import NumberFlow, { NumberFlowGroup } from '@number-flow/react';
-import Image from 'next/image';
-import { VideoModal } from '@/components/video-modal';
 import { ProjectGrid, type Project } from '@/components/project-grid';
+import { assets } from '@/config/assets';
 
 const container = {
   hidden: { opacity: 0 },
@@ -67,13 +64,12 @@ function getNextMonth() {
 const projects: Project[] = [
   {
     title: 'Agent + Assistant Explainer',
-    description: 'An explainer video breaking down the differences between AI agents and assistants.',
+    description:
+      'An explainer video breaking down the differences between AI agents and assistants.',
     liveUrl: 'https://www.youtube.com/watch?v=1a1-B4kIWpA',
     videoId: '1a1-B4kIWpA',
     imageUrl: 'https://i.ytimg.com/vi/1a1-B4kIWpA/maxresdefault.jpg',
     imageAlt: 'Agent + Assistant Explainer thumbnail',
-    badges: ['Video Production', 'AI Education'],
-    category: 'content',
   },
   {
     title: 'Replit + Y Combinator + a16z',
@@ -82,8 +78,34 @@ const projects: Project[] = [
     videoId: 'vw727qcskUQ',
     imageUrl: 'https://i.ytimg.com/vi/vw727qcskUQ/maxresdefault.jpg',
     imageAlt: 'Replit and Y Combinator event showcase',
-    badges: ['Event', 'Partnership'],
-    category: 'event',
+  },
+  {
+    title: 'Deployments on Replit',
+    description: 'Breaking down complex technical tools into simple, easy-to-follow videos.',
+    videoId: 'sXP5d0k1atk',
+    imageUrl: 'https://i.ytimg.com/vi/sXP5d0k1atk/maxresdefault.jpg',
+    liveUrl: 'https://www.youtube.com/watch?v=sXP5d0k1atk',
+  },
+  {
+    title: 'uv in 30 seconds',
+    description: 'Short-form, entertaining content explaining a complex tool.',
+    videoId: '5mbaca1xVJ4',
+    imageUrl: 'https://i.ytimg.com/vi/5mbaca1xVJ4/maxresdefault.jpg',
+    liveUrl: 'https://www.youtube.com/shorts/5mbaca1xVJ4',
+  },
+  {
+    title: 'xAI Hackathon',
+    description: 'Professional photography and color grading for the first ever hackathon at xAI.',
+    imageUrl: assets.projects.xai,
+    liveUrl: 'https://x.com/mattppal/status/1845583077692903884',
+  },
+  {
+    title: 'Understanding ETL',
+    description:
+      "100-page technical data engineering whitepaper, written in collaboration with O'Reilly Media for Databricks.",
+    imageUrl: assets.projects.uetl,
+    liveUrl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-uetl.pdf',
+    badges: ['Technical Writing', 'Education'],
   },
   // ... other projects with their categories
 ];
@@ -118,25 +140,26 @@ export default function PricingPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-16 text-center"
+        className="mx-auto mb-16 flex max-w-[640px] flex-col items-center justify-center text-center"
       >
-        <motion.div className="mb-8 flex w-full justify-center">
+        <motion.div className="mb-8">
           <Badge
             variant="secondary"
-            className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-base text-primary shadow-lg transition-shadow hover:bg-primary/20 hover:shadow-xl"
+            className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 text-base text-primary shadow-lg transition-shadow hover:bg-primary/20 hover:shadow-xl"
           >
             <Clock className="h-4 w-4" />
             Slots available in {getNextMonth()}
           </Badge>
         </motion.div>
-        <h1 className="mb-4 text-4xl font-bold">Membership</h1>
-        <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-          {currentDescription} Pause or cancel anytime.
-        </p>
-
-        <div className="mx-auto mt-8 flex items-center justify-center gap-4">
+        <div className="w-full space-y-4">
+          <h1 className="text-4xl font-bold">Membership</h1>
+          <p className="text-lg text-muted-foreground">
+            {currentDescription} Pause or cancel anytime.
+          </p>
+        </div>
+        <div className="relative mt-8 flex w-full justify-center">
           <span
-            className={`text-sm font-medium ${!isPro ? 'text-primary' : 'text-muted-foreground'}`}
+            className={`absolute right-[calc(50%+40px)] text-sm font-medium ${!isPro ? 'text-primary' : 'text-muted-foreground'}`}
           >
             Standard
           </span>
@@ -146,13 +169,12 @@ export default function PricingPage() {
             className="data-[state=checked]:bg-primary"
           />
           <span
-            className={`flex items-center gap-1 text-sm font-medium ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+            className={`absolute left-[calc(50%+40px)] inline-flex items-center gap-1 text-sm font-medium ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
           >
             Pro <Zap className="h-3.5 w-3.5" />
           </span>
         </div>
-
-        <div className="mt-8 flex items-center justify-center">
+        <div className="mt-8 flex w-full items-center justify-center">
           <NumberFlowGroup>
             <div className="relative flex items-start">
               <span className="absolute -left-8 top-[0.6em] text-4xl font-bold">$</span>
@@ -180,62 +202,101 @@ export default function PricingPage() {
       >
         <div className="rounded-lg border border-primary/20 bg-background p-8 shadow-lg">
           <h3 className="mb-6 text-xl font-semibold">What&apos;s included</h3>
-          <ul className="grid gap-4 sm:grid-cols-2">
-            <motion.li variants={item} className="flex items-center gap-3">
-              <MessageSquare className="h-5 w-5 text-primary" />
-              <span>
-                <NumberFlow value={isPro ? 2 : 1} className="font-medium tabular-nums" continuous />{' '}
-                request{isPro ? 's' : ''} at a time
-              </span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Clock className="h-5 w-5 text-primary" />
-              <span>
-                Average <NumberFlow value={isPro ? 48 : 72} className="font-medium tabular-nums" />{' '}
-                hour delivery
-              </span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <MessageSquare className="h-5 w-5 text-primary" />
-              <span>Product marketing & strategy</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Video className="h-5 w-5 text-primary" />
-              <span>Product launch videos</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <PlaySquare className="h-5 w-5 text-primary" />
-              <span>Animated product demos</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Code2 className="h-5 w-5 text-primary" />
-              <span>Developer Relations consulting</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              <span>Developer education assets</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Sparkles className="h-5 w-5 text-primary" />
-              <span>Product GIFs & animations</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <CalendarDays className="h-5 w-5 text-primary" />
-              <span>Event planning & coordination</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Camera className="h-5 w-5 text-primary" />
-              <span>Professional photography</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Layout className="h-5 w-5 text-primary" />
-              <span>Responsive website design</span>
-            </motion.li>
-            <motion.li variants={item} className="flex items-center gap-3">
-              <Pause className="h-5 w-5 text-primary" />
-              <span>Pause or cancel anytime</span>
-            </motion.li>
-          </ul>
+
+          {/* Request & Subscription Details */}
+          <div className="mb-6">
+            <h4 className="mb-3 text-sm font-medium text-muted-foreground">
+              Request & Subscription Details
+            </h4>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              <motion.li variants={item} className="flex items-center gap-3">
+                <MessageSquare className="h-5 w-5 text-primary" />
+                <span>
+                  <NumberFlow
+                    value={isPro ? 2 : 1}
+                    className="font-medium tabular-nums"
+                    continuous
+                  />{' '}
+                  request{isPro ? 's' : ''} at a time
+                </span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-primary" />
+                <span>
+                  Average{' '}
+                  <NumberFlow value={isPro ? 48 : 72} className="font-medium tabular-nums" /> hour
+                  delivery
+                </span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Pause className="h-5 w-5 text-primary" />
+                <span>Pause or cancel anytime</span>
+              </motion.li>
+            </ul>
+          </div>
+
+          {/* Product & Marketing */}
+          <div className="mb-6">
+            <h4 className="mb-3 text-sm font-medium text-muted-foreground">Product & Marketing</h4>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              <motion.li variants={item} className="flex items-center gap-3">
+                <MessageSquare className="h-5 w-5 text-primary" />
+                <span>Product marketing & strategy</span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Video className="h-5 w-5 text-primary" />
+                <span>Product launch videos</span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <PlaySquare className="h-5 w-5 text-primary" />
+                <span>Animated product demos</span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <span>Product GIFs & animations</span>
+              </motion.li>
+            </ul>
+          </div>
+
+          {/* Developer & Web */}
+          <div className="mb-6">
+            <h4 className="mb-3 text-sm font-medium text-muted-foreground">
+              Developer & Web Services
+            </h4>
+            <ul className="grid gap-4 sm:grid-cols-2">
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Code2 className="h-5 w-5 text-primary" />
+                <span>Developer Relations consulting</span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <GraduationCap className="h-5 w-5 text-primary" />
+                <span>Developer education assets</span>
+              </motion.li>
+              <motion.li variants={item} className="flex items-center gap-3">
+                <Layout className="h-5 w-5 text-primary" />
+                <span>Responsive website design</span>
+              </motion.li>
+            </ul>
+          </div>
+
+          {/* Events & Media */}
+          {isPro && (
+            <div className="mb-6">
+              <h4 className="mb-3 text-sm font-medium text-muted-foreground">
+                Events & Media <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />
+              </h4>
+              <ul className="grid gap-4 sm:grid-cols-2">
+                <motion.li variants={item} className="flex items-center gap-3">
+                  <CalendarDays className="h-5 w-5 text-primary" />
+                  <span>Event planning & coordination</span>
+                </motion.li>
+                <motion.li variants={item} className="flex items-center gap-3">
+                  <Camera className="h-5 w-5 text-primary" />
+                  <span>Professional photography</span>
+                </motion.li>
+              </ul>
+            </div>
+          )}
 
           <motion.div className="mt-8 flex gap-4">
             <Button
@@ -361,7 +422,7 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mt-24 max-w-4xl"
+        className="mx-auto mt-24 max-w-6xl"
         id="showcase"
       >
         <div className="mb-12 text-center">
@@ -371,11 +432,7 @@ export default function PricingPage() {
           </p>
         </div>
 
-        <ProjectGrid 
-          projects={projects.slice(0, 4)} 
-          columns={2}
-          className="max-w-4xl mx-auto"
-        />
+        <ProjectGrid projects={projects.slice(0, 6)} columns={3} className="mx-auto max-w-6xl" />
       </motion.div>
 
       <motion.div
