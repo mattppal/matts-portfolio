@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import crypto from 'crypto';
 import ignore from 'ignore';
 import { promises as fsPromises } from 'fs';
+import { execSync } from 'child_process';
 
 // Load environment variables
 dotenv.config({ path: '.env.local' });
@@ -118,6 +119,34 @@ async function getAllLocalFiles(dir: string, baseDir: string = ''): Promise<stri
   return files;
 }
 
+// Add this helper function to check git status
+async function isFileModifiedInGit(relativePath: string): Promise<boolean> {
+  try {
+    // Check if file is tracked by git
+    const isTracked =
+      execSync(`git ls-files ${relativePath}`, {
+        encoding: 'utf8',
+        stdio: ['pipe', 'pipe', 'ignore'],
+      }).length > 0;
+
+    if (!isTracked) {
+      return true; // New file, needs upload
+    }
+
+    // Check if file is modified
+    const status = execSync(`git status --porcelain ${relativePath}`, {
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+
+    return status.length > 0; // Returns true if file is modified
+  } catch (error) {
+    console.warn(`Error checking git status for ${relativePath}, assuming modified:`, error);
+    return true;
+  }
+}
+
+// Replace the existing processFiles function
 async function processFiles(localFiles: string[], existingBlobs: Map<string, string>) {
   const processedFiles = new Set<string>();
 
@@ -125,20 +154,11 @@ async function processFiles(localFiles: string[], existingBlobs: Map<string, str
     console.log(`Processing: ${relativePath}`);
     const fullPath = path.join(PUBLIC_DIR, relativePath);
 
-    // Calculate hash of local file
-    const localHash = await calculateFileHash(fullPath);
-
     if (existingBlobs.has(relativePath)) {
-      // Check if file content has changed by downloading and comparing hash
-      const existingUrl = existingBlobs.get(relativePath)!;
-      const response = await fetch(existingUrl);
-      const existingBuffer = await response.arrayBuffer();
-      const existingHash = crypto
-        .createHash('sha256')
-        .update(Buffer.from(existingBuffer))
-        .digest('hex');
+      // Instead of downloading and comparing, use git to check if file changed
+      const isModified = await isFileModifiedInGit(path.join('public', relativePath));
 
-      if (localHash !== existingHash) {
+      if (isModified) {
         console.log(`File changed, re-uploading: ${relativePath}`);
         const file = await fs.readFile(fullPath);
         await put(relativePath, file, {
