@@ -37,13 +37,13 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.2,
     },
   },
 };
 
 const item = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0, y: 10 },
   show: { opacity: 1, y: 0 },
 };
 
@@ -129,23 +129,9 @@ export default function PricingPage() {
     notes: '',
   });
   const [isPro, setIsPro] = useState(false);
-  const { toast } = useToast();
 
   const currentPriceValue = isPro ? 6995 : 3995;
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: 'Thanks for your interest!',
-      description: `We'll be in touch soon about the ${isPro ? 'Pro ⚡' : 'Standard'} plan.`,
-    });
-    setFormData({ email: '', name: '', notes: '' });
-  };
-
-  const scrollToForm = () => {
-    document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   return (
     <div className="container relative mx-auto px-4 py-24">
@@ -240,7 +226,7 @@ export default function PricingPage() {
                   className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-6 text-left transition-colors hover:bg-accent"
                 >
                   <div>
-                    <h3 className="text-lg font-semibold">Example projects</h3>
+                    <h3 className="text-lg font-semibold">Sample projects</h3>
                     <p className="text-sm text-muted-foreground">
                       See my recent work and collaborations
                     </p>
@@ -277,7 +263,7 @@ export default function PricingPage() {
           <div className="space-y-8">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-semibold">What&apos;s included</h3>
-              <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-base text-primary">
+              <div className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-base text-primary rounded-full">
                 <motion.div
                   className="h-2 w-2 rounded-full bg-primary"
                   animate={{
@@ -287,7 +273,7 @@ export default function PricingPage() {
                   transition={{
                     duration: 2,
                     repeat: Infinity,
-                    ease: 'easeInOut',
+                    ease: "easeInOut",
                   }}
                 />
                 Slots available in {getNextMonth()}
@@ -295,12 +281,12 @@ export default function PricingPage() {
             </div>
 
             {/* Request & Subscription Details */}
-            <div className="space-y-4">
+            <motion.div variants={item} className="space-y-4">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Request & Subscription Details
               </h4>
               <ul className="grid gap-4 sm:grid-cols-2">
-                <motion.li variants={item} className="flex items-center gap-3">
+                <li className="flex items-center gap-3">
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span>
                     <NumberFlow
@@ -310,84 +296,82 @@ export default function PricingPage() {
                     />{' '}
                     request{isPro ? 's' : ''} at a time
                   </span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-primary" />
-                  <span>
-                    Average{' '}
-                    <NumberFlow value={isPro ? 48 : 72} className="font-medium tabular-nums" /> hour
-                    delivery
-                  </span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                  <span>Average 48 hour delivery</span>
+                </li>
+                <li className="flex items-center gap-3">
                   <Pause className="h-5 w-5 text-primary" />
                   <span>Pause or cancel anytime</span>
-                </motion.li>
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Product & Marketing */}
-            <div className="space-y-4">
+            <motion.div variants={item} className="space-y-4">
               <h4 className="text-sm font-medium text-muted-foreground">Product & Marketing</h4>
               <ul className="grid gap-4 sm:grid-cols-2">
-                <motion.li variants={item} className="flex items-center gap-3">
+                <li className="flex items-center gap-3">
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span>Product marketing & strategy</span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <Video className="h-5 w-5 text-primary" />
                   <span>Product launch videos</span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <PlaySquare className="h-5 w-5 text-primary" />
                   <span>Animated product demos</span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <Sparkles className="h-5 w-5 text-primary" />
                   <span>Product GIFs & animations</span>
-                </motion.li>
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Developer & Web */}
-            <div className="space-y-4">
+            <motion.div variants={item} className="space-y-4">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Developer & Web Services
               </h4>
               <ul className="grid gap-4 sm:grid-cols-2">
-                <motion.li variants={item} className="flex items-center gap-3">
+                <li className="flex items-center gap-3">
                   <Code2 className="h-5 w-5 text-primary" />
                   <span>Developer Relations consulting</span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <GraduationCap className="h-5 w-5 text-primary" />
                   <span>Developer education assets</span>
-                </motion.li>
-                <motion.li variants={item} className="flex items-center gap-3">
+                </li>
+                <li className="flex items-center gap-3">
                   <Layout className="h-5 w-5 text-primary" />
                   <span>Responsive website design</span>
-                </motion.li>
+                </li>
               </ul>
-            </div>
+            </motion.div>
 
             {/* Events & Media */}
-            {isPro && (
-              <div className="space-y-4">
-                <h4 className="text-sm font-medium text-muted-foreground">
-                  Events & Media <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />
-                </h4>
-                <ul className="grid gap-4 sm:grid-cols-2">
-                  <motion.li variants={item} className="flex items-center gap-3">
-                    <CalendarDays className="h-5 w-5 text-primary" />
-                    <span>Event planning & coordination</span>
-                  </motion.li>
-                  <motion.li variants={item} className="flex items-center gap-3">
-                    <Camera className="h-5 w-5 text-primary" />
-                    <span>Professional photography</span>
-                  </motion.li>
-                </ul>
-              </div>
-            )}
+            <motion.div 
+              variants={item} 
+              className={`space-y-4 ${!isPro ? 'opacity-40' : ''}`}
+              transition={{ duration: 0.2 }}
+            >
+              <h4 className="text-sm font-medium text-muted-foreground">
+                Events & Media <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />
+              </h4>
+              <ul className="grid gap-4 sm:grid-cols-2">
+                <li className="flex items-center gap-3">
+                  <CalendarDays className="h-5 w-5 text-primary" />
+                  <span>Event planning & coordination</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Camera className="h-5 w-5 text-primary" />
+                  <span>Professional photography</span>
+                </li>
+              </ul>
+            </motion.div>
           </div>
         </motion.div>
       </div>

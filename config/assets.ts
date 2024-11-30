@@ -51,6 +51,7 @@ export const assets = {
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/databricks.svg',
     hex: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/hex.svg',
     oreilly: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/oreilly.svg',
+    "og (1)": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/og%20(1).jpg",
     replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/replit.svg',
     tobiko: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/tobiko.svg',
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
