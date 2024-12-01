@@ -288,11 +288,6 @@ function CostBreakdown() {
 }
 
 export default function PricingPage() {
-  const [formData, setFormData] = useState({
-    email: '',
-    name: '',
-    notes: '',
-  });
   const [isPro, setIsPro] = useState(false);
 
   const currentPriceValue = isPro ? 6995 : 3995;
