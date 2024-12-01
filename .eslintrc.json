@@ -95,7 +95,44 @@
           "vid2gif",
           "wtw",
           "Whitepapers",
-          "whitepapers"
+          "whitepapers",
+          // File extensions
+          "ttf",
+          "ico",
+          "jpg",
+          "gpu",
+          // HTML/Web terms
+          "latin",
+          "favicon",
+          "sitemap",
+          "Sitemap",
+          "resize",
+          "maxresdefault",
+          "autoplay",
+          "accelerometer",
+          // Technical terms
+          "Ld",
+          "JsonLd",
+          "ld",
+          "ai",
+          "Fs",
+          "Wi",
+          "Fi",
+          "Splide",
+          "Webkit",
+          "Checkbox",
+          "Textarea",
+          "radix",
+          "clsx",
+          "tw",
+          // UI Component names
+          "Checkbox",
+          "Textarea",
+          "Splide",
+          // Project IDs and hashes
+          "P5d0k1atk",
+          "vw727qcsk",
+          "5mbaca1x"
         ]
       }
     ]
