@@ -1,130 +1,145 @@
 'use client';
 
-import { motion, useScroll, useTransform, type HTMLMotionProps } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import type { CSSProperties } from 'react';
+import { useEffect, useState } from 'react';
 
 interface GradientBlurProps {
   className?: string;
   intensity?: 'subtle' | 'medium' | 'strong';
   position?: 'top' | 'center' | 'bottom';
-  animate?: boolean;
 }
 
 const intensityMap = {
-  subtle: {
-    primary: 'bg-primary/5',
-    secondary: 'bg-primary/3',
-    blur: 'blur-2xl',
+  subtle: 'opacity-[0.03]',
+  medium: 'opacity-[0.045]',
+  strong: 'opacity-[0.06]',
+};
+
+const blurMap = {
+  default: {
+    subtle: 'blur-[50px]',
+    medium: 'blur-[75px]',
+    strong: 'blur-[100px]',
   },
-  medium: {
-    primary: 'bg-primary/10',
-    secondary: 'bg-primary/5',
-    blur: 'blur-3xl',
-  },
-  strong: {
-    primary: 'bg-primary/15',
-    secondary: 'bg-primary/10',
-    blur: 'blur-[100px]',
-  },
+  mobile: {
+    subtle: 'blur-[30px]',
+    medium: 'blur-[40px]',
+    strong: 'blur-[50px]',
+  }
 };
 
 const positionMap = {
-  top: {
-    primary: 'left-1/2 top-0',
-    secondary: 'right-0 top-1/4',
-  },
-  center: {
-    primary: 'left-1/2 top-1/2',
-    secondary: 'right-1/4 top-1/2',
-  },
-  bottom: {
-    primary: 'left-1/2 bottom-0',
-    secondary: 'right-0 bottom-1/4',
-  },
+  top: '-top-1/3',
+  center: 'top-1/4',
+  bottom: 'top-1/2',
 };
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Initial check
+    checkMobile();
+
+    // Add event listener
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+}
 
 export function GradientBlur({
   className,
   intensity = 'medium',
   position = 'top',
-  animate = true,
 }: GradientBlurProps) {
+  const isMobile = useIsMobile();
   const { scrollYProgress } = useScroll();
-  const intensityStyles = intensityMap[intensity];
-  const positionStyles = positionMap[position];
 
-  const secondaryY = useTransform(scrollYProgress, [0, 1], ['0%', '-20%']);
-  const secondaryX = useTransform(scrollYProgress, [0, 1], ['0%', '10%']);
-  const scaleValue = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '-30%' : '-50%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, isMobile ? 1.1 : 1.2]);
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        duration: 0.8,
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, scale: 0.8 },
-    show: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1.2,
-        ease: [0.4, 0, 0.2, 1],
-      },
-    },
-  };
-
-  const Wrapper = animate ? motion.div : 'div';
-  const Element = animate ? motion.div : 'div';
-
-  const primaryStyle: CSSProperties = {
-    background: `radial-gradient(circle at center, ${intensityStyles.primary} 0%, transparent 100%)`,
-    filter: 'blur(100px)',
-    opacity: 0.15,
-  };
-
-  type MotionDivStyle = NonNullable<HTMLMotionProps<'div'>['style']>;
-
-  const secondaryStyle: MotionDivStyle = {
-    transform: 'none',
-    y: secondaryY,
-    x: secondaryX,
-    scale: scaleValue,
-  };
+  const blurIntensity = isMobile ? blurMap.mobile[intensity] : blurMap.default[intensity];
 
   return (
-    <Wrapper
-      variants={container}
-      initial="hidden"
-      animate="show"
-      className={cn('pointer-events-none fixed inset-0 -z-10 overflow-hidden', className)}
-    >
-      <Element
-        variants={item}
-        style={primaryStyle}
+    <div className={cn('pointer-events-none fixed inset-0 -z-10 overflow-hidden', className)}>
+      {/* Primary circle */}
+      <motion.div
+        style={{ y, scale }}
         className={cn(
-          'absolute h-[800px] w-[800px] rounded-full',
-          intensityStyles.primary,
-          'left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2'
+          'absolute',
+          isMobile ? 'left-[20%]' : 'left-[35%]',
+          positionMap[position],
+          isMobile ? 'h-[600px] w-[600px]' : 'h-[1000px] w-[1000px]',
+          'transform-gpu'
         )}
-      />
-      <Element
-        variants={item}
-        style={secondaryStyle as CSSProperties}
+      >
+        <div
+          className={cn(
+            'absolute inset-0 rounded-full',
+            'bg-primary mix-blend-normal',
+            intensityMap[intensity],
+            blurIntensity
+          )}
+        />
+      </motion.div>
+
+      {/* Secondary circle */}
+      <motion.div
+        style={{ 
+          y: useTransform(y, value => `${-parseFloat(value as string)}%`),
+          scale: useTransform(scale, value => value * (isMobile ? 0.98 : 0.95))
+        }}
         className={cn(
-          'absolute h-[600px] w-[600px] rounded-full',
-          intensityStyles.secondary,
-          intensityStyles.blur,
-          positionStyles.secondary
+          'absolute',
+          isMobile ? 'right-[20%]' : 'right-[35%]',
+          positionMap[position],
+          isMobile ? 'h-[500px] w-[500px]' : 'h-[900px] w-[900px]',
+          'transform-gpu'
         )}
-      />
-    </Wrapper>
+      >
+        <div
+          className={cn(
+            'absolute inset-0 rounded-full',
+            'bg-secondary mix-blend-normal',
+            intensityMap[intensity],
+            blurIntensity
+          )}
+        />
+      </motion.div>
+
+      {/* Accent circle - desktop only */}
+      {!isMobile && (
+        <motion.div
+          style={{ 
+            y: useTransform(y, value => `${-parseFloat(value as string) * 1.1}%`),
+            scale: useTransform(scale, value => value * 0.85)
+          }}
+          className={cn(
+            'absolute left-[45%]',
+            positionMap[position],
+            'h-[800px] w-[800px]',
+            'transform-gpu'
+          )}
+        >
+          <div
+            className={cn(
+              'absolute inset-0 rounded-full',
+              'bg-accent mix-blend-normal',
+              intensityMap[intensity],
+              blurIntensity
+            )}
+          />
+        </motion.div>
+      )}
+    </div>
   );
 }

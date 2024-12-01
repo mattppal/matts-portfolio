@@ -32,7 +32,15 @@ export default function Home() {
         <p className="text-center text-muted-foreground">Trusted by content teams at</p>
         <LogoCarousel />
       </Suspense>
-      <NewsletterSubscription />
+      <Suspense
+        fallback={
+          <div className="w-full max-w-4xl mx-auto px-4">
+            <Skeleton className="h-[200px]" />
+          </div>
+        }
+      >
+        <NewsletterSubscription />
+      </Suspense>
       <Suspense
         fallback={
           <div className="flex gap-4 py-8 sm:py-4 md:py-4">

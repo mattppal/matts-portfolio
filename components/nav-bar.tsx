@@ -19,7 +19,12 @@ const menuItems = [
   { name: 'About', id: 'about' },
   { name: 'Projects', id: 'projects' },
   { name: 'Writing', id: 'writing' },
-  { name: 'Contact', id: 'contact' },
+  { 
+    name: 'Guestbook', 
+    id: 'guestbook',
+    href: 'https://guestbook.mattpalmer.io/',
+    external: true 
+  },
 ];
 
 // Client component for navigation logic
@@ -53,7 +58,11 @@ function NavigationContent() {
     }
   }, [pathname]);
 
-  const handleNavigation = (id: string) => {
+  const handleNavigation = (id: string, href?: string) => {
+    if (href) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+      return;
+    }
     if (isHomePage) {
       scrollToSection(id);
     } else {
@@ -64,7 +73,19 @@ function NavigationContent() {
   return (
     <nav className="container mx-auto flex h-16 items-center justify-between px-4">
       <div className="flex items-center gap-4">
-        <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
+        <motion.div 
+          className="text-xl font-bold" 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ 
+            duration: 0.3,
+            ease: "easeOut",
+            // This ensures the animation completes
+            type: "tween",
+            // Force the animation to finish even if hover ends
+            repeatType: "finish"
+          }}
+        >
           <Link href="/" scroll={false}>
             <AnimatedLogo />
           </Link>
@@ -87,7 +108,7 @@ function NavigationContent() {
           <Button
             key={item.id}
             variant="ghost"
-            onClick={() => handleNavigation(item.id)}
+            onClick={() => handleNavigation(item.id, item.href)}
             className="btn-scale"
           >
             {item.name}
@@ -115,7 +136,7 @@ function NavigationContent() {
             {menuItems.map((item) => (
               <DropdownMenuItem
                 key={item.id}
-                onClick={() => handleNavigation(item.id)}
+                onClick={() => handleNavigation(item.id, item.href)}
                 className="cursor-pointer justify-end py-1.5"
               >
                 {item.name}

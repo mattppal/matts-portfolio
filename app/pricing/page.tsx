@@ -620,7 +620,7 @@ export default function PricingPage() {
               <ul className="grid gap-4 sm:grid-cols-2">
                 <li className="flex items-center gap-3">
                   <Code2 className="h-5 w-5 text-primary" />
-                  <span>Developer Relations consulting</span>
+                  <span>Developer Relations</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <GraduationCap className="h-5 w-5 text-primary" />
