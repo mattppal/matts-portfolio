@@ -26,7 +26,7 @@ const blurMap = {
     subtle: 'blur-[30px]',
     medium: 'blur-[40px]',
     strong: 'blur-[50px]',
-  }
+  },
 };
 
 const positionMap = {
@@ -35,37 +35,33 @@ const positionMap = {
   bottom: 'top-1/2',
 };
 
-function useIsMobile() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    // Initial check
-    checkMobile();
-
-    // Add event listener
-    window.addEventListener('resize', checkMobile);
-    
-    // Cleanup
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  return isMobile;
-}
-
 export function GradientBlur({
   className,
   intensity = 'medium',
   position = 'top',
 }: GradientBlurProps) {
-  const isMobile = useIsMobile();
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
 
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', isMobile ? '-30%' : '-50%']);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, isMobile ? 1.1 : 1.2]);
+  // Always create transforms, but use different values based on isMobile
+  const y = useTransform(scrollYProgress, [0, 1], ['0%', '-50%']);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const secondaryY = useTransform(y, (value) => `${-parseFloat(value as string)}%`);
+  const secondaryScale = useTransform(scale, (value) => value * 0.95);
+  const accentY = useTransform(y, (value) => `${-parseFloat(value as string) * 1.1}%`);
+  const accentScale = useTransform(scale, (value) => value * 0.85);
+
+  useEffect(() => {
+    const updateMobileState = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Initial check
+    updateMobileState();
+
+    window.addEventListener('resize', updateMobileState);
+    return () => window.removeEventListener('resize', updateMobileState);
+  }, []);
 
   const blurIntensity = isMobile ? blurMap.mobile[intensity] : blurMap.default[intensity];
 
@@ -73,14 +69,14 @@ export function GradientBlur({
     <div className={cn('pointer-events-none fixed inset-0 -z-10 overflow-hidden', className)}>
       {/* Primary circle */}
       <motion.div
-        style={{ y, scale }}
-        className={cn(
-          'absolute',
-          isMobile ? 'left-[20%]' : 'left-[35%]',
-          positionMap[position],
-          isMobile ? 'h-[600px] w-[600px]' : 'h-[1000px] w-[1000px]',
-          'transform-gpu'
-        )}
+        style={{
+          y,
+          scale,
+          left: isMobile ? '20%' : '35%',
+          width: isMobile ? '600px' : '1000px',
+          height: isMobile ? '600px' : '1000px',
+        }}
+        className={cn('absolute', positionMap[position], 'transform-gpu')}
       >
         <div
           className={cn(
@@ -94,17 +90,14 @@ export function GradientBlur({
 
       {/* Secondary circle */}
       <motion.div
-        style={{ 
-          y: useTransform(y, value => `${-parseFloat(value as string)}%`),
-          scale: useTransform(scale, value => value * (isMobile ? 0.98 : 0.95))
+        style={{
+          y: secondaryY,
+          scale: secondaryScale,
+          right: isMobile ? '20%' : '35%',
+          width: isMobile ? '500px' : '900px',
+          height: isMobile ? '500px' : '900px',
         }}
-        className={cn(
-          'absolute',
-          isMobile ? 'right-[20%]' : 'right-[35%]',
-          positionMap[position],
-          isMobile ? 'h-[500px] w-[500px]' : 'h-[900px] w-[900px]',
-          'transform-gpu'
-        )}
+        className={cn('absolute', positionMap[position], 'transform-gpu')}
       >
         <div
           className={cn(
@@ -116,30 +109,30 @@ export function GradientBlur({
         />
       </motion.div>
 
-      {/* Accent circle - desktop only */}
-      {!isMobile && (
-        <motion.div
-          style={{ 
-            y: useTransform(y, value => `${-parseFloat(value as string) * 1.1}%`),
-            scale: useTransform(scale, value => value * 0.85)
-          }}
+      {/* Accent circle - always render but hide on mobile */}
+      <motion.div
+        style={{
+          y: accentY,
+          scale: accentScale,
+          opacity: isMobile ? 0 : 1,
+          pointerEvents: isMobile ? 'none' : 'auto',
+        }}
+        className={cn(
+          'absolute left-[45%]',
+          positionMap[position],
+          'h-[800px] w-[800px]',
+          'transform-gpu'
+        )}
+      >
+        <div
           className={cn(
-            'absolute left-[45%]',
-            positionMap[position],
-            'h-[800px] w-[800px]',
-            'transform-gpu'
+            'absolute inset-0 rounded-full',
+            'bg-accent mix-blend-normal',
+            intensityMap[intensity],
+            blurIntensity
           )}
-        >
-          <div
-            className={cn(
-              'absolute inset-0 rounded-full',
-              'bg-accent mix-blend-normal',
-              intensityMap[intensity],
-              blurIntensity
-            )}
-          />
-        </motion.div>
-      )}
+        />
+      </motion.div>
     </div>
   );
 }

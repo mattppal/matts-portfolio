@@ -19,11 +19,11 @@ const menuItems = [
   { name: 'About', id: 'about' },
   { name: 'Projects', id: 'projects' },
   { name: 'Writing', id: 'writing' },
-  { 
-    name: 'Guestbook', 
+  {
+    name: 'Guestbook',
     id: 'guestbook',
     href: 'https://guestbook.mattpalmer.io/',
-    external: true 
+    external: true,
   },
 ];
 
@@ -73,33 +73,31 @@ function NavigationContent() {
   return (
     <nav className="container mx-auto flex h-16 items-center justify-between px-4">
       <div className="flex items-center gap-4">
-        <motion.div 
-          className="text-xl font-bold" 
+        <motion.div
+          className="text-xl font-bold"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          transition={{ 
+          transition={{
             duration: 0.3,
-            ease: "easeOut",
-            // This ensures the animation completes
-            type: "tween",
-            // Force the animation to finish even if hover ends
-            repeatType: "finish"
+            ease: 'easeOut',
+            type: 'tween',
           }}
         >
           <Link href="/" scroll={false}>
             <AnimatedLogo />
           </Link>
         </motion.div>
-        {/* <motion.div whileHover={{ scale: 1.05 }} className="hidden sm:block">
+        {/* Combined CTA with responsive styles */}
+        <motion.div whileHover={{ scale: 1.05 }}>
           <Link href="/pricing">
             <Badge
               variant="secondary"
-              className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
+              className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md sm:px-4 sm:py-2"
             >
               Work with me
             </Badge>
           </Link>
-        </motion.div> */}
+        </motion.div>
       </div>
 
       {/* Desktop Navigation */}
@@ -123,7 +121,7 @@ function NavigationContent() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex items-center gap-4 md:hidden">
+      <div className="flex items-center gap-2 md:hidden">
         <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -142,9 +140,6 @@ function NavigationContent() {
                 {item.name}
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
-              <Link href="/pricing">Work with me</Link>
-            </DropdownMenuItem>
             <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
               <Link href="/books" scroll={false}>
                 <span className="text-xl">📚</span>

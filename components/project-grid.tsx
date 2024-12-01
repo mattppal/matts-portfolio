@@ -32,7 +32,7 @@ interface CategorySectionProps {
 interface ProjectGridProps {
   projects: Project[];
   showCategories?: boolean;
-  columns?: number;
+  columns?: number | { mobile: number; tablet: number; desktop: number };
   className?: string;
 }
 
@@ -132,7 +132,7 @@ function CategorySection({ title, icon, projects }: CategorySectionProps) {
 export function ProjectGrid({
   projects,
   showCategories = false,
-  columns = 2,
+  columns = { mobile: 1, tablet: 2, desktop: 3 },
   className = '',
 }: ProjectGridProps) {
   if (showCategories) {
@@ -157,10 +157,15 @@ export function ProjectGrid({
     );
   }
 
+  const getGridClass = () => {
+    if (typeof columns === 'number') {
+      return `grid gap-8 ${columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`;
+    }
+    return `grid gap-8 grid-cols-${columns.mobile} sm:grid-cols-${columns.tablet} lg:grid-cols-${columns.desktop}`;
+  };
+
   return (
-    <div
-      className={`grid gap-8 ${columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'} ${className}`}
-    >
+    <div className={`${getGridClass()} ${className}`}>
       {projects.map((project) => (
         <ProjectCard key={project.title} project={project} />
       ))}

@@ -299,23 +299,23 @@ export default function PricingPage() {
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
 
   return (
-    <div className="container relative mx-auto px-4 py-24">
-      {/* New Hero Section */}
+    <div className="container relative mx-auto mt-16 px-4 py-12 md:mt-20 md:py-24">
+      {/* Hero Section - Updated for mobile */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-auto mb-32 max-w-4xl text-center"
+        className="mx-auto mb-16 max-w-4xl text-center md:mb-32"
       >
-        <h1 className="mb-6 text-6xl font-bold leading-[1.1] tracking-tight">
+        <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-6xl">
           Developer marketing, simplified.
         </h1>
-        <p className="mb-12 text-xl text-muted-foreground">
+        <p className="mb-8 text-lg text-muted-foreground md:mb-12 md:text-xl">
           From product launches to developer education, I help tech companies connect with
           developers through compelling content and strategic marketing.
         </p>
 
-        {/* Explainer Icons */}
-        <div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-4">
+        {/* Explainer Icons - Updated grid for mobile */}
+        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mb-12 md:grid-cols-4 md:gap-8">
           <div className="flex flex-col items-center text-center">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Clock className="h-6 w-6 text-primary" />
@@ -357,12 +357,12 @@ export default function PricingPage() {
           </div>
         </div>
 
-        <div className="flex items-center justify-center gap-4">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
           <button
             onClick={() =>
               document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-8 py-3 text-lg font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-8 py-3 text-lg font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
           >
             See plans
           </button>
@@ -370,37 +370,41 @@ export default function PricingPage() {
             onClick={() =>
               document.getElementById('breakdown')?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="inline-flex items-center justify-center rounded-lg border border-primary px-8 py-3 text-lg font-medium text-primary transition-colors hover:bg-primary/10"
+            className="inline-flex w-full items-center justify-center rounded-lg border border-primary px-8 py-3 text-lg font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
           >
             Compare costs
           </button>
         </div>
       </motion.div>
 
-      {/* Projects Section - Moved up */}
+      {/* Projects Section - Updated spacing */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-32 max-w-6xl"
+        className="mx-auto mb-16 max-w-6xl md:mb-32"
         id="showcase"
       >
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">See what you can accomplish</h2>
+        <div className="mb-8 text-center md:mb-12">
+          <h2 className="mb-4 text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
           <p className="text-muted-foreground">
             A showcase of Matt&apos;s previous work and collaborations
           </p>
         </div>
 
-        <ProjectGrid projects={projects} columns={3} className="mx-auto max-w-6xl" />
+        <ProjectGrid
+          projects={projects}
+          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
+          className="mx-auto max-w-6xl"
+        />
       </motion.div>
 
-      {/* Cost Breakdown Section */}
+      {/* Cost Breakdown Section - Updated spacing */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mb-32 max-w-3xl"
+        className="mx-auto mb-16 max-w-3xl md:mb-32"
         id="breakdown"
       >
         <div className="mb-12 text-center">
@@ -412,19 +416,19 @@ export default function PricingPage() {
         <CostBreakdown />
       </motion.div>
 
-      {/* Pricing Grid - Original pricing section moved down */}
-      <div
-        id="pricing"
-        className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12"
-      >
-        {/* Left Column - Membership Info */}
+      {/* Pricing Grid - Updated for mobile */}
+      <div id="pricing" className="mx-auto grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
+        {/* Left Column - Updated spacing */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="h-full rounded-xl border border-primary/10 bg-card p-8">
-            <div className="flex flex-col items-center space-y-8 text-center">
-              <h1 className="text-5xl font-bold leading-[1.1] tracking-tight">Work with Matt 🤘</h1>
+          <div className="h-full rounded-xl border border-primary/10 bg-card p-6 md:p-8">
+            <div className="flex flex-col items-center space-y-6 text-center md:space-y-8">
+              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+                Work with Matt 🤘
+              </h1>
 
+              {/* Toggle Switch - Updated width for mobile */}
               <div>
-                <div className="relative flex w-[280px] items-center rounded-full bg-background/10 p-1">
+                <div className="relative flex w-full max-w-[280px] items-center rounded-full bg-background/10 p-1">
                   <span
                     className={`absolute h-[calc(100%-8px)] rounded-full transition-all duration-200 ${
                       isPro
@@ -534,14 +538,14 @@ export default function PricingPage() {
           </div>
         </motion.div>
 
-        {/* Right Column - What's Included */}
+        {/* Right Column - Updated grid for mobile */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="rounded-xl border border-primary/10 bg-card p-8"
+          className="rounded-xl border border-primary/10 bg-card p-6 md:p-8"
         >
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-semibold">What&apos;s included</h3>
               <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-base text-primary">
@@ -633,25 +637,24 @@ export default function PricingPage() {
               </ul>
             </motion.div>
 
-            {/* Events & Media */}
-            <motion.div
-              variants={item}
-              initial="hidden"
-              animate={isPro ? 'show' : 'hidden'}
-              className="space-y-4"
-              transition={{ duration: 0.2 }}
-            >
+            {/* Events & Media - Always visible on mobile */}
+            <motion.div variants={item} className="space-y-4">
               <h4 className="text-sm font-medium text-muted-foreground">
-                Events & Media <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />
+                Events & Media{' '}
+                {isPro && <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />}
               </h4>
               <ul className="grid gap-4 sm:grid-cols-2">
                 <li className="flex items-center gap-3">
                   <CalendarDays className="h-5 w-5 text-primary" />
-                  <span>Event planning & coordination</span>
+                  <span className={!isPro ? 'text-muted-foreground' : ''}>
+                    Event planning & coordination
+                  </span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Camera className="h-5 w-5 text-primary" />
-                  <span>Professional photography</span>
+                  <span className={!isPro ? 'text-muted-foreground' : ''}>
+                    Professional photography
+                  </span>
                 </li>
               </ul>
             </motion.div>
@@ -659,15 +662,15 @@ export default function PricingPage() {
         </motion.div>
       </div>
 
-      {/* FAQ Section */}
+      {/* FAQ Section - Updated spacing */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mt-24 max-w-3xl"
+        className="mx-auto mt-16 max-w-3xl md:mt-24"
       >
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">Frequently asked questions</h2>
+        <div className="mb-8 text-center md:mb-12">
+          <h2 className="mb-4 text-2xl font-bold md:text-3xl">Frequently asked questions</h2>
           <p className="text-muted-foreground">Everything you need to know about the membership.</p>
         </div>
 
