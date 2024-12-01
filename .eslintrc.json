@@ -1,9 +1,38 @@
 {
   "root": true,
   "extends": ["next/core-web-vitals"],
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["@typescript-eslint", "spellcheck"],
   "rules": {
     "@typescript-eslint/no-unused-vars": "warn",
-    "@typescript-eslint/no-explicit-any": "warn"
+    "@typescript-eslint/no-explicit-any": "warn",
+    "spellcheck/spell-checker": [
+      "warn",
+      {
+        "skipWords": [
+          "Next",
+          "js",
+          "shadcn",
+          "ui",
+          "pnpm",
+          "Vercel",
+          "mattppal",
+          "TypeScript",
+          "Tailwind",
+          "CSS",
+          "Framer",
+          "Motion",
+          "Husky",
+          "OG",
+          "API",
+          "tsx",
+          "npm",
+          "dev",
+          "ts",
+          "Linting",
+          "lint",
+          "staged"
+        ]
+      }
+    ]
   }
 }

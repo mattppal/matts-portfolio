@@ -17,9 +17,9 @@ A modern, responsive portfolio website built with Next.js 15, featuring beautifu
 
 - **Framework**: Next.js 15
 - **Styling**: Tailwind CSS
-- **Components**: shadcn
+- **Components**: shadcn components
 - **Animations**: Framer Motion
-- **Package Manager**: pnpm
+- **Package Manager**: PNPM
 - **Asset Management**: Custom upload scripts
 - **Type Safety**: TypeScript
 
@@ -67,18 +67,6 @@ pnpm dev
   - `/api/books`: Manages book-related content
   - `/api/og`: Generates dynamic Open Graph images
 
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Contact
 
-Your Name - [@mattppal](https://twitter.com/mattppal)
+Matt Palmer - [@mattpalmer](https://twitter.com/mattpalmer)

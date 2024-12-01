@@ -5,9 +5,6 @@ import { ImageCarousel } from '@/components/ui/carousel';
 export function LogoCarousel() {
   return (
     <div className="relative w-full py-4 sm:py-6 md:py-8 lg:py-10">
-      {/* Left fade overlay - hidden on mobile */}
-      <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
-
       <ImageCarousel
         fetchUrl="/api/logos"
         dataKey="logos"
@@ -53,9 +50,6 @@ export function LogoCarousel() {
         imageClassName="w-auto h-8 opacity-70 transition-opacity hover:opacity-100 dark:brightness-[100] dark:contrast-[0] dark:invert brightness-0"
         priority={true}
       />
-
-      {/* Right fade overlay - hidden on mobile */}
-      <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
     </div>
   );
 }

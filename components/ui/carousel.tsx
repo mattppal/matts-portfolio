@@ -51,23 +51,32 @@ export function ImageCarousel({
   if (items.length === 0) return null;
 
   return (
-    <div className="relative w-full">
-      <Splide options={options} extensions={{ AutoScroll }}>
-        {items.map((src, index) => (
-          <SplideSlide key={`${src}-${index}`}>
-            <div className={cn('flex items-center justify-center', itemClassName)}>
-              <Image
-                src={src}
-                alt={`Carousel item ${(index % items.length) + 1}`}
-                width={120}
-                height={40}
-                priority={priority}
-                className={cn('object-contain', imageClassName)}
-              />
-            </div>
-          </SplideSlide>
-        ))}
-      </Splide>
+    <div className="relative w-full overflow-hidden">
+      <div
+        className="w-full"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent, black 20%, black 80%, transparent)',
+        }}
+      >
+        <Splide options={options} extensions={{ AutoScroll }}>
+          {items.map((src, index) => (
+            <SplideSlide key={`${src}-${index}`}>
+              <div className={cn('flex items-center justify-center', itemClassName)}>
+                <Image
+                  src={src}
+                  alt={`Carousel item ${(index % items.length) + 1}`}
+                  width={120}
+                  height={40}
+                  priority={priority}
+                  className={cn('object-contain', imageClassName)}
+                />
+              </div>
+            </SplideSlide>
+          ))}
+        </Splide>
+      </div>
     </div>
   );
 }
