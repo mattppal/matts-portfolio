@@ -161,7 +161,7 @@ export function ProjectGrid({
     if (typeof columns === 'number') {
       return `grid gap-8 ${columns === 2 ? 'md:grid-cols-2' : 'md:grid-cols-3'}`;
     }
-    return `grid gap-8 grid-cols-${columns.mobile} sm:grid-cols-${columns.tablet} lg:grid-cols-${columns.desktop}`;
+    return `grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3`;
   };
 
   return (

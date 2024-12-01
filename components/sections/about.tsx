@@ -35,9 +35,9 @@ const itemVariants = {
 export function About() {
   return (
     <section id="about" className="section-padding">
-      <div className="container mx-auto px-2 sm:px-4">
+      <div className="px-s container mx-auto">
         <motion.div
-          className="mx-auto max-w-4xl space-y-8 sm:space-y-12"
+          className="space-y-l mx-auto max-w-4xl"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -52,7 +52,7 @@ export function About() {
 
           <motion.div variants={itemVariants}>
             <Card>
-              <CardContent className="space-y-4 pt-4 sm:space-y-6 sm:pt-6">
+              <CardContent className="space-y-m pt-m">
                 <p className="text-base leading-relaxed sm:text-lg">
                   Former data professional turned product marketer, I spend my time thinking about
                   how to communicate complex technology.
@@ -75,15 +75,15 @@ export function About() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-6 text-center sm:space-y-8">
-            <div className="space-y-3 sm:space-y-4">
+          <motion.div variants={itemVariants} className="space-y-l text-center">
+            <div className="space-y-m">
               <h3 className="text-lg font-semibold sm:text-xl">Technologies</h3>
-              <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+              <div className="gap-2xs sm:gap-xs flex flex-wrap justify-center">
                 {skills.map((skill) => (
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="bg-background px-2 py-0.5 text-xs transition-all hover:bg-primary/10 hover:text-primary btn-scale sm:px-3 sm:py-1 sm:text-sm"
+                    className="gap-2xs px-2xs py-2xs btn-scale sm:px-s sm:py-xs bg-background text-xs transition-all hover:bg-primary/10 hover:text-primary sm:text-sm"
                   >
                     {skill}
                   </Badge>
@@ -91,14 +91,14 @@ export function About() {
               </div>
             </div>
 
-            <div className="space-y-3 sm:space-y-4">
+            <div className="space-y-m">
               <h3 className="text-lg font-semibold sm:text-xl">Passions</h3>
-              <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2">
+              <div className="gap-2xs sm:gap-xs flex flex-wrap justify-center">
                 {passions.map((passion) => (
                   <Badge
                     key={passion}
                     variant="secondary"
-                    className="bg-background px-2 py-0.5 text-xs transition-all hover:bg-primary/10 hover:text-primary btn-scale sm:px-3 sm:py-1 sm:text-sm"
+                    className="px-2xs py-3xs btn-scale sm:px-s sm:py-xs bg-background text-xs transition-all hover:bg-primary/10 hover:text-primary sm:text-sm"
                   >
                     {passion}
                   </Badge>
@@ -107,7 +107,7 @@ export function About() {
             </div>
           </motion.div>
 
-          <div className="space-y-6 sm:space-y-8">
+          <div className="space-y-l">
             <VideoGallery />
           </div>
         </motion.div>

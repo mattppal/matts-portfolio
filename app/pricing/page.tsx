@@ -164,10 +164,10 @@ function CostBreakdown() {
   const totalMonthly = calculateTotalMonthly(monthlyCosts);
 
   return (
-    <div ref={ref} className="space-y-6">
-      <div className="rounded-lg border border-border p-6">
-        <h3 className="mb-4 text-xl font-semibold">One-Time Setup Costs</h3>
-        <div className="space-y-3">
+    <div ref={ref} className="space-y-l">
+      <div className="p-l rounded-lg border border-border">
+        <h3 className="mb-m text-xl font-semibold">One-Time Setup Costs</h3>
+        <div className="space-y-s">
           {setupCosts.map((cost) => (
             <div key={cost.name} className="flex items-center justify-between">
               <span>{cost.name}</span>
@@ -183,7 +183,7 @@ function CostBreakdown() {
               </span>
             </div>
           ))}
-          <div className="border-t border-border pt-3">
+          <div className="pt-s border-t border-border">
             <div className="flex items-center justify-between font-semibold">
               <span>Initial Investment</span>
               <span className="font-mono">
@@ -201,9 +201,9 @@ function CostBreakdown() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-border p-6">
-        <h3 className="mb-4 text-xl font-semibold">Monthly Operating Costs</h3>
-        <div className="space-y-3">
+      <div className="p-l rounded-lg border border-border">
+        <h3 className="mb-m text-xl font-semibold">Monthly Operating Costs</h3>
+        <div className="space-y-s">
           {monthlyCosts.map((cost) => (
             <div key={cost.name} className="flex items-center justify-between">
               <span>{cost.name}</span>
@@ -220,7 +220,7 @@ function CostBreakdown() {
               </span>
             </div>
           ))}
-          <div className="border-t border-border pt-3">
+          <div className="pt-s border-t border-border">
             <div className="flex items-center justify-between font-semibold">
               <span>Total Monthly Cost</span>
               <span className="font-mono">
@@ -239,9 +239,9 @@ function CostBreakdown() {
         </div>
       </div>
 
-      <div className="rounded-lg border border-primary/20 bg-primary/5 p-6">
-        <h3 className="mb-4 text-xl font-semibold text-primary">The Alternative: Work with Matt</h3>
-        <div className="space-y-3">
+      <div className="p-l rounded-lg border border-primary/20 bg-primary/5">
+        <h3 className="mb-m text-xl font-semibold text-primary">The Alternative: Work with Matt</h3>
+        <div className="space-y-s">
           <div className="flex items-center justify-between">
             <span>All Equipment</span>
             <span className="font-mono">$0</span>
@@ -261,7 +261,7 @@ function CostBreakdown() {
             </span>
             <span className="font-mono">$0</span>
           </div>
-          <div className="border-t border-primary/20 pt-3">
+          <div className="pt-s border-t border-primary/20">
             <div className="flex items-center justify-between font-semibold">
               <span>Monthly Subscription</span>
               <span className="font-mono text-primary">
@@ -306,12 +306,12 @@ export default function PricingPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mx-auto mb-16 max-w-4xl text-center md:mb-32"
       >
-        <h1 className="mb-6 text-4xl font-bold leading-[1.1] tracking-tight md:text-6xl">
+        <h1 className="mb-8 text-4xl font-bold leading-[1.2] tracking-tight md:mb-10 md:text-6xl">
           Developer marketing, simplified.
         </h1>
-        <p className="mb-8 text-lg text-muted-foreground md:mb-12 md:text-xl">
-          From product launches to developer education, I help tech companies connect with
-          developers through compelling content and strategic marketing.
+        <p className="mb-8 text-lg leading-relaxed text-muted-foreground md:mb-12 md:text-xl">
+          From product launches to developer education, I help companies connect with developers
+          through compelling content and strategic marketing.
         </p>
 
         {/* Explainer Icons - Updated grid for mobile */}
@@ -340,9 +340,9 @@ export default function PricingPage() {
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Zap className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-2 font-semibold">48 hour delivery</h3>
+            <h3 className="mb-2 font-semibold">72 hour delivery</h3>
             <p className="text-sm text-muted-foreground">
-              Most requests are completed within 48 hours. Complex projects may take longer.
+              Most requests are completed within 72 hours. Complex projects may take longer.
             </p>
           </div>
 
@@ -352,7 +352,7 @@ export default function PricingPage() {
             </div>
             <h3 className="mb-2 font-semibold">Incredible value</h3>
             <p className="text-sm text-muted-foreground">
-              Typical DevRel costs run in the $10,000&apos;s/mo.
+              Typical DevRel costs run $10-20k/mo plus setup.
             </p>
           </div>
         </div>
@@ -382,7 +382,7 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-16 max-w-6xl md:mb-32"
+        className="mx-auto mb-16 max-w-7xl md:mb-32"
         id="showcase"
       >
         <div className="mb-8 text-center md:mb-12">
@@ -395,7 +395,7 @@ export default function PricingPage() {
         <ProjectGrid
           projects={projects}
           columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-          className="mx-auto max-w-6xl"
+          className="mx-auto gap-6"
         />
       </motion.div>
 
@@ -426,20 +426,20 @@ export default function PricingPage() {
                 Work with Matt 🤘
               </h1>
 
-              {/* Toggle Switch - Updated width for mobile */}
+              {/* Toggle Switch - Updated styling */}
               <div>
                 <div className="relative flex w-full max-w-[280px] items-center rounded-full bg-background/10 p-1">
                   <span
-                    className={`absolute h-[calc(100%-8px)] rounded-full transition-all duration-200 ${
+                    className={`absolute left-1 h-[calc(100%-8px)] rounded-full bg-primary transition-all duration-200 ${
                       isPro
-                        ? 'left-[calc(50%+4px)] w-[calc(50%-8px)] bg-primary'
-                        : 'left-1 w-[calc(50%-8px)] bg-foreground/20'
+                        ? 'w-[calc(50%-4px)] translate-x-[calc(100%+2px)]'
+                        : 'w-[calc(50%+4px)] translate-x-0'
                     }`}
                   />
                   <button
                     onClick={() => setIsPro(false)}
-                    className={`relative z-10 flex-1 rounded-full px-6 py-2 text-base font-semibold transition-colors ${
-                      !isPro ? 'text-background' : 'text-foreground'
+                    className={`relative z-10 flex flex-1 items-center justify-center rounded-full px-6 py-2 text-base font-semibold transition-colors ${
+                      !isPro ? 'text-primary-foreground' : 'text-foreground'
                     }`}
                   >
                     Standard
@@ -447,7 +447,7 @@ export default function PricingPage() {
                   <button
                     onClick={() => setIsPro(true)}
                     className={`relative z-10 flex flex-1 items-center justify-center gap-1.5 rounded-full px-6 py-2 text-base font-semibold transition-colors ${
-                      isPro ? 'text-background' : 'text-foreground'
+                      isPro ? 'text-primary-foreground' : 'text-foreground'
                     }`}
                   >
                     Pro <Zap className="h-4 w-4" />
@@ -584,7 +584,7 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-center gap-3">
                   <Clock className="h-5 w-5 text-primary" />
-                  <span>Average 48 hour delivery</span>
+                  <span>Average 72 hour delivery</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <Pause className="h-5 w-5 text-primary" />
@@ -637,21 +637,27 @@ export default function PricingPage() {
               </ul>
             </motion.div>
 
-            {/* Events & Media - Always visible on mobile */}
+            {/* Events & Media - Updated lightning icon */}
             <motion.div variants={item} className="space-y-4">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Events & Media{' '}
-                {isPro && <Zap className="ml-1 inline-block h-3.5 w-3.5 text-primary" />}
+                <Zap
+                  className={`ml-1 inline-block h-3.5 w-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                />
               </h4>
               <ul className="grid gap-4 sm:grid-cols-2">
                 <li className="flex items-center gap-3">
-                  <CalendarDays className="h-5 w-5 text-primary" />
+                  <CalendarDays
+                    className={`h-5 w-5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                  />
                   <span className={!isPro ? 'text-muted-foreground' : ''}>
                     Event planning & coordination
                   </span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <Camera className="h-5 w-5 text-primary" />
+                  <Camera
+                    className={`h-5 w-5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                  />
                   <span className={!isPro ? 'text-muted-foreground' : ''}>
                     Professional photography
                   </span>
@@ -675,9 +681,31 @@ export default function PricingPage() {
         </div>
 
         <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-0" className="border-b-0">
+            <AccordionTrigger className="py-4 text-lg font-medium">
+              What am I paying you for?
+            </AccordionTrigger>
+            <AccordionContent className="space-y-4 pb-4 text-base">
+              <p>
+                If you&apos;ve ever worked with a technical product, you soon realized a large share
+                of your users have no idea what your product is. This is a marketing and education
+                issue.
+              </p>
+              <p>
+                Matt is an experienced developer educator, who&apos;s worked with companies like
+                Replit, LinkedIn, O&apos;Reilly Media, xAI, and many more to simplify complex
+                experiences and foster amazing developer interactions.
+              </p>
+              <p>
+                He's successfully executed multi-million impression campaigns from start to finish
+                and helped many others achieve their awareness, engagement, and conversion goals.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+
           <AccordionItem value="item-1" className="border-b-0">
             <AccordionTrigger className="py-4 text-lg font-medium">
-              Why not hire a full-time DevRel or marketing person?
+              Why not hire a full-time DevRel or Product Marketer?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 pb-4 text-base">
               <p>
@@ -687,10 +715,13 @@ export default function PricingPage() {
               </p>
 
               <p>
-                DevRel has an extremely steep learning curve and ramp-up time. High quality video
-                production alone requires $5,000+ in equipment and video editing skills, not to
-                mention hundreds in annual SaaS subscriptions. Even outsourcing to an overseas video
-                editor costs around $3,000/month.
+                DevRel has an extremely steep learning curve and ramp-up{' '}
+                <a href="#breakdown" className="text-primary hover:underline">
+                  cost
+                </a>
+                . High quality video production alone requires $5,000+ in equipment and video
+                editing skills, not to mention hundreds in annual SaaS subscriptions. Even
+                outsourcing to an overseas video editor costs around $3,000/month.
               </p>
 
               <p>

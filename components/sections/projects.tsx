@@ -77,7 +77,6 @@ const itemVariants = {
 };
 
 export function ProjectsSection() {
-  // Combine all projects and add their categories with proper typing
   const allProjects = [
     ...projects.map((p) => ({ ...p, category: 'event' as const })),
     ...codeProjects.map((p) => ({ ...p, category: 'code' as const })),
@@ -86,7 +85,7 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" className="section-padding">
-      <div className="container mx-auto px-12">
+      <div className="container mx-auto px-s">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -94,7 +93,7 @@ export function ProjectsSection() {
           variants={containerVariants}
         >
           <motion.h2
-            className="mb-8 text-center text-3xl font-bold md:text-3xl"
+            className="mb-l text-center text-3xl font-bold md:text-3xl"
             variants={itemVariants}
           >
             Fun Projects

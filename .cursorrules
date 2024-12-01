@@ -8,3 +8,5 @@ This is a Next.js project using Next 15 and shadcn, along with framer-motion for
 My goal is to create a beautiful, responsive portfolio site to share what I've been working on and advertise my services.
 
 I am using pnpm for the package manager.
+
+Be sure to use the correct spacing values, defined in tailwind.config.ts. theme > extend > spacing.

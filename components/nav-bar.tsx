@@ -71,8 +71,8 @@ function NavigationContent() {
   };
 
   return (
-    <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-      <div className="flex items-center gap-4">
+    <nav className="px-s container mx-auto flex h-16 items-center justify-between">
+      <div className="gap-s flex items-center">
         <motion.div
           className="text-xl font-bold"
           whileHover={{ scale: 1.05 }}
@@ -87,12 +87,11 @@ function NavigationContent() {
             <AnimatedLogo />
           </Link>
         </motion.div>
-        {/* Combined CTA with responsive styles */}
         <motion.div whileHover={{ scale: 1.05 }}>
           <Link href="/pricing">
             <Badge
               variant="secondary"
-              className="flex items-center gap-2 bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md sm:px-4 sm:py-2"
+              className="gap-2xs px-2xs py-2xs flex items-center bg-primary/10 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
             >
               Work with me
             </Badge>
@@ -101,7 +100,7 @@ function NavigationContent() {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden items-center gap-4 md:flex">
+      <div className="gap-s hidden items-center md:flex">
         {menuItems.map((item) => (
           <Button
             key={item.id}
@@ -121,7 +120,7 @@ function NavigationContent() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex items-center gap-2 md:hidden">
+      <div className="gap-xs flex items-center md:hidden">
         <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -135,12 +134,12 @@ function NavigationContent() {
               <DropdownMenuItem
                 key={item.id}
                 onClick={() => handleNavigation(item.id, item.href)}
-                className="cursor-pointer justify-end py-1.5"
+                className="py-xs cursor-pointer justify-end"
               >
                 {item.name}
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
+            <DropdownMenuItem asChild className="py-xs cursor-pointer justify-end">
               <Link href="/books" scroll={false}>
                 <span className="text-xl">📚</span>
               </Link>

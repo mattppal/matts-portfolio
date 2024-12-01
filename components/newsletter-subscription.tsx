@@ -43,9 +43,9 @@ export function NewsletterSubscription() {
   };
 
   return (
-    <section className="mx-auto w-full max-w-3xl px-4 py-4 md:py-8">
+    <section className="mx-auto w-full max-w-3xl px-s py-m md:py-l">
       <motion.div
-        className="space-y-4 text-center"
+        className="space-y-m text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -62,8 +62,8 @@ export function NewsletterSubscription() {
           on building & marketing.
         </p>
 
-        <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-2">
-          <div className="flex w-full flex-col gap-2 sm:flex-row">
+        <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-xs">
+          <div className="flex w-full flex-col gap-xs sm:flex-row">
             <div className="flex-1">
               <Input
                 type="email"
@@ -79,7 +79,7 @@ export function NewsletterSubscription() {
                 aria-describedby={error ? 'email-error' : undefined}
               />
               {error && (
-                <p id="email-error" className="mt-1 text-left text-sm text-red-500">
+                <p id="email-error" className="mt-2xs text-left text-sm text-red-500">
                   {error}
                 </p>
               )}
@@ -87,7 +87,7 @@ export function NewsletterSubscription() {
             <Button
               type="submit"
               variant="default"
-              className="h-12 w-full bg-[#392C72] px-6 text-base text-white hover:bg-[#2D2359] sm:w-auto"
+              className="h-12 w-full bg-[#392C72] px-m text-base text-white hover:bg-[#2D2359] sm:w-auto"
               disabled={!isValid}
             >
               Subscribe
