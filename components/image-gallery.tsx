@@ -5,9 +5,6 @@ import { ImageCarousel } from '@/components/ui/carousel';
 export function ImageGallery() {
   return (
     <div className="relative w-full py-4">
-      {/* Left fade overlay */}
-      <div className="absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-32" />
-
       <ImageCarousel
         fetchUrl="/api/gallery"
         dataKey="images"
@@ -54,9 +51,6 @@ export function ImageGallery() {
         }}
         priority={true}
       />
-
-      {/* Right fade overlay */}
-      <div className="absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-32" />
     </div>
   );
 }

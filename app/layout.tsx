@@ -29,7 +29,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           <div className="relative min-h-screen">
-            <GradientBlur intensity="medium" position="top" />
+            <GradientBlur intensity="strong" position="top" />
+            <GradientBlur intensity="medium" position="center" />
             <NavBar />
             {children}
           </div>

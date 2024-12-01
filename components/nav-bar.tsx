@@ -19,7 +19,12 @@ const menuItems = [
   { name: 'About', id: 'about' },
   { name: 'Projects', id: 'projects' },
   { name: 'Writing', id: 'writing' },
-  { name: 'Contact', id: 'contact' },
+  {
+    name: 'Guestbook',
+    id: 'guestbook',
+    href: 'https://guestbook.mattpalmer.io/',
+    external: true,
+  },
 ];
 
 // Client component for navigation logic
@@ -53,7 +58,11 @@ function NavigationContent() {
     }
   }, [pathname]);
 
-  const handleNavigation = (id: string) => {
+  const handleNavigation = (id: string, href?: string) => {
+    if (href) {
+      window.open(href, '_blank', 'noopener,noreferrer');
+      return;
+    }
     if (isHomePage) {
       scrollToSection(id);
     } else {
@@ -62,32 +71,41 @@ function NavigationContent() {
   };
 
   return (
-    <nav className="container mx-auto flex h-16 items-center justify-between px-4">
-      <div className="flex items-center gap-4">
-        <motion.div className="text-xl font-bold" whileHover={{ scale: 1.05 }}>
+    <nav className="px-s container mx-auto flex h-16 items-center justify-between">
+      <div className="gap-s flex items-center">
+        <motion.div
+          className="text-xl font-bold"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{
+            duration: 0.3,
+            ease: 'easeOut',
+            type: 'tween',
+          }}
+        >
           <Link href="/" scroll={false}>
             <AnimatedLogo />
           </Link>
         </motion.div>
-        {/* <motion.div whileHover={{ scale: 1.05 }} className="hidden sm:block">
+        <motion.div whileHover={{ scale: 1.05 }}>
           <Link href="/pricing">
             <Badge
               variant="secondary"
-              className="flex items-center gap-2 bg-primary/10 px-4 py-2 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
+              className="gap-2xs px-2xs py-2xs flex items-center bg-primary/10 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
             >
               Work with me
             </Badge>
           </Link>
-        </motion.div> */}
+        </motion.div>
       </div>
 
       {/* Desktop Navigation */}
-      <div className="hidden items-center gap-4 md:flex">
+      <div className="gap-s hidden items-center md:flex">
         {menuItems.map((item) => (
           <Button
             key={item.id}
             variant="ghost"
-            onClick={() => handleNavigation(item.id)}
+            onClick={() => handleNavigation(item.id, item.href)}
             className="btn-scale"
           >
             {item.name}
@@ -102,7 +120,7 @@ function NavigationContent() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="flex items-center gap-4 md:hidden">
+      <div className="gap-xs flex items-center md:hidden">
         <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -115,16 +133,13 @@ function NavigationContent() {
             {menuItems.map((item) => (
               <DropdownMenuItem
                 key={item.id}
-                onClick={() => handleNavigation(item.id)}
-                className="cursor-pointer justify-end py-1.5"
+                onClick={() => handleNavigation(item.id, item.href)}
+                className="py-xs cursor-pointer justify-end"
               >
                 {item.name}
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
-              <Link href="/pricing">Work with me</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem asChild className="cursor-pointer justify-end py-1.5">
+            <DropdownMenuItem asChild className="py-xs cursor-pointer justify-end">
               <Link href="/books" scroll={false}>
                 <span className="text-xl">📚</span>
               </Link>

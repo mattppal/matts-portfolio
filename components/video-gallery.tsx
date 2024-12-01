@@ -69,7 +69,7 @@ export function VideoGallery() {
       onViewportEnter={() => setIsInView(true)}
       onViewportLeave={() => setIsInView(false)}
       viewport={{ once: false, margin: '-20%' }}
-      className="mx-auto grid w-full grid-cols-3 gap-2 overflow-hidden rounded-[var(--radius)]"
+      className="mx-auto grid w-full grid-cols-3 gap-xs overflow-hidden rounded-[var(--radius)]"
     >
       {videos.map((video, index) => (
         <motion.div

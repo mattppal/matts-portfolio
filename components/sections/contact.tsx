@@ -74,7 +74,7 @@ const SocialIcon = ({ social }: { social: (typeof socials)[number] }) => {
 export function ContactSection() {
   return (
     <section id="contact" className="section-padding">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-s">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -82,13 +82,13 @@ export function ContactSection() {
           variants={containerVariants}
           className="mx-auto max-w-2xl text-center"
         >
-          <motion.h2 variants={itemVariants} className="mb-4 text-3xl font-bold md:text-3xl">
+          <motion.h2 variants={itemVariants} className="mb-m text-3xl font-bold md:text-3xl">
             Get in touch
           </motion.h2>
-          <motion.p variants={itemVariants} className="mb-8 text-muted-foreground">
+          <motion.p variants={itemVariants} className="mb-l text-muted-foreground">
             Feel free to reach out through any of these channels
           </motion.p>
-          <motion.div variants={itemVariants} className="flex justify-center gap-4">
+          <motion.div variants={itemVariants} className="flex justify-center gap-m">
             {socials.map((social) => (
               <SocialIcon key={social.name} social={social} />
             ))}

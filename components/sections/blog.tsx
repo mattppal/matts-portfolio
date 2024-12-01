@@ -15,10 +15,10 @@ interface BlogPost {
 
 function BlogSkeleton() {
   return (
-    <div className="animate-pulse space-y-4 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
+    <div className="grid gap-s md:grid-cols-2 md:gap-m">
       {[1, 2, 3].map((i) => (
-        <div key={i} className="border-b pb-4 md:border-none">
-          <div className="mb-2 h-6 w-3/4 rounded bg-muted"></div>
+        <div key={i} className="border-b pb-s md:border-none">
+          <div className="mb-xs h-6 w-3/4 rounded bg-muted"></div>
           <div className="h-4 w-1/4 rounded bg-muted"></div>
         </div>
       ))}
@@ -32,17 +32,17 @@ function BlogList({ posts }: { posts: BlogPost[] }) {
   }
 
   return (
-    <div className="space-y-6 md:grid md:grid-cols-2 md:gap-8 md:space-y-0">
+    <div className="grid gap-s md:grid-cols-2 md:gap-m">
       {posts.map((post) => (
         <Link
           key={post.link}
           href={post.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="group block border-b pb-6 last:border-0 md:border-none"
+          className="group block border-b pb-s last:border-0 md:border-none"
         >
-          <article className="flex items-center justify-between gap-2">
-            <div className="space-y-1">
+          <article className="flex items-center justify-between gap-xs">
+            <div className="space-y-2xs">
               <h3 className="line-clamp-1 text-lg font-medium transition-colors group-hover:text-primary">
                 {post.title}
               </h3>
@@ -82,7 +82,7 @@ export function BlogSection() {
 
   return (
     <section id="writing" className="section-padding">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-s">
         <motion.div
           className="mx-auto max-w-4xl"
           initial="hidden"
@@ -93,7 +93,7 @@ export function BlogSection() {
             visible: { opacity: 1, transition: { duration: 0.5 } },
           }}
         >
-          <h2 className="mb-8 text-center text-3xl font-bold md:text-4xl">Latest Writing</h2>
+          <h2 className="mb-l text-center text-3xl font-bold md:text-4xl">Latest Writing</h2>
           <Suspense fallback={<BlogSkeleton />}>
             {isLoading ? <BlogSkeleton /> : <BlogList posts={posts} />}
           </Suspense>

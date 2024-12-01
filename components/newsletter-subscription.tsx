@@ -5,66 +5,95 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { motion } from 'framer-motion';
 
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function NewsletterSubscription() {
   const [email, setEmail] = useState('');
+  const [error, setError] = useState('');
+  const [isValid, setIsValid] = useState(false);
+
+  const validateEmail = (email: string) => {
+    if (!email) {
+      setError('Email is required');
+      setIsValid(false);
+      return false;
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      setError('Please enter a valid email address');
+      setIsValid(false);
+      return false;
+    }
+    setError('');
+    setIsValid(true);
+    return true;
+  };
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newEmail = e.target.value;
+    setEmail(newEmail);
+    validateEmail(newEmail);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateEmail(email)) {
+      // Handle subscription logic here
+      console.log('Subscribing:', email);
+    }
+  };
 
   return (
-    <section className="section-padding">
+    <section className="mx-auto w-full max-w-3xl px-s py-m md:py-l">
       <motion.div
-        className="container mx-auto px-4"
+        className="space-y-m text-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <div className="mx-auto max-w-4xl">
-          <div className="flex flex-col items-center justify-center text-center">
-            <p className="mb-6 text-lg text-muted-foreground">
-              Subscribe to my{' '}
-              <a
-                href="https://blog.mattpalmer.io"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-primary"
-              >
-                blog
-              </a>{' '}
-              or check out a{' '}
-              <a href="#writing" className="underline hover:text-primary">
-                post
-              </a>{' '}
-              first.
-            </p>
-            <form
-              action="https://buttondown.com/api/emails/embed-subscribe/mattpalmer"
-              method="post"
-              target="popupwindow"
-              onSubmit={() => {
-                window.open('https://buttondown.com/mattpalmer', 'popupwindow');
-              }}
-              className="mx-auto w-full max-w-sm space-y-2"
+        <p className="text-base text-muted-foreground md:text-lg">
+          Weekly{' '}
+          <a
+            href="#writing"
+            className="underline decoration-primary transition-colors hover:text-foreground"
+          >
+            thoughts
+          </a>{' '}
+          on building & marketing.
+        </p>
+
+        <form onSubmit={handleSubmit} className="mx-auto flex max-w-md flex-col gap-xs">
+          <div className="flex w-full flex-col gap-xs sm:flex-row">
+            <div className="flex-1">
+              <Input
+                type="email"
+                placeholder="Enter your email"
+                className={`h-12 w-full text-base ${
+                  error ? 'border-red-500 focus-visible:ring-red-500' : ''
+                }`}
+                value={email}
+                onChange={handleEmailChange}
+                onBlur={() => validateEmail(email)}
+                required
+                aria-invalid={!!error}
+                aria-describedby={error ? 'email-error' : undefined}
+              />
+              {error && (
+                <p id="email-error" className="mt-2xs text-left text-sm text-red-500">
+                  {error}
+                </p>
+              )}
+            </div>
+            <Button
+              type="submit"
+              variant="default"
+              className="h-12 w-full bg-[#392C72] px-m text-base text-white hover:bg-[#2D2359] sm:w-auto"
+              disabled={!isValid}
             >
-              <div className="flex flex-col gap-2 sm:flex-row">
-                <Input
-                  className="h-12 flex-1 text-lg"
-                  placeholder="Enter your email"
-                  type="email"
-                  name="email"
-                  id="bd-email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button
-                  type="submit"
-                  className="inline-flex h-12 items-center justify-center text-lg"
-                >
-                  Subscribe
-                </Button>
-              </div>
-            </form>
+              Subscribe
+            </Button>
           </div>
-        </div>
+        </form>
       </motion.div>
     </section>
   );

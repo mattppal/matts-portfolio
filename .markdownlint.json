@@ -1,0 +1,30 @@
+{
+  "MD033": false,
+  "MD013": false,
+  "MD041": false,
+  "MD026": false,
+  "word-allowlist": [
+    "Next",
+    "js",
+    "shadcn",
+    "ui",
+    "pnpm",
+    "Vercel",
+    "mattppal",
+    "TypeScript",
+    "Tailwind",
+    "CSS",
+    "Framer",
+    "Motion",
+    "Husky",
+    "OG",
+    "API",
+    "tsx",
+    "npm",
+    "dev",
+    "ts",
+    "Linting",
+    "lint",
+    "staged"
+  ]
+} 

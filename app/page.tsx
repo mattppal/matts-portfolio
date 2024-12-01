@@ -13,8 +13,8 @@ import { NewsletterSubscription } from '@/components/newsletter-subscription';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-2">
-      <div className="mt-20">
+    <main className="flex min-h-screen flex-col items-center justify-between p-s">
+      <div className="mt-xl">
         <CreatorPill />
       </div>
       <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
@@ -22,20 +22,28 @@ export default function Home() {
       </Suspense>
       <Suspense
         fallback={
-          <div className="space-y-4">
+          <div className="space-y-m">
             <Skeleton className="h-12 w-[300px]" />
             <Skeleton className="h-6 w-[500px]" />
           </div>
         }
       >
         <Hero />
-        <p className="text-center text-muted-foreground">Trusted by content teams at</p>
+        <p className="text-center text-muted-foreground mt-m mb-s">Trusted by content teams at</p>
         <LogoCarousel />
       </Suspense>
-      <NewsletterSubscription />
       <Suspense
         fallback={
-          <div className="flex gap-4 py-8 sm:py-4 md:py-4">
+          <div className="w-full max-w-4xl mx-auto px-m">
+            <Skeleton className="h-[200px]" />
+          </div>
+        }
+      >
+        <NewsletterSubscription />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div className="flex gap-s py-m">
             {Array.from({ length: 5 }).map((_, i) => (
               <Skeleton key={i} className="h-12 w-32" />
             ))}
