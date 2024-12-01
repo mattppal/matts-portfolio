@@ -165,7 +165,7 @@ function CostBreakdown() {
 
   return (
     <div ref={ref} className="space-y-l">
-      <div className="p-l rounded-lg border border-border">
+      <div className="rounded-lg border border-border p-l">
         <h3 className="mb-m text-xl font-semibold">One-Time Setup Costs</h3>
         <div className="space-y-s">
           {setupCosts.map((cost) => (
@@ -183,7 +183,7 @@ function CostBreakdown() {
               </span>
             </div>
           ))}
-          <div className="pt-s border-t border-border">
+          <div className="border-t border-border pt-s">
             <div className="flex items-center justify-between font-semibold">
               <span>Initial Investment</span>
               <span className="font-mono">
@@ -201,7 +201,7 @@ function CostBreakdown() {
         </div>
       </div>
 
-      <div className="p-l rounded-lg border border-border">
+      <div className="rounded-lg border border-border p-l">
         <h3 className="mb-m text-xl font-semibold">Monthly Operating Costs</h3>
         <div className="space-y-s">
           {monthlyCosts.map((cost) => (
@@ -220,7 +220,7 @@ function CostBreakdown() {
               </span>
             </div>
           ))}
-          <div className="pt-s border-t border-border">
+          <div className="border-t border-border pt-s">
             <div className="flex items-center justify-between font-semibold">
               <span>Total Monthly Cost</span>
               <span className="font-mono">
@@ -239,7 +239,7 @@ function CostBreakdown() {
         </div>
       </div>
 
-      <div className="p-l rounded-lg border border-primary/20 bg-primary/5">
+      <div className="rounded-lg border border-primary/20 bg-primary/5 p-l">
         <h3 className="mb-m text-xl font-semibold text-primary">The Alternative: Work with Matt</h3>
         <div className="space-y-s">
           <div className="flex items-center justify-between">
@@ -261,7 +261,7 @@ function CostBreakdown() {
             </span>
             <span className="font-mono">$0</span>
           </div>
-          <div className="pt-s border-t border-primary/20">
+          <div className="border-t border-primary/20 pt-s">
             <div className="flex items-center justify-between font-semibold">
               <span>Monthly Subscription</span>
               <span className="font-mono text-primary">
@@ -697,8 +697,9 @@ export default function PricingPage() {
                 experiences and foster amazing developer interactions.
               </p>
               <p>
-                He's successfully executed multi-million impression campaigns from start to finish
-                and helped many others achieve their awareness, engagement, and conversion goals.
+                He&apos;s successfully executed multi-million impression campaigns from start to
+                finish and helped many others achieve their awareness, engagement, and conversion
+                goals.
               </p>
             </AccordionContent>
           </AccordionItem>
