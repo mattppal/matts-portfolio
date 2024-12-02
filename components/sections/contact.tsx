@@ -62,19 +62,19 @@ const SocialIcon = ({ social }: { social: (typeof socials)[number] }) => {
       href={social.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="rounded-full p-4 transition-colors hover:bg-primary/10"
+      className="rounded-full p-3 transition-colors hover:bg-primary/10 md:p-4"
       whileHover={{ scale: 1.05 }}
       aria-label={social.alt}
     >
-      <Icon className="h-8 w-8 text-muted-foreground transition-colors hover:text-primary" />
+      <Icon className="h-6 w-6 text-muted-foreground transition-colors hover:text-primary md:h-8 md:w-8" />
     </motion.a>
   );
 };
 
 export function ContactSection() {
   return (
-    <section id="contact" className="section-padding">
-      <div className="container mx-auto px-s">
+    <section id="contact" className="py-16 md:py-24">
+      <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -82,13 +82,22 @@ export function ContactSection() {
           variants={containerVariants}
           className="mx-auto max-w-2xl text-center"
         >
-          <motion.h2 variants={itemVariants} className="mb-m text-3xl font-bold md:text-3xl">
+          <motion.h2
+            variants={itemVariants}
+            className="mb-4 text-2xl font-bold md:mb-6 md:text-3xl"
+          >
             Get in touch
           </motion.h2>
-          <motion.p variants={itemVariants} className="mb-l text-muted-foreground">
+          <motion.p
+            variants={itemVariants}
+            className="mb-8 px-4 text-muted-foreground md:mb-10 md:px-0"
+          >
             Feel free to reach out through any of these channels
           </motion.p>
-          <motion.div variants={itemVariants} className="flex justify-center gap-m">
+          <motion.div
+            variants={itemVariants}
+            className="flex flex-wrap justify-center gap-4 md:gap-6"
+          >
             {socials.map((social) => (
               <SocialIcon key={social.name} social={social} />
             ))}

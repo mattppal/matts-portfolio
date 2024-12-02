@@ -255,7 +255,7 @@ function CostBreakdown() {
             <span className="font-mono">$0</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="flex items-center gap-1.5">
+            <span className="flex items-center gap-xs">
               Event Planning & Coordination
               <Zap className="h-3.5 w-3.5 text-primary" />
             </span>
@@ -277,7 +277,7 @@ function CostBreakdown() {
                 />
               </span>
             </div>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-xs text-sm text-muted-foreground">
               No setup costs. No hidden fees. Pause or cancel anytime.
             </p>
           </div>
@@ -294,70 +294,70 @@ export default function PricingPage() {
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
 
   return (
-    <div className="container relative mx-auto mt-16 px-4 py-12 md:mt-20 md:py-24">
+    <div className="container relative mx-auto mt-xl px-s py-l md:mt-2xl md:py-2xl">
       {/* Hero Section - Updated for mobile */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-auto mb-16 max-w-4xl text-center md:mb-32"
+        className="mx-auto mb-xl max-w-4xl text-center md:mb-3xl"
       >
-        <h1 className="mb-8 text-4xl font-bold leading-[1.2] tracking-tight md:mb-10 md:text-6xl">
+        <h1 className="mb-l text-4xl font-bold leading-[1.2] tracking-tight md:mb-xl md:text-6xl">
           Developer marketing, simplified.
         </h1>
-        <p className="mb-8 text-lg leading-relaxed text-muted-foreground md:mb-12 md:text-xl">
+        <p className="mb-l text-lg leading-relaxed text-muted-foreground md:mb-xl md:text-xl">
           From product launches to developer education, I help companies connect with developers
           through compelling content and strategic marketing.
         </p>
 
         {/* Explainer Icons - Updated grid for mobile */}
-        <div className="mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:mb-12 md:grid-cols-4 md:gap-8">
+        <div className="mb-l grid grid-cols-1 gap-m sm:grid-cols-2 md:mb-xl md:grid-cols-4 md:gap-l">
           <div className="flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+            <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Clock className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-2 font-semibold">Monthly subscription</h3>
+            <h3 className="mb-xs font-semibold">Monthly subscription</h3>
             <p className="text-sm text-muted-foreground">
               Subscribe monthly and pause or cancel anytime. No long-term commitments.
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+            <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <MessageSquare className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-2 font-semibold">Unlimited requests</h3>
+            <h3 className="mb-xs font-semibold">Unlimited requests</h3>
             <p className="text-sm text-muted-foreground">
               Submit as many requests as you need. We&apos;ll work on them one at a time.
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+            <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Zap className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-2 font-semibold">72 hour delivery</h3>
+            <h3 className="mb-xs font-semibold">72 hour delivery</h3>
             <p className="text-sm text-muted-foreground">
               Most requests are completed within 72 hours. Complex projects may take longer.
             </p>
           </div>
 
           <div className="flex flex-col items-center text-center">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+            <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <DollarSign className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-2 font-semibold">Incredible value</h3>
+            <h3 className="mb-xs font-semibold">Incredible value</h3>
             <p className="text-sm text-muted-foreground">
               Typical DevRel costs run $10-20k/mo plus setup.
             </p>
           </div>
         </div>
 
-        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="flex flex-col items-center justify-center gap-s sm:flex-row">
           <button
             onClick={() =>
               document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="inline-flex w-full items-center justify-center rounded-lg bg-primary px-8 py-3 text-lg font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-lg border border-primary bg-primary px-s py-xs text-lg font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:w-auto"
           >
             See plans
           </button>
@@ -365,7 +365,7 @@ export default function PricingPage() {
             onClick={() =>
               document.getElementById('breakdown')?.scrollIntoView({ behavior: 'smooth' })
             }
-            className="inline-flex w-full items-center justify-center rounded-lg border border-primary px-8 py-3 text-lg font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
+            className="inline-flex w-full items-center justify-center rounded-lg border border-primary px-s py-xs text-lg font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
           >
             Compare costs
           </button>
@@ -377,11 +377,11 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-16 max-w-7xl md:mb-32"
+        className="mx-auto mb-xl max-w-7xl md:mb-3xl"
         id="showcase"
       >
-        <div className="mb-8 text-center md:mb-12">
-          <h2 className="mb-4 text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
+        <div className="mb-l text-center md:mb-xl">
+          <h2 className="mb-s text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
           <p className="text-muted-foreground">
             A showcase of Matt&apos;s previous work and collaborations
           </p>
@@ -390,7 +390,7 @@ export default function PricingPage() {
         <ProjectGrid
           projects={projects}
           columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-          className="mx-auto gap-6"
+          className="mx-auto gap-m"
         />
       </motion.div>
 
@@ -399,11 +399,11 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mb-16 max-w-3xl md:mb-32"
+        className="mx-auto mb-xl max-w-3xl md:mb-3xl"
         id="breakdown"
       >
-        <div className="mb-12 text-center">
-          <h2 className="mb-4 text-3xl font-bold">The cost breakdown</h2>
+        <div className="mb-xl text-center">
+          <h2 className="mb-s text-3xl font-bold">The cost breakdown</h2>
           <p className="text-muted-foreground">
             Here&apos;s what you&apos;d typically spend to build an in-house DevRel program
           </p>
@@ -411,139 +411,148 @@ export default function PricingPage() {
         <CostBreakdown />
       </motion.div>
 
-      {/* Pricing Grid - Updated for mobile */}
-      <div id="pricing" className="mx-auto grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
-        {/* Left Column - Updated spacing */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="h-full rounded-xl border border-primary/10 bg-card p-6 md:p-8">
-            <div className="flex flex-col items-center space-y-6 text-center md:space-y-8">
-              <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
-                Work with Matt 🤘
-              </h1>
+      {/* Pricing Grid - Reduced gap and optimized columns */}
+      <div
+        id="pricing"
+        className="mx-auto grid max-w-7xl grid-cols-1 gap-m lg:grid-cols-7 lg:gap-l"
+      >
+        {/* Left Column - Takes 3 columns */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="h-full rounded-xl border border-primary/10 bg-card p-m md:p-xl lg:col-span-3"
+        >
+          <div className="flex flex-col items-center space-y-m text-center md:space-y-l">
+            <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
+              Work with Matt 🤘
+            </h1>
 
-              {/* Toggle Switch - Updated styling */}
-              <div>
-                <div className="relative flex w-full max-w-[280px] items-center rounded-full bg-background/10 p-1">
-                  <span
-                    className={`absolute left-1 h-[calc(100%-8px)] rounded-full bg-primary transition-all duration-200 ${
-                      isPro
-                        ? 'w-[calc(50%-4px)] translate-x-[calc(100%+2px)]'
-                        : 'w-[calc(50%+4px)] translate-x-0'
-                    }`}
-                  />
-                  <button
-                    onClick={() => setIsPro(false)}
-                    className={`relative z-10 flex flex-1 items-center justify-center rounded-full px-6 py-2 text-base font-semibold transition-colors ${
-                      !isPro ? 'text-primary-foreground' : 'text-foreground'
-                    }`}
-                  >
-                    Standard
-                  </button>
-                  <button
-                    onClick={() => setIsPro(true)}
-                    className={`relative z-10 flex flex-1 items-center justify-center gap-1.5 rounded-full px-6 py-2 text-base font-semibold transition-colors ${
-                      isPro ? 'text-primary-foreground' : 'text-foreground'
-                    }`}
-                  >
-                    Pro <Zap className="h-4 w-4" />
-                  </button>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-semibold">$</span>
-                  <NumberFlow
-                    value={currentPriceValue}
-                    className="text-6xl font-bold tabular-nums tracking-tight"
-                    format={{
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    }}
-                    transformTiming={{ duration: 600, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
-                    continuous
-                  />
-                  <span className="text-xl text-muted-foreground">/m</span>
-                </div>
-                <p className="text-lg text-muted-foreground">{currentDescription}</p>
-              </div>
-
-              <div className="flex w-full flex-col gap-4">
-                <button
-                  onClick={() =>
-                    window.open('https://calendar.app.google/4Aoa3R1HKFPF48rU6', '_blank')
-                  }
-                  className="group relative flex w-full items-center justify-between rounded-lg bg-primary p-6 text-left text-primary-foreground transition-colors hover:bg-primary/90"
+            {/* Toggle Switch - Updated styling */}
+            <div>
+              <label className="themeSwitcherTwo relative inline-flex cursor-pointer select-none items-center justify-center rounded-md bg-muted p-1">
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  checked={isPro}
+                  onChange={() => setIsPro(!isPro)}
+                />
+                <span
+                  className={`flex items-center rounded px-4 py-2 text-base font-medium transition-colors ${
+                    !isPro
+                      ? 'bg-background text-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  <div>
-                    <h3 className="text-lg font-semibold">Book a 15-min intro call</h3>
-                    <p className="text-sm text-primary-foreground/80">
-                      Learn more about how I work and how I can help you
-                    </p>
-                  </div>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-primary-foreground/30 transition-transform group-hover:translate-x-1">
-                    <svg
-                      className="h-3 w-3"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </button>
-
-                <button
-                  onClick={() =>
-                    document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })
-                  }
-                  className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-6 text-left transition-colors hover:bg-accent"
+                  Standard
+                </span>
+                <span
+                  className={`flex items-center gap-1 rounded px-4 py-2 text-base font-medium transition-colors ${
+                    isPro
+                      ? 'bg-primary text-primary-foreground'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
                 >
-                  <div>
-                    <h3 className="text-lg font-semibold">Sample projects</h3>
-                    <p className="text-sm text-muted-foreground">
-                      See my recent work and collaborations
-                    </p>
-                  </div>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full border border-foreground/30 transition-transform group-hover:translate-x-1">
-                    <svg
-                      className="h-3 w-3"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 5l7 7-7 7"
-                      />
-                    </svg>
-                  </div>
-                </button>
+                  Pro
+                  <Zap className="h-4 w-4" />
+                </span>
+              </label>
+            </div>
+
+            <div className="space-y-s">
+              <div className="flex items-baseline gap-xs">
+                <span className="text-2xl font-semibold">$</span>
+                <NumberFlow
+                  value={currentPriceValue}
+                  className="text-6xl font-bold tabular-nums tracking-tight"
+                  format={{
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  }}
+                  transformTiming={{ duration: 600, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' }}
+                  continuous
+                />
+                <span className="text-xl text-muted-foreground">/m</span>
               </div>
+              <p className="text-lg text-muted-foreground">{currentDescription}</p>
+            </div>
+
+            <div className="flex w-full flex-col gap-s">
+              <button
+                onClick={() =>
+                  window.open('https://calendar.app.google/4Aoa3R1HKFPF48rU6', '_blank')
+                }
+                className="group relative flex w-full items-center justify-between rounded-lg bg-primary p-m text-left text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold">Book a 15-min intro call</h3>
+                  <p className="text-sm text-primary-foreground/80">
+                    Learn more about how I work and how I can help you
+                  </p>
+                </div>
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-primary-foreground/30 transition-transform group-hover:translate-x-1">
+                  <svg
+                    className="h-3 w-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </button>
+
+              <button
+                onClick={() =>
+                  document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-m text-left transition-colors hover:bg-accent"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold">Sample projects</h3>
+                  <p className="text-sm text-muted-foreground">
+                    See my recent work and collaborations
+                  </p>
+                </div>
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-foreground/30 transition-transform group-hover:translate-x-1">
+                  <svg
+                    className="h-3 w-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </button>
             </div>
           </div>
         </motion.div>
 
-        {/* Right Column - Updated grid for mobile */}
+        {/* Right Column - Takes 4 columns for better text fit */}
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="rounded-xl border border-primary/10 bg-card p-6 md:p-8"
+          className="rounded-xl border border-primary/10 bg-card p-l md:p-xl lg:col-span-4"
         >
-          <div className="space-y-6 md:space-y-8">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-semibold">What&apos;s included</h3>
-              <div className="flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-base text-primary">
+          <div className="space-y-m md:space-y-l">
+            <div className="flex flex-col gap-xs sm:flex-row sm:items-center sm:justify-between sm:gap-xs">
+              <h3 className="order-last text-xl font-semibold sm:order-none">
+                What&apos;s included
+              </h3>
+              <div className="order-first inline-flex items-center gap-xs whitespace-nowrap rounded-full bg-primary/10 px-s py-xs text-sm text-primary sm:order-none sm:text-base">
                 <motion.div
                   className="h-2 w-2 rounded-full bg-primary"
                   animate={{
@@ -561,12 +570,12 @@ export default function PricingPage() {
             </div>
 
             {/* Request & Subscription Details */}
-            <motion.div variants={item} className="space-y-4">
+            <motion.div variants={item} className="space-y-s">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Request & Subscription Details
               </h4>
-              <ul className="grid gap-4 sm:grid-cols-2">
-                <li className="flex items-center gap-3">
+              <ul className="grid gap-s sm:grid-cols-2">
+                <li className="flex items-center gap-s">
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span>
                     <NumberFlow
@@ -577,11 +586,11 @@ export default function PricingPage() {
                     request{isPro ? 's' : ''} at a time
                   </span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Clock className="h-5 w-5 text-primary" />
                   <span>Average 72 hour delivery</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Pause className="h-5 w-5 text-primary" />
                   <span>Pause or cancel anytime</span>
                 </li>
@@ -589,22 +598,22 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Product & Marketing */}
-            <motion.div variants={item} className="space-y-4">
+            <motion.div variants={item} className="space-y-s">
               <h4 className="text-sm font-medium text-muted-foreground">Product & Marketing</h4>
-              <ul className="grid gap-4 sm:grid-cols-2">
-                <li className="flex items-center gap-3">
+              <ul className="grid gap-s sm:grid-cols-2">
+                <li className="flex items-center gap-s">
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span>Product marketing & strategy</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Video className="h-5 w-5 text-primary" />
                   <span>Product launch videos</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <PlaySquare className="h-5 w-5 text-primary" />
                   <span>Animated product demos</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Sparkles className="h-5 w-5 text-primary" />
                   <span>Product GIFs & animations</span>
                 </li>
@@ -612,20 +621,20 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Developer & Web */}
-            <motion.div variants={item} className="space-y-4">
+            <motion.div variants={item} className="space-y-s">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Developer & Web Services
               </h4>
-              <ul className="grid gap-4 sm:grid-cols-2">
-                <li className="flex items-center gap-3">
+              <ul className="grid gap-s sm:grid-cols-2">
+                <li className="flex items-center gap-s">
                   <Code2 className="h-5 w-5 text-primary" />
                   <span>Developer Relations</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <GraduationCap className="h-5 w-5 text-primary" />
                   <span>Developer education assets</span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Layout className="h-5 w-5 text-primary" />
                   <span>Responsive website design</span>
                 </li>
@@ -633,15 +642,15 @@ export default function PricingPage() {
             </motion.div>
 
             {/* Events & Media - Updated lightning icon */}
-            <motion.div variants={item} className="space-y-4">
+            <motion.div variants={item} className="space-y-s">
               <h4 className="text-sm font-medium text-muted-foreground">
                 Events & Media{' '}
                 <Zap
-                  className={`ml-1 inline-block h-3.5 w-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                  className={`ml-2xs inline-block h-3.5 w-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
                 />
               </h4>
-              <ul className="grid gap-4 sm:grid-cols-2">
-                <li className="flex items-center gap-3">
+              <ul className="grid gap-s sm:grid-cols-2">
+                <li className="flex items-center gap-s">
                   <CalendarDays
                     className={`h-5 w-5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
                   />
@@ -649,7 +658,7 @@ export default function PricingPage() {
                     Event planning & coordination
                   </span>
                 </li>
-                <li className="flex items-center gap-3">
+                <li className="flex items-center gap-s">
                   <Camera
                     className={`h-5 w-5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
                   />
@@ -668,16 +677,16 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mt-16 max-w-3xl md:mt-24"
+        className="mx-auto mt-xl max-w-3xl md:mt-2xl"
       >
-        <div className="mb-8 text-center md:mb-12">
-          <h2 className="mb-4 text-2xl font-bold md:text-3xl">Frequently asked questions</h2>
+        <div className="mb-l text-center md:mb-xl">
+          <h2 className="mb-s text-2xl font-bold md:text-3xl">Frequently asked questions</h2>
           <p className="text-muted-foreground">Everything you need to know about the membership.</p>
         </div>
 
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="item-0" className="border-b-0">
-            <AccordionTrigger className="py-4 text-lg font-medium">
+            <AccordionTrigger className="py-s text-lg font-medium">
               What am I paying you for?
             </AccordionTrigger>
             <AccordionContent className="space-y-4 pb-4 text-base">

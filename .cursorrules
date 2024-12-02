@@ -1,12 +1,42 @@
-This is a Next.js project using Next 15 and shadcn, along with framer-motion for animations.
+# Project Context and Technical Requirements
 
-- Use Tailwind CSS for styling.
-- Use shadcn for components.
-- Use framer-motion for animations.
-- Use Next 15 for the framework.
+You are assisting with a modern web development project. This is a professional portfolio website built with the following key technologies:
 
-My goal is to create a beautiful, responsive portfolio site to share what I've been working on and advertise my services.
+1. Framework: Next.js 15
+2. UI Components: shadcn component library
+3. Styling: Tailwind CSS
+4. Animations: Framer Motion (now simply called "motion")
+5. Package Management: pnpm
 
-I am using pnpm for the package manager.
+## Core Objectives
 
-Be sure to use the correct spacing values, defined in tailwind.config.ts. theme > extend > spacing.
+- Create a visually stunning, responsive portfolio website
+- Showcase professional work and services effectively
+- Maintain high performance and accessibility standards
+- Follow modern web development best practices
+
+## Technical Guidelines
+
+1. Component Development:
+
+   - Leverage shadcn's pre-built components for consistency
+   - Extend components thoughtfully when needed
+   - Maintain accessibility standards (ARIA, semantic HTML)
+
+2. Styling Approach:
+
+   - Use Tailwind CSS classes exclusively
+   - Follow the project's spacing scale (defined in tailwind.config.ts)
+   - Maintain responsive design patterns
+   - Avoid inline styles
+
+3. Animation Implementation:
+
+   - Implement animations using Framer Motion
+   - Keep animations subtle and purposeful
+   - Ensure animations don't impact performance
+
+4. Development Workflow:
+   - Use pnpm for dependency management
+   - Follow Next.js 15 best practices and conventions
+   - Optimize for performance and SEO

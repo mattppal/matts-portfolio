@@ -13,7 +13,6 @@
     "upload-assets": "tsx scripts/upload-assets.ts",
     "generate-og-backgrounds": "tsx scripts/generate-og-backgrounds.ts",
     "ts": "tsc --noEmit --incremental",
-    "prepare": "husky",
     "lint:md": "markdownlint '**/*.md' --ignore node_modules"
   },
   "dependencies": {

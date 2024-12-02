@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '@/components/mode-toggle';
 import Link from 'next/link';
@@ -27,12 +27,31 @@ const menuItems = [
   },
 ];
 
+function useLogoAnimation() {
+  const controls = useAnimation();
+
+  const handleHoverStart = async () => {
+    // Start a new animation sequence
+    await controls.start({
+      scale: [1, 1.05, 1],
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+        times: [0, 0.5, 1],
+      },
+    });
+  };
+
+  return { controls, handleHoverStart };
+}
+
 // Client component for navigation logic
 function NavigationContent() {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
   const isHomePage = pathname === '/';
+  const logoAnimation = useLogoAnimation();
 
   const scrollToSection = useCallback((id: string) => {
     const element = document.getElementById(id);
@@ -71,12 +90,12 @@ function NavigationContent() {
   };
 
   return (
-    <nav className="px-s container mx-auto flex h-16 items-center justify-between">
-      <div className="gap-s flex items-center">
+    <nav className="container mx-auto flex h-16 items-center justify-between px-s">
+      <div className="flex items-center gap-s">
         <motion.div
           className="text-xl font-bold"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          animate={logoAnimation.controls}
+          onHoverStart={logoAnimation.handleHoverStart}
           transition={{
             duration: 0.3,
             ease: 'easeOut',
@@ -91,7 +110,7 @@ function NavigationContent() {
           <Link href="/pricing">
             <Badge
               variant="secondary"
-              className="gap-2xs px-2xs py-2xs flex items-center bg-primary/10 text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
+              className="flex items-center gap-2xs bg-primary/10 px-2xs py-2xs text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
             >
               Work with me
             </Badge>
@@ -100,7 +119,7 @@ function NavigationContent() {
       </div>
 
       {/* Desktop Navigation */}
-      <div className="gap-s hidden items-center md:flex">
+      <div className="hidden items-center gap-s md:flex">
         {menuItems.map((item) => (
           <Button
             key={item.id}
@@ -120,7 +139,7 @@ function NavigationContent() {
       </div>
 
       {/* Mobile Navigation */}
-      <div className="gap-xs flex items-center md:hidden">
+      <div className="flex items-center gap-xs md:hidden">
         <ModeToggle />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -134,12 +153,12 @@ function NavigationContent() {
               <DropdownMenuItem
                 key={item.id}
                 onClick={() => handleNavigation(item.id, item.href)}
-                className="py-xs cursor-pointer justify-end"
+                className="cursor-pointer justify-end py-xs"
               >
                 {item.name}
               </DropdownMenuItem>
             ))}
-            <DropdownMenuItem asChild className="py-xs cursor-pointer justify-end">
+            <DropdownMenuItem asChild className="cursor-pointer justify-end py-xs">
               <Link href="/books" scroll={false}>
                 <span className="text-xl">📚</span>
               </Link>
