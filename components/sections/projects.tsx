@@ -34,14 +34,14 @@ const codeProjects: Project[] = [
     liveUrl: 'https://magnetic-feel.replit.app/',
     badges: ['Web App', 'Interactive'],
   },
-  {
-    title: 'vid2gif',
-    description: 'A simple web app that converts video files to animated GIFs.',
-    imageUrl: assets.projects.vid2gif,
-    githubUrl: 'https://replit.com/@matt/vid2gif?v=1',
-    liveUrl: 'https://vid2gif.replit.app/',
-    badges: ['Web App', 'Tools'],
-  },
+  // {
+  //   title: 'vid2gif',
+  //   description: 'A simple web app that converts video files to animated GIFs.',
+  //   imageUrl: assets.projects.vid2gif,
+  //   githubUrl: 'https://replit.com/@matt/vid2gif?v=1',
+  //   liveUrl: 'https://vid2gif.replit.app/',
+  //   badges: ['Web App', 'Tools'],
+  // },
   {
     title: "What's the WiFi",
     description: 'QR code generator for sharing WiFi credentials easily.',
