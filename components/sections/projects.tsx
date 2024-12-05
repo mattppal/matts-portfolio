@@ -27,8 +27,9 @@ const projects: Project[] = [
 const codeProjects: Project[] = [
   {
     title: 'Magnetic Feel',
-    description: 'An interactive web experiment using Three.js and magnetic field equations to create realistic attraction effects. Built with shadcn components and fully responsive for mobile touch interactions.',
-    imageUrl: assets.projects.magnetic,
+    description:
+      'An interactive web experiment using Three.js and magnetic field equations to create realistic attraction effects. Built with shadcn components and fully responsive for mobile touch interactions.',
+    imageUrl: assets.projects['magnetic-feel'],
     githubUrl: 'https://replit.com/@matt/magnetic-feel',
     liveUrl: 'https://magnetic-feel.replit.app/',
     badges: ['Web App', 'Interactive'],
