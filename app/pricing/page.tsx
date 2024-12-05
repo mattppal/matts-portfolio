@@ -420,9 +420,9 @@ export default function PricingPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="h-full rounded-xl border border-primary/10 bg-card p-m md:p-xl lg:col-span-3"
+          className="h-full rounded-xl border border-primary/10 bg-card px-m pb-s pt-l lg:col-span-3"
         >
-          <div className="flex flex-col items-center space-y-m text-center md:space-y-l">
+          <div className="flex flex-col items-center space-y-m text-center">
             <h1 className="text-4xl font-bold leading-[1.1] tracking-tight md:text-5xl">
               Work with Matt 🤘
             </h1>
@@ -481,7 +481,7 @@ export default function PricingPage() {
                 onClick={() =>
                   window.open('https://calendar.app.google/4Aoa3R1HKFPF48rU6', '_blank')
                 }
-                className="group relative flex w-full items-center justify-between rounded-lg bg-primary p-m text-left text-primary-foreground transition-colors hover:bg-primary/90"
+                className="group relative flex w-full items-center justify-between rounded-lg bg-primary p-s text-left text-primary-foreground transition-colors hover:bg-primary/90"
               >
                 <div>
                   <h3 className="text-lg font-semibold">Book a 15-min intro call</h3>
@@ -511,12 +511,42 @@ export default function PricingPage() {
                 onClick={() =>
                   document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })
                 }
-                className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-m text-left transition-colors hover:bg-accent"
+                className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-s text-left transition-colors hover:bg-accent"
               >
                 <div>
                   <h3 className="text-lg font-semibold">Sample projects</h3>
                   <p className="text-sm text-muted-foreground">
                     See my recent work and collaborations
+                  </p>
+                </div>
+                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-foreground/30 transition-transform group-hover:translate-x-1">
+                  <svg
+                    className="h-3 w-3"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </button>
+
+              <button
+                onClick={() =>
+                  document.getElementById('questions')?.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-s text-left transition-colors hover:bg-accent"
+              >
+                <div>
+                  <h3 className="text-lg font-semibold">Learn more</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Frequently asked questions and answers
                   </p>
                 </div>
                 <div className="flex h-6 w-6 items-center justify-center rounded-full border border-foreground/30 transition-transform group-hover:translate-x-1">
@@ -545,7 +575,7 @@ export default function PricingPage() {
           variants={container}
           initial="hidden"
           animate="show"
-          className="rounded-xl border border-primary/10 bg-card p-l md:p-xl lg:col-span-4"
+          className="rounded-xl border border-primary/10 bg-card p-l lg:col-span-4"
         >
           <div className="space-y-m md:space-y-l">
             <div className="flex flex-col gap-xs sm:flex-row sm:items-center sm:justify-between sm:gap-xs">
@@ -678,9 +708,10 @@ export default function PricingPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
         className="mx-auto mt-xl max-w-3xl md:mt-2xl"
+        id="questions"
       >
         <div className="mb-l text-center md:mb-xl">
-          <h2 className="mb-s text-2xl font-bold md:text-3xl">Frequently asked questions</h2>
+          <h2 className="mb-s text-2xl font-bold md:text-3xl">Common questions</h2>
           <p className="text-muted-foreground">Everything you need to know about the membership.</p>
         </div>
 
