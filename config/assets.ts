@@ -57,7 +57,8 @@ export const assets = {
     "x-receipts": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/x-receipts.gif",
     "xai": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/xai.jpeg",
     "yc": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/yc.jpeg",
-    "youtube": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/youtube.jpg"
+    "youtube": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/youtube.jpg",
+    "magnetic": "/path/to/magnetic-feel-screenshot.jpg"
   },
   "replit": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/replit.svg",
   "robots": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/robots.txt",
