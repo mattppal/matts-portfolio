@@ -77,10 +77,10 @@ const projects: Project[] = [
   {
     title: 'Replit + Y Combinator + a16z',
     description: "Replit's biggest event of 2024, hosted at Y Combinator in partnership with a16z.",
-    liveUrl: 'https://www.youtube.com/watch?v=vw727qcskUQ',
-    videoId: 'vw727qcskUQ',
-    imageUrl: 'https://i.ytimg.com/vi/vw727qcskUQ/maxresdefault.jpg',
+    liveUrl: 'https://x.com/mattppal/status/1844400953371333035',
+    imageUrl: assets.projects.yc,
     imageAlt: 'Replit and Y Combinator event showcase',
+    badges: ['Event', 'Partnership'],
   },
   {
     title: 'Deployments on Replit',
