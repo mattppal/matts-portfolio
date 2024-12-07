@@ -509,36 +509,6 @@ export default function PricingPage() {
 
               <button
                 onClick={() =>
-                  document.getElementById('showcase')?.scrollIntoView({ behavior: 'smooth' })
-                }
-                className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-s text-left transition-colors hover:bg-accent"
-              >
-                <div>
-                  <h3 className="text-lg font-semibold">Sample projects</h3>
-                  <p className="text-sm text-muted-foreground">
-                    See my recent work and collaborations
-                  </p>
-                </div>
-                <div className="flex h-6 w-6 items-center justify-center rounded-full border border-foreground/30 transition-transform group-hover:translate-x-1">
-                  <svg
-                    className="h-3 w-3"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-              </button>
-
-              <button
-                onClick={() =>
                   document.getElementById('questions')?.scrollIntoView({ behavior: 'smooth' })
                 }
                 className="group relative flex w-full items-center justify-between rounded-lg border border-border bg-card p-s text-left transition-colors hover:bg-accent"
@@ -637,15 +607,22 @@ export default function PricingPage() {
                 </li>
                 <li className="flex items-center gap-s">
                   <Video className="h-5 w-5 text-primary" />
-                  <span>Product launch videos</span>
-                </li>
-                <li className="flex items-center gap-s">
-                  <PlaySquare className="h-5 w-5 text-primary" />
                   <span>Animated product demos</span>
                 </li>
                 <li className="flex items-center gap-s">
                   <Sparkles className="h-5 w-5 text-primary" />
                   <span>Product GIFs & animations</span>
+                </li>
+                <li className="flex items-center gap-s">
+                  <PlaySquare
+                    className={`h-5 w-5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                  />
+                  <span className={!isPro ? 'text-muted-foreground' : ''}>
+                    E2E product launch support{' '}
+                    <Zap
+                      className={`ml-2xs inline-block h-3.5 w-3.5 ${isPro ? 'text-primary' : 'text-muted-foreground'}`}
+                    />
+                  </span>
                 </li>
               </ul>
             </motion.div>
@@ -658,11 +635,15 @@ export default function PricingPage() {
               <ul className="grid gap-s sm:grid-cols-2">
                 <li className="flex items-center gap-s">
                   <Code2 className="h-5 w-5 text-primary" />
-                  <span>Developer Relations</span>
+                  <span>Full DevRel support</span>
+                </li>
+                <li className="flex items-center gap-s">
+                  <Video className="h-5 w-5 text-primary" />
+                  <span>Custom talking-head videos</span>
                 </li>
                 <li className="flex items-center gap-s">
                   <GraduationCap className="h-5 w-5 text-primary" />
-                  <span>Developer education assets</span>
+                  <span>Interactive tutorials and projects</span>
                 </li>
                 <li className="flex items-center gap-s">
                   <Layout className="h-5 w-5 text-primary" />
@@ -776,10 +757,14 @@ export default function PricingPage() {
               <p>
                 You can request anything from technical blog posts and documentation, to product
                 launch videos, developer education content, API guides, technical social content,
-                and more.
+                product launches, event planning, and more.
               </p>
 
               <p>Once subscribed, you can add as many requests to your queue as you&apos;d like.</p>
+              <p>
+                Note: Full event coordination and end-to-end product launch support are
+                time-intensive services that are exclusively available in the Pro plan.
+              </p>
             </AccordionContent>
           </AccordionItem>
 
@@ -789,13 +774,13 @@ export default function PricingPage() {
             </AccordionTrigger>
             <AccordionContent className="space-y-4 pb-4 text-base">
               <p>
-                Most requests are completed within 48 hours. This includes items like blog posts,
+                Most requests are completed within 72 hours. This includes items like blog posts,
                 social content, or product demos.
               </p>
 
               <p>
                 Larger projects like documentation overhauls or video series are broken down into
-                manageable deliverables, with updates every 48 hours until completion.
+                manageable deliverables, with updates every 72 hours until completion.
               </p>
             </AccordionContent>
           </AccordionItem>
@@ -807,17 +792,31 @@ export default function PricingPage() {
             <AccordionContent className="space-y-4 pb-4 text-base">
               <p>
                 You&apos;ll work directly with me (Matt), a developer and content creator with
-                experience at companies like Replit, Vercel, and more.
-              </p>
-
-              <p>
-                For specialized requests like custom animations or illustrations, I work with
-                trusted creative partners to deliver the highest quality work.
+                experience at companies like Replit, LinkedIn, O&apos;Reilly Media, xAI, and more.
               </p>
             </AccordionContent>
           </AccordionItem>
 
           <AccordionItem value="item-5" className="border-b-0">
+            <AccordionTrigger className="py-4 text-lg font-medium">
+              How do you handle larger requests?
+            </AccordionTrigger>
+            <AccordionContent className="space-y-4 pb-4 text-base">
+              <p>
+                Larger requests are broken down into manageable deliverables. This applies to
+                product launches, event planning, documentation overhauls, video series, and more.
+                You&apos;ll receive regular updates and deliverables every 72 hours until
+                completion.
+              </p>
+
+              <p>
+                This approach ensures you have visibility into progress and can provide feedback
+                throughout the process, rather than waiting for one big delivery at the end.
+              </p>
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-6" className="border-b-0">
             <AccordionTrigger className="py-4 text-lg font-medium">
               How does the pause feature work?
             </AccordionTrigger>
@@ -834,24 +833,7 @@ export default function PricingPage() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-6" className="border-b-0">
-            <AccordionTrigger className="py-4 text-lg font-medium">
-              How do I submit requests?
-            </AccordionTrigger>
-            <AccordionContent className="space-y-4 pb-4 text-base">
-              <p>
-                You can submit requests through a simple form, share Google docs, or even record a
-                Loom video explaining your needs.
-              </p>
-
-              <p>
-                For technical content, you can share GitHub repos, documentation, or set up a quick
-                call to discuss the technical details.
-              </p>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="item-7" className="border-b-0">
+          <AccordionItem value="item-8" className="border-b-0">
             <AccordionTrigger className="py-4 text-lg font-medium">
               What if I need revisions?
             </AccordionTrigger>
@@ -868,7 +850,7 @@ export default function PricingPage() {
             </AccordionContent>
           </AccordionItem>
 
-          <AccordionItem value="item-8" className="border-b-0">
+          <AccordionItem value="item-9" className="border-b-0">
             <AccordionTrigger className="py-4 text-lg font-medium">
               What services aren&apos;t included?
             </AccordionTrigger>
