@@ -83,6 +83,14 @@ const projects: Project[] = [
     imageAlt: 'Agent + Assistant Explainer thumbnail',
   },
   {
+    title: 'First Look: Replit Assistant',
+    description: 'An introduction to the new Replit Assistant.',
+    liveUrl: 'https://youtu.be/ooYwXr2lPaA',
+    videoId: 'ooYwXr2lPaA',
+    imageUrl: 'https://i.ytimg.com/vi/ooYwXr2lPaA/maxresdefault.jpg',
+    imageAlt: 'First Look: Replit Assistant thumbnail',
+  },
+  {
     title: 'Assistant Launch',
     description: 'Replit Assistant launch video.',
     liveUrl: 'https://youtu.be/Do_lq8RZ9GU',
