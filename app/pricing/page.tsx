@@ -68,10 +68,18 @@ const projects: Project[] = [
   {
     title: 'Agent + Assistant Explainer',
     description:
-      'An explainer video breaking down the differences between AI agents and assistants.',
-    liveUrl: 'https://www.youtube.com/watch?v=1a1-B4kIWpA',
-    videoId: '1a1-B4kIWpA',
-    imageUrl: 'https://i.ytimg.com/vi/1a1-B4kIWpA/maxresdefault.jpg',
+      'A 1-minute explainer breaking down the difference between Replit Agent and Assistant.',
+    liveUrl: 'https://youtu.be/rkB4PT5yuhw',
+    videoId: 'rkB4PT5yuhw',
+    imageUrl: 'https://i.ytimg.com/vi/rkB4PT5yuhw/maxresdefault.jpg',
+    imageAlt: 'Agent + Assistant Explainer thumbnail',
+  },
+  {
+    title: 'Assistant Launch',
+    description: 'Replit Assistant launch video.',
+    liveUrl: 'https://youtu.be/Do_lq8RZ9GU',
+    videoId: 'Do_lq8RZ9GU',
+    imageUrl: 'https://i.ytimg.com/vi/Do_lq8RZ9GU/maxresdefault.jpg',
     imageAlt: 'Agent + Assistant Explainer thumbnail',
   },
   {
