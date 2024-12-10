@@ -15,6 +15,7 @@ export type Project = {
   liveUrl: string;
   videoId?: string;
   badges?: string[];
+  category?: string;
 };
 
 interface ProjectCardProps {

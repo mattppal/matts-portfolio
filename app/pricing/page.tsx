@@ -22,7 +22,7 @@ import {
   Target,
 } from 'lucide-react';
 import NumberFlow from '@number-flow/react';
-import { ProjectGrid, type Project } from '@/components/project-grid';
+import { type Project } from '@/components/project-grid';
 import { assets } from '@/config/assets';
 import {
   Accordion,
@@ -32,8 +32,6 @@ import {
 } from '@/components/ui/accordion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import useEmblaCarousel from 'embla-carousel-react';
-import Autoplay from 'embla-carousel-autoplay';
 import { VideoModal } from '@/components/video-modal';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
@@ -462,24 +460,6 @@ function ProjectCarousel({
   projects: Project[];
   reverse?: boolean;
 }) {
-  const options = useMemo(
-    () => ({
-      loop: true,
-      align: 'center' as const,
-      slidesToScroll: 1,
-      dragFree: true,
-      containScroll: 'trimSnaps' as const,
-      skipSnaps: true,
-      watchDrag: false,
-      inViewThreshold: 0.7,
-      breakpoints: {
-        '(min-width: 768px)': { slidesToScroll: 2 },
-        '(min-width: 1024px)': { slidesToScroll: 3 },
-      },
-    }),
-    []
-  );
-
   const [videoId, setVideoId] = useState<string | null>(null);
 
   const handleVideoClick = useCallback((id: string) => {

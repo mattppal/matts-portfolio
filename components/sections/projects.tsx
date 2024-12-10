@@ -29,7 +29,6 @@ const codeProjects: Project[] = [
     description:
       'An interactive web experiment using Three.js and magnetic field equations to create realistic attraction effects. Built with shadcn components and fully responsive for mobile touch interactions.',
     imageUrl: assets.projects['magnetic-feel'],
-    githubUrl: 'https://replit.com/@matt/magnetic-feel',
     liveUrl: 'https://magnetic-feel.replit.app/',
     badges: ['Web App', 'Interactive'],
   },
@@ -37,7 +36,6 @@ const codeProjects: Project[] = [
   //   title: 'vid2gif',
   //   description: 'A simple web app that converts video files to animated GIFs.',
   //   imageUrl: assets.projects.vid2gif,
-  //   githubUrl: 'https://replit.com/@matt/vid2gif?v=1',
   //   liveUrl: 'https://vid2gif.replit.app/',
   //   badges: ['Web App', 'Tools'],
   // },
@@ -45,7 +43,6 @@ const codeProjects: Project[] = [
     title: "What's the WiFi",
     description: 'QR code generator for sharing WiFi credentials easily.',
     imageUrl: assets.projects.wtw,
-    githubUrl: 'https://replit.com/@matt/Whats-the-WiFi',
     liveUrl: 'https://whats-the-wifi.replit.app/',
     badges: ['Web App', 'Tools'],
   },
