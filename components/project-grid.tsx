@@ -10,13 +10,11 @@ import { VideoModal } from './video-modal';
 export type Project = {
   title: string;
   description: string;
-  imageUrl?: string;
+  imageUrl: string;
   imageAlt?: string;
+  liveUrl: string;
   videoId?: string;
-  liveUrl?: string;
-  githubUrl?: string;
   badges?: string[];
-  category?: 'event' | 'code' | 'content';
 };
 
 interface ProjectCardProps {

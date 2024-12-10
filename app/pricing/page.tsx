@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import {
   Clock,
   Pause,
@@ -32,6 +32,11 @@ import {
 } from '@/components/ui/accordion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { VideoModal } from '@/components/video-modal';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
 
 const container = {
   hidden: { opacity: 0 },
@@ -450,11 +455,154 @@ function CaseStudy() {
   );
 }
 
+function ProjectCarousel({
+  projects,
+  reverse = false,
+}: {
+  projects: Project[];
+  reverse?: boolean;
+}) {
+  const options = useMemo(
+    () => ({
+      loop: true,
+      align: 'center' as const,
+      slidesToScroll: 1,
+      dragFree: true,
+      containScroll: 'trimSnaps' as const,
+      skipSnaps: true,
+      watchDrag: false,
+      inViewThreshold: 0.7,
+      breakpoints: {
+        '(min-width: 768px)': { slidesToScroll: 2 },
+        '(min-width: 1024px)': { slidesToScroll: 3 },
+      },
+    }),
+    []
+  );
+
+  const [videoId, setVideoId] = useState<string | null>(null);
+
+  const handleVideoClick = useCallback((id: string) => {
+    setVideoId(id);
+  }, []);
+
+  const duplicatedProjects = useMemo(() => [...projects, ...projects], [projects]);
+
+  const videoModalProps = useMemo(
+    () => ({
+      isOpen: !!videoId,
+      videoId: videoId || '',
+      onClose: () => setVideoId(null),
+    }),
+    [videoId]
+  );
+
+  return (
+    <>
+      <div className={`carousel-mask promote-layer ${reverse ? 'carousel-reverse' : ''}`}>
+        <div className="embla overflow-hidden">
+          <div className="embla__container flex">
+            {duplicatedProjects.map((project, index) => (
+              <div key={`${project.title}-${index}`} className="embla__slide">
+                {project.videoId ? (
+                  <button
+                    onClick={() => handleVideoClick(project.videoId!)}
+                    className="block h-full w-full"
+                  >
+                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                      <CardContent className="p-3">
+                        <div className="group relative mb-4 aspect-video overflow-hidden rounded-md">
+                          {project.imageUrl && (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.imageAlt || project.title}
+                              width={480}
+                              height={270}
+                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+                            <div className="rounded-full border-2 border-white/80 p-2 transition-transform group-hover:scale-110">
+                              <PlaySquare className="h-6 w-6 text-white/90" strokeWidth={1.5} />
+                            </div>
+                          </div>
+                        </div>
+                        <CardHeader className="p-0">
+                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                          <CardDescription>{project.description}</CardDescription>
+                        </CardHeader>
+                        {project.badges && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {project.badges.map((badge, badgeIndex) => (
+                              <span
+                                key={badgeIndex}
+                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                              >
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </button>
+                ) : (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
+                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                      <CardContent className="p-3">
+                        <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
+                          {project.imageUrl && (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.imageAlt || project.title}
+                              width={480}
+                              height={270}
+                              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                            />
+                          )}
+                        </div>
+                        <CardHeader className="p-0">
+                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                          <CardDescription>{project.description}</CardDescription>
+                        </CardHeader>
+                        {project.badges && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {project.badges.map((badge, badgeIndex) => (
+                              <span
+                                key={badgeIndex}
+                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                              >
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </a>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <VideoModal {...videoModalProps} />
+    </>
+  );
+}
+
 export default function PricingPage() {
   const [isPro, setIsPro] = useState(false);
-
   const currentPriceValue = isPro ? 6995 : 3995;
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
+
+  const evenProjects = useMemo(() => projects.filter((_, i) => i % 2 === 0), [projects]);
+  const oddProjects = useMemo(() => projects.filter((_, i) => i % 2 === 1), [projects]);
 
   return (
     <div className="container relative mx-auto mt-xl px-s py-l md:mt-2xl md:py-2xl">
@@ -540,7 +688,7 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-xl max-w-7xl md:mb-3xl"
+        className="mx-auto mb-xl md:mb-3xl"
         id="showcase"
       >
         <div className="mb-l text-center md:mb-xl">
@@ -548,11 +696,10 @@ export default function PricingPage() {
           <p className="text-muted-foreground">A showcase of previous work and collaborations</p>
         </div>
 
-        <ProjectGrid
-          projects={projects}
-          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-          className="mx-auto gap-m"
-        />
+        <div className="space-y-4 px-2">
+          <ProjectCarousel projects={evenProjects} />
+          <ProjectCarousel projects={oddProjects} reverse={true} />
+        </div>
       </motion.div>
 
       {/* Cost Breakdown Section - Updated spacing */}
