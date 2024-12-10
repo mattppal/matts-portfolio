@@ -1,5 +1,5 @@
-import fs from 'fs/promises';
-import path from 'path';
+import * as fs from 'fs/promises';
+import * as path from 'path';
 
 const OUTPUT_DIR = path.join(process.cwd(), 'public', '.og-backgrounds');
 

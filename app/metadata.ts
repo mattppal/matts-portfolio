@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { assets } from '@/config/assets';
 export const siteConfig = {
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-  description: 'I make complicated things simple & create amazing developer interactions.',
+  description: 'The best communication is simple',
   author: 'Matt Palmer',
   siteUrl: process.env.NEXT_PUBLIC_BASE_URL,
   keywords: [
