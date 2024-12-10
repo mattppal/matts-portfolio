@@ -35,6 +35,7 @@ import { useRef } from 'react';
 import { VideoModal } from '@/components/video-modal';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
+import { useScroll, useTransform } from 'framer-motion';
 
 const container = {
   hidden: { opacity: 0 },
@@ -461,12 +462,13 @@ function ProjectCarousel({
   reverse?: boolean;
 }) {
   const [videoId, setVideoId] = useState<string | null>(null);
+  const ref = useRef(null);
 
   const handleVideoClick = useCallback((id: string) => {
     setVideoId(id);
   }, []);
 
-  const duplicatedProjects = useMemo(() => [...projects, ...projects], [projects]);
+  const duplicatedProjects = useMemo(() => [...projects, ...projects, ...projects], [projects]);
 
   const videoModalProps = useMemo(
     () => ({
@@ -479,97 +481,115 @@ function ProjectCarousel({
 
   return (
     <>
-      <div className={`carousel-mask promote-layer ${reverse ? 'carousel-reverse' : ''}`}>
-        <div className="embla overflow-hidden">
-          <div className="embla__container flex">
-            {duplicatedProjects.map((project, index) => (
-              <div key={`${project.title}-${index}`} className="embla__slide">
-                {project.videoId ? (
-                  <button
-                    onClick={() => handleVideoClick(project.videoId!)}
-                    className="block h-full w-full"
-                  >
-                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
-                      <CardContent className="p-3">
-                        <div className="group relative mb-4 aspect-video overflow-hidden rounded-md">
-                          {project.imageUrl && (
-                            <Image
-                              src={project.imageUrl}
-                              alt={project.imageAlt || project.title}
-                              width={480}
-                              height={270}
-                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                            />
-                          )}
-                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
-                            <div className="rounded-full border-2 border-white/80 p-2 transition-transform group-hover:scale-110">
-                              <PlaySquare className="h-6 w-6 text-white/90" strokeWidth={1.5} />
-                            </div>
+      <div className="relative mx-auto max-w-[100vw] overflow-hidden">
+        {/* Stronger mask overlays */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-[15%] bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-[15%] bg-gradient-to-l from-background to-transparent" />
+
+        <motion.div
+          ref={ref}
+          className="flex gap-4 py-2"
+          style={{
+            x: useTransform(
+              useScroll({
+                target: ref,
+                offset: ['start end', 'end start'],
+              }).scrollYProgress,
+              [0, 1],
+              reverse ? ['5%', '-15%'] : ['-15%', '5%']
+            ),
+          }}
+        >
+          {duplicatedProjects.map((project, index) => (
+            <motion.div
+              key={`${project.title}-${index}`}
+              className="w-[260px] flex-shrink-0 sm:w-[320px]"
+            >
+              {project.videoId ? (
+                <button
+                  onClick={() => handleVideoClick(project.videoId!)}
+                  className="block h-full w-full"
+                >
+                  <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                    <CardContent className="p-3">
+                      <div className="group relative mb-4 aspect-video overflow-hidden rounded-md">
+                        {project.imageUrl && (
+                          <Image
+                            src={project.imageUrl}
+                            alt={project.imageAlt || project.title}
+                            width={480}
+                            height={270}
+                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                          />
+                        )}
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+                          <div className="rounded-full border-2 border-white/80 p-2 transition-transform group-hover:scale-110">
+                            <PlaySquare className="h-6 w-6 text-white/90" strokeWidth={1.5} />
                           </div>
                         </div>
-                        <CardHeader className="p-0">
-                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
-                          <CardDescription>{project.description}</CardDescription>
-                        </CardHeader>
-                        {project.badges && (
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {project.badges.map((badge, badgeIndex) => (
-                              <span
-                                key={badgeIndex}
-                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-                              >
-                                {badge}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </button>
-                ) : (
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block h-full"
-                  >
-                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
-                      <CardContent className="p-3">
-                        <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
-                          {project.imageUrl && (
-                            <Image
-                              src={project.imageUrl}
-                              alt={project.imageAlt || project.title}
-                              width={480}
-                              height={270}
-                              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                            />
-                          )}
+                      </div>
+                      <CardHeader className="p-0">
+                        <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                        <CardDescription>{project.description}</CardDescription>
+                      </CardHeader>
+                      {project.badges && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {project.badges.map((badge, badgeIndex) => (
+                            <span
+                              key={badgeIndex}
+                              className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                            >
+                              {badge}
+                            </span>
+                          ))}
                         </div>
-                        <CardHeader className="p-0">
-                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
-                          <CardDescription>{project.description}</CardDescription>
-                        </CardHeader>
-                        {project.badges && (
-                          <div className="mt-4 flex flex-wrap gap-2">
-                            {project.badges.map((badge, badgeIndex) => (
-                              <span
-                                key={badgeIndex}
-                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
-                              >
-                                {badge}
-                              </span>
-                            ))}
-                          </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </button>
+              ) : (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block h-full"
+                >
+                  <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                    <CardContent className="p-3">
+                      <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
+                        {project.imageUrl && (
+                          <Image
+                            src={project.imageUrl}
+                            alt={project.imageAlt || project.title}
+                            width={480}
+                            height={270}
+                            className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                          />
                         )}
-                      </CardContent>
-                    </Card>
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+                      </div>
+                      <CardHeader className="p-0">
+                        <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                        <CardDescription>{project.description}</CardDescription>
+                      </CardHeader>
+                      {project.badges && (
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {project.badges.map((badge, badgeIndex) => (
+                            <span
+                              key={badgeIndex}
+                              className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                            >
+                              {badge}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </a>
+              )}
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
       <VideoModal {...videoModalProps} />
     </>
@@ -577,12 +597,16 @@ function ProjectCarousel({
 }
 
 export default function PricingPage() {
+  // Add state for Pro toggle
   const [isPro, setIsPro] = useState(false);
+
+  // Derive projects for each row
+  const evenProjects = useMemo(() => projects.filter((_, i) => i % 2 === 0), []);
+  const oddProjects = useMemo(() => projects.filter((_, i) => i % 2 === 1), []);
+
+  // Derive pricing values
   const currentPriceValue = isPro ? 6995 : 3995;
   const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
-
-  const evenProjects = useMemo(() => projects.filter((_, i) => i % 2 === 0), [projects]);
-  const oddProjects = useMemo(() => projects.filter((_, i) => i % 2 === 1), [projects]);
 
   return (
     <div className="container relative mx-auto mt-xl px-s py-l md:mt-2xl md:py-2xl">
@@ -663,23 +687,21 @@ export default function PricingPage() {
         </div>
       </motion.div>
 
-      {/* Projects Section - Updated spacing */}
+      {/* Projects Section - Updated spacing and layout */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mx-auto mb-xl md:mb-3xl"
+        className="mx-auto mb-xl space-y-4 md:mb-3xl"
         id="showcase"
       >
-        <div className="mb-l text-center md:mb-xl">
+        <div className="mb-m text-center md:mb-l">
           <h2 className="mb-s text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
           <p className="text-muted-foreground">A showcase of previous work and collaborations</p>
         </div>
 
-        <div className="space-y-4 px-2">
-          <ProjectCarousel projects={evenProjects} />
-          <ProjectCarousel projects={oddProjects} reverse={true} />
-        </div>
+        <ProjectCarousel projects={evenProjects} />
+        <ProjectCarousel projects={oddProjects} reverse={true} />
       </motion.div>
 
       {/* Cost Breakdown Section - Updated spacing */}
