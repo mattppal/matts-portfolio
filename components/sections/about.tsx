@@ -13,9 +13,9 @@ const skills = [
   'Premier Pro',
   'After Effects',
   'Figma',
-];
+] as const;
 
-const passions = ['Weightlifting', 'Reading', 'Writing', 'Fitness'];
+const passions = ['Weightlifting', 'Reading', 'Writing', 'Fitness'] as const;
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -34,13 +34,13 @@ const itemVariants = {
 
 export function About() {
   return (
-    <section id="about" className="section-padding">
-      <div className="px-s container mx-auto">
+    <section id="about" className="section-padding scroll-mt-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="space-y-l mx-auto max-w-4xl"
+          className="mx-auto max-w-4xl space-y-8"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: '-100px' }}
           variants={containerVariants}
         >
           <motion.h2
@@ -52,7 +52,7 @@ export function About() {
 
           <motion.div variants={itemVariants}>
             <Card>
-              <CardContent className="space-y-m pt-m">
+              <CardContent className="space-y-6 pt-6">
                 <p className="text-base leading-relaxed sm:text-lg">
                   Former data professional turned product marketer, I spend my time thinking about
                   how to communicate complex technology.
@@ -61,13 +61,11 @@ export function About() {
                   That includes everything from demos & tutorial videos to product marketing assets,
                   blog posts, event planning, and more.
                 </p>
-
                 <p className="text-base leading-relaxed sm:text-lg">
                   In my free time, I express my creativity through coding, writing, photography, and
                   videography. I&apos;m extremely passionate about fitness, weightlifting, & all
                   things outdoors.
                 </p>
-
                 <p className="text-base leading-relaxed sm:text-lg">
                   I live in San Francisco, California.
                 </p>
@@ -75,15 +73,15 @@ export function About() {
             </Card>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="space-y-l text-center">
-            <div className="space-y-m">
+          <motion.div variants={itemVariants} className="space-y-8 text-center">
+            <div className="space-y-4">
               <h3 className="text-lg font-semibold sm:text-xl">Technologies</h3>
-              <div className="gap-2xs sm:gap-xs flex flex-wrap justify-center">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                 {skills.map((skill) => (
                   <Badge
                     key={skill}
                     variant="secondary"
-                    className="gap-2xs px-2xs py-2xs btn-scale sm:px-s sm:py-xs bg-background text-xs transition-all hover:bg-primary/10 hover:text-primary sm:text-sm"
+                    className="btn-scale bg-background px-2 py-1 text-xs transition-all hover:bg-primary/10 hover:text-primary sm:px-4 sm:py-2 sm:text-sm"
                   >
                     {skill}
                   </Badge>
@@ -91,14 +89,14 @@ export function About() {
               </div>
             </div>
 
-            <div className="space-y-m">
+            <div className="space-y-4">
               <h3 className="text-lg font-semibold sm:text-xl">Passions</h3>
-              <div className="gap-2xs sm:gap-xs flex flex-wrap justify-center">
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                 {passions.map((passion) => (
                   <Badge
                     key={passion}
                     variant="secondary"
-                    className="px-2xs py-3xs btn-scale sm:px-s sm:py-xs bg-background text-xs transition-all hover:bg-primary/10 hover:text-primary sm:text-sm"
+                    className="btn-scale bg-background px-2 py-1 text-xs transition-all hover:bg-primary/10 hover:text-primary sm:px-4 sm:py-2 sm:text-sm"
                   >
                     {passion}
                   </Badge>
@@ -107,9 +105,9 @@ export function About() {
             </div>
           </motion.div>
 
-          <div className="space-y-l">
+          <motion.div variants={itemVariants} className="space-y-8">
             <VideoGallery />
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

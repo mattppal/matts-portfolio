@@ -127,7 +127,7 @@ export async function GET(request: Request) {
                   margin: 0,
                 }}
               >
-                {new URL(url || siteConfig.baseUrl || '').href}
+                {new URL(url || siteConfig.baseUrl || '').host}
               </p>
             </div>
           </div>
