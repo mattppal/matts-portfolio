@@ -14,6 +14,16 @@ export const projects: Project[] = [
     category: 'content',
   },
   {
+    title: 'Assistant Launch',
+    description:
+      'Assistant launch video for Replit, featuring the new Assistant and a look at the future of AI.',
+    videoId: 'Do_lq8RZ9GU',
+    imageUrl: 'https://i.ytimg.com/vi/Do_lq8RZ9GU/maxresdefault.jpg',
+    imageAlt: 'Agent + Assistant Explainer thumbnail',
+    badges: ['Video', 'AI'],
+    category: 'content',
+  },
+  {
     title: 'First Look: Replit Assistant',
     description: 'An introduction to the new Replit Assistant.',
     videoId: 'ooYwXr2lPaA',
