@@ -4,19 +4,27 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { assets } from '@/config/assets';
 
-interface Video {
-  src: string;
+export interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
 }
 
 const videos: Video[] = [
   {
-    src: assets.lifts.dead,
+    id: 'dead',
+    title: 'Deadlift',
+    thumbnail: assets.lifts.dead,
   },
   {
-    src: assets.lifts.bench,
+    id: 'bench',
+    title: 'Bench Press',
+    thumbnail: assets.lifts.bench,
   },
   {
-    src: assets.lifts.squat,
+    id: 'squat',
+    title: 'Squat',
+    thumbnail: assets.lifts.squat,
   },
 ];
 
@@ -73,7 +81,7 @@ export function VideoGallery() {
     >
       {videos.map((video, index) => (
         <motion.div
-          key={video.src}
+          key={video.id}
           className="relative w-full overflow-hidden rounded-[var(--radius)] bg-black"
           style={{
             aspectRatio: '9/16',
@@ -89,7 +97,7 @@ export function VideoGallery() {
             ref={(el) => {
               if (el) videoRefs.current[index] = el;
             }}
-            src={video.src}
+            src={video.thumbnail}
             className="h-full w-full object-cover"
             muted
             playsInline

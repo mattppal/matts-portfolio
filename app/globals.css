@@ -135,13 +135,16 @@ number-flow-react {
 
 /* Update the embla base styles */
 .embla {
-  --slide-spacing: 0.5rem;
-  --slide-size: 85%;
-  --slide-height: 19rem;
-  position: relative;
   overflow: hidden;
-  margin: 0 -1rem;
-  @apply promote-layer;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
 }
 
 /* Update container styles */
@@ -234,13 +237,15 @@ number-flow-react {
 /* Add these new styles for the carousel mask effect */
 .carousel-mask {
   position: relative;
-  mask-image: none;
-  -webkit-mask-image: none;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  perspective: 1000;
-  -webkit-perspective: 1000;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Add this class for the mask container */
+.carousel-mask-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 }
 
 /* Add hover effect for clickable cards */
