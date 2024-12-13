@@ -54,12 +54,13 @@ export function About() {
             <Card>
               <CardContent className="space-y-6 pt-6">
                 <p className="text-base leading-relaxed sm:text-lg">
-                  Former data professional turned product marketer, I spend my time thinking about
-                  how to communicate complex technology.
+                  I&apos;m a former data professional turned product marketer. I spend my time
+                  thinking about how to communicate complex things simply.
                 </p>
                 <p className="text-base leading-relaxed sm:text-lg">
-                  That includes everything from demos & tutorial videos to product marketing assets,
-                  blog posts, event planning, and more.
+                  I <i>love</i> developer education and marketing. That includes everything from
+                  demos & tutorial videos to product marketing assets, blog posts, event planning,
+                  and more.
                 </p>
                 <p className="text-base leading-relaxed sm:text-lg">
                   In my free time, I express my creativity through coding, writing, photography, and
@@ -67,7 +68,8 @@ export function About() {
                   things outdoors.
                 </p>
                 <p className="text-base leading-relaxed sm:text-lg">
-                  I live in San Francisco, California.
+                  I live in San Francisco, California, but I&apos;m from Asheville, North Carolina.
+                  I&apos;ve lived in North Carolina, Pennsylvania, Virginia, Utah, & California. 🏄‍♂️
                 </p>
               </CardContent>
             </Card>

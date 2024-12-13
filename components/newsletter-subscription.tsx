@@ -52,7 +52,7 @@ export function NewsletterSubscription() {
         transition={{ duration: 0.5 }}
       >
         <p className="text-base text-muted-foreground md:text-lg">
-          Weekly{' '}
+          I write weekly{' '}
           <a
             href="#writing"
             className="underline decoration-primary transition-colors hover:text-foreground"

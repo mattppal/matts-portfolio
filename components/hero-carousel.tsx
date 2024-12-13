@@ -32,7 +32,7 @@ export function HeroCarousel() {
   const xTransform = useTransform(scrollYProgress, [0, 1], ['5%', '-45%']);
 
   return (
-    <div className="carousel-mask-container relative z-10 mt-24">
+    <div className="carousel-mask-container relative z-10 mt-3xl pb-l">
       <div className="carousel-mask">
         <motion.div ref={ref} className="flex gap-4 py-2" style={{ x: xTransform }}>
           {shuffledImages.map((image, index) => (

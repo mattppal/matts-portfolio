@@ -23,6 +23,7 @@ export const assets = {
   },
   headshot: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/headshot.jpg',
   'hero-carousel': {
+    buildin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/buildin.jpeg',
     eatin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/eatin.png',
     'hiking-2':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/hiking-2.png',
