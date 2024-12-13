@@ -33,10 +33,10 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useInView } from 'framer-motion';
-import { VideoModal } from '@/components/video-modal';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+// import { VideoModal } from '@/components/video-modal';
+// import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-import { useScroll, useTransform } from 'framer-motion';
+// import { useScroll, useTransform } from 'framer-motion';
 import { ProjectCarousel } from '@/components/project-carousel';
 
 const container = {
