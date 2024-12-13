@@ -38,7 +38,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          I build and educate about developer tools and platforms.
+          I build great products and make complex tools simple. I currently lead DevRel @ Replit.
         </motion.p>
       </div>
     </section>
