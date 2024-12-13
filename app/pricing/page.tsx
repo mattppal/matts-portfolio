@@ -17,10 +17,11 @@ import {
   Camera,
   GraduationCap,
   DollarSign,
-  Trophy,
-  Users,
-  TrendingUp,
-  Target,
+  // Remove unused imports:
+  // Trophy,
+  // Users,
+  // TrendingUp,
+  // Target,
 } from 'lucide-react';
 import NumberFlow from '@number-flow/react';
 import { type Project } from '@/components/project-grid';
@@ -339,140 +340,140 @@ function CostBreakdown() {
   );
 }
 
-function CaseStudy() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
+// function CaseStudy() {
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.3 }}
-      className="mx-auto mt-xl max-w-4xl md:mt-2xl"
-      ref={ref}
-    >
-      <div className="mb-l text-center md:mb-xl">
-        <h2 className="mb-s text-2xl font-bold md:text-3xl">Case Study: Replit</h2>
-        <p className="text-muted-foreground">
-          How strategic developer content transformed Replit&apos;s product launches
-        </p>
-      </div>
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       transition={{ delay: 0.3 }}
+//       className="mx-auto mt-xl max-w-4xl md:mt-2xl"
+//       ref={ref}
+//     >
+//       <div className="mb-l text-center md:mb-xl">
+//         <h2 className="mb-s text-2xl font-bold md:text-3xl">Case Study: Replit</h2>
+//         <p className="text-muted-foreground">
+//           How strategic developer content transformed Replit&apos;s product launches
+//         </p>
+//       </div>
 
-      {/* Metrics Grid */}
-      <div className="mb-l grid grid-cols-3 gap-m sm:grid-cols-3 lg:grid-cols-3">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-          className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
-        >
-          <Trophy className="mb-s h-8 w-8 text-primary" />
-          <NumberFlow
-            value={4000000}
-            className="mb-xs text-2xl font-bold"
-            suffix="+"
-            animated={isInView}
-            format={{ notation: 'compact', maximumFractionDigits: 1 }}
-          />
-          <p className="text-sm text-muted-foreground">Video impressions</p>
-        </motion.div>
+//       {/* Metrics Grid */}
+//       <div className="mb-l grid grid-cols-3 gap-m sm:grid-cols-3 lg:grid-cols-3">
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.1 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <Trophy className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={4000000}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="+"
+//             animated={isInView}
+//             format={{ notation: 'compact', maximumFractionDigits: 1 }}
+//           />
+//           <p className="text-sm text-muted-foreground">Video impressions</p>
+//         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
-        >
-          <Users className="mb-s h-8 w-8 text-primary" />
-          <NumberFlow
-            value={12500}
-            className="mb-xs text-2xl font-bold"
-            suffix="+"
-            animated={isInView}
-            format={{ notation: 'compact', maximumFractionDigits: 1 }}
-          />
-          <p className="text-sm text-muted-foreground">New developers reached</p>
-        </motion.div>
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.2 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <Users className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={12500}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="+"
+//             animated={isInView}
+//             format={{ notation: 'compact', maximumFractionDigits: 1 }}
+//           />
+//           <p className="text-sm text-muted-foreground">New developers reached</p>
+//         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
-        >
-          <TrendingUp className="mb-s h-8 w-8 text-primary" />
-          <NumberFlow
-            value={300}
-            className="mb-xs text-2xl font-bold"
-            suffix="%"
-            animated={isInView}
-          />
-          <p className="text-sm text-muted-foreground">Increase in conversions</p>
-        </motion.div>
-      </div>
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.3 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <TrendingUp className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={300}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="%"
+//             animated={isInView}
+//           />
+//           <p className="text-sm text-muted-foreground">Increase in conversions</p>
+//         </motion.div>
+//       </div>
 
-      {/* Story Section */}
-      <div className="mb-l space-y-m rounded-lg border border-border bg-card p-l">
-        <div>
-          <h3 className="mb-s text-xl font-semibold">The Challenge</h3>
-          <p className="text-muted-foreground">
-            Replit needed to effectively communicate complex AI tools to their developer community
-            while maintaining high engagement and technical accuracy. The challenge was to break
-            down sophisticated features like AI Agents and Assistants into digestible, actionable
-            content.
-          </p>
-        </div>
+//       {/* Story Section */}
+//       <div className="mb-l space-y-m rounded-lg border border-border bg-card p-l">
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">The Challenge</h3>
+//           <p className="text-muted-foreground">
+//             Replit needed to effectively communicate complex AI tools to their developer community
+//             while maintaining high engagement and technical accuracy. The challenge was to break
+//             down sophisticated features like AI Agents and Assistants into digestible, actionable
+//             content.
+//           </p>
+//         </div>
 
-        <div>
-          <h3 className="mb-s text-xl font-semibold">The Solution</h3>
-          <p className="text-muted-foreground">
-            We developed a multi-format content strategy that included:
-          </p>
-          <ul className="mt-s space-y-xs text-muted-foreground">
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Short-form technical videos explaining key features
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Interactive tutorials and documentation
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Strategic product launch campaigns
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Developer education workshops
-            </li>
-          </ul>
-        </div>
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">The Solution</h3>
+//           <p className="text-muted-foreground">
+//             We developed a multi-format content strategy that included:
+//           </p>
+//           <ul className="mt-s space-y-xs text-muted-foreground">
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Short-form technical videos explaining key features
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Interactive tutorials and documentation
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Strategic product launch campaigns
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Developer education workshops
+//             </li>
+//           </ul>
+//         </div>
 
-        <div>
-          <h3 className="mb-s text-xl font-semibold">Key Outcomes</h3>
-          <ul className="space-y-xs text-muted-foreground">
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Reached over 2.8M developers through targeted video content
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              48% increase in product adoption following launch campaigns
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              92% positive feedback on educational content
-            </li>
-            <li className="flex items-center gap-xs">
-              <div className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Successfully launched 5+ major product features
-            </li>
-          </ul>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">Key Outcomes</h3>
+//           <ul className="space-y-xs text-muted-foreground">
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Reached over 2.8M developers through targeted video content
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               48% increase in product adoption following launch campaigns
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               92% positive feedback on educational content
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Successfully launched 5+ major product features
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// }
 
 interface ProjectCarouselProps {
   projects: Project[];

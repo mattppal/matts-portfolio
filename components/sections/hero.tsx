@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { assets } from '@/config/assets';
 import Image from 'next/image';
-import { siteConfig } from '@/app/metadata';
 
 export function Hero() {
   return (
