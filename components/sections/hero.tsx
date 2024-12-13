@@ -20,7 +20,7 @@ export function Hero() {
             alt="Profile picture"
             width={192}
             height={192}
-            className="aspect-square w-[clamp(8rem,20vw,16rem)] rounded-full border-4 border-purple-700/80 object-cover transition-colors duration-300 hover:border-purple-500/80"
+            className="aspect-square w-[clamp(8rem,20vw,16rem)] rounded-full border-4 border-primary/50 object-cover transition-colors duration-300 hover:border-primary"
             priority
           />
         </motion.div>
