@@ -1,7 +1,8 @@
 'use client';
 
+import { LogoCarousel } from '@/components/logo-carousel';
 import { motion } from 'framer-motion';
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import {
   Clock,
   Pause,
@@ -31,7 +32,6 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
 import { VideoModal } from '@/components/video-modal';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
@@ -188,121 +188,149 @@ function CostBreakdown() {
   const totalMonthly = calculateTotalMonthly(monthlyCosts);
 
   return (
-    <div ref={ref} className="space-y-l">
-      <div className="rounded-lg border border-border p-l">
-        <h3 className="mb-m text-xl font-semibold">One-Time Setup Costs</h3>
+    <div ref={ref} className="grid gap-m lg:grid-cols-2">
+      {/* Traditional Costs Column */}
+      <div className="space-y-s">
+        <h3 className="text-xl font-semibold text-muted-foreground">Traditional Approach</h3>
         <div className="space-y-s">
-          {setupCosts.map((cost) => (
-            <div key={cost.name} className="flex items-center justify-between">
-              <span>{cost.name}</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={cost.amount}
-                  prefix="$"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+          <div className="rounded-lg border border-border p-m">
+            <h4 className="mb-s text-lg font-medium">One-Time Setup Costs</h4>
+            <div className="space-y-s">
+              {setupCosts.map((cost) => (
+                <div key={cost.name} className="flex items-center justify-between">
+                  <span>{cost.name}</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={cost.amount}
+                      prefix="$"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              ))}
+              <div className="border-t border-border pt-s">
+                <div className="flex items-center justify-between font-semibold">
+                  <span>Initial Investment</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={totalSetup}
+                      prefix="$"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
-          ))}
-          <div className="border-t border-border pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>Initial Investment</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={totalSetup}
-                  prefix="$"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+          </div>
+
+          <div className="rounded-lg border border-border p-m">
+            <h4 className="mb-s text-lg font-medium">Monthly Operating Costs</h4>
+            <div className="space-y-s">
+              {monthlyCosts.map((cost) => (
+                <div key={cost.name} className="flex items-center justify-between">
+                  <span>{cost.name}</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={cost.amount}
+                      prefix="$"
+                      suffix={`/${cost.period}`}
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              ))}
+              <div className="border-t border-border pt-s">
+                <div className="flex items-center justify-between font-semibold">
+                  <span>Total Monthly Cost</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={totalMonthly}
+                      prefix="$"
+                      suffix="/mo"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg border border-border p-l">
-        <h3 className="mb-m text-xl font-semibold">Monthly Operating Costs</h3>
-        <div className="space-y-s">
-          {monthlyCosts.map((cost) => (
-            <div key={cost.name} className="flex items-center justify-between">
-              <span>{cost.name}</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={cost.amount}
-                  prefix="$"
-                  suffix={`/${cost.period}`}
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+      {/* Working with Matt Column */}
+      <div className="space-y-s">
+        <h3 className="text-xl font-semibold text-primary">Working with Matt</h3>
+        <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+          <h4 className="mb-m text-lg font-medium">All-Inclusive Package</h4>
+          <div className="space-y-s">
+            <div className="flex items-center justify-between">
+              <span>All Equipment</span>
+              <span className="font-mono">$0</span>
             </div>
-          ))}
-          <div className="border-t border-border pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>Total Monthly Cost</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={totalMonthly}
-                  prefix="$"
-                  suffix="/mo"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
+            <div className="flex items-center justify-between">
+              <span>All Software</span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Video Editing</span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="flex items-center gap-xs">
+                Event Planning & Coordination
+                <Zap className="h-3.5 w-3.5 text-primary" />
               </span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="border-t border-primary/20 pt-s">
+              <div className="flex items-center justify-between font-semibold">
+                <span>DevRel as a Service</span>
+                <span className="font-mono text-primary">
+                  Starting at{' '}
+                  <NumberFlow
+                    value={3995}
+                    prefix="$"
+                    suffix="/mo"
+                    animated={isInView}
+                    format={{ minimumFractionDigits: 0 }}
+                    transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                    continuous
+                  />
+                </span>
+              </div>
+              <p className="mt-xs text-sm text-muted-foreground">
+                No setup costs. No hidden fees. Pause or cancel anytime.
+              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="rounded-lg border border-primary/20 bg-primary/5 p-l">
-        <h3 className="mb-m text-xl font-semibold text-primary">The Alternative: Work with Matt</h3>
-        <div className="space-y-s">
-          <div className="flex items-center justify-between">
-            <span>All Equipment</span>
-            <span className="font-mono">$0</span>
+        {/* Additional value props */}
+        <div className="grid gap-s sm:grid-cols-2">
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+            <Clock className="mb-s h-5 w-5 text-primary" />
+            <h4 className="mb-xs font-medium">Quick Setup</h4>
+            <p className="text-sm text-muted-foreground">
+              Start working together immediately with no setup time
+            </p>
           </div>
-          <div className="flex items-center justify-between">
-            <span>All Software</span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span>Video Editing</span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-xs">
-              Event Planning & Coordination
-              <Zap className="h-3.5 w-3.5 text-primary" />
-            </span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="border-t border-primary/20 pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>DevRel as a Service</span>
-              <span className="font-mono text-primary">
-                Starting at{' '}
-                <NumberFlow
-                  value={3995}
-                  prefix="$"
-                  suffix="/mo"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
-            </div>
-            <p className="mt-xs text-sm text-muted-foreground">
-              No setup costs. No hidden fees. Pause or cancel anytime.
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+            <DollarSign className="mb-s h-5 w-5 text-primary" />
+            <h4 className="mb-xs font-medium">Cost Effective</h4>
+            <p className="text-sm text-muted-foreground">
+              Save over $15k/month compared to traditional hiring
             </p>
           </div>
         </div>
@@ -446,15 +474,14 @@ function CaseStudy() {
   );
 }
 
-function ProjectCarousel({
-  projects,
-  reverse = false,
-}: {
+interface ProjectCarouselProps {
   projects: Project[];
   reverse?: boolean;
-}) {
+}
+
+function ProjectCarousel({ projects, reverse = false }: ProjectCarouselProps) {
   const [videoId, setVideoId] = useState<string | null>(null);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   const handleVideoClick = useCallback((id: string) => {
     setVideoId(id);
@@ -489,7 +516,7 @@ function ProjectCarousel({
               ),
             }}
           >
-            {duplicatedProjects.map((project, index) => (
+            {duplicatedProjects.map((project: Project, index: number) => (
               <motion.div
                 key={`${project.title}-${index}`}
                 className="w-[260px] flex-shrink-0 sm:w-[320px]"
@@ -523,7 +550,7 @@ function ProjectCarousel({
                         </CardHeader>
                         {project.badges && (
                           <div className="mt-4 flex flex-wrap gap-2">
-                            {project.badges.map((badge, badgeIndex) => (
+                            {project.badges.map((badge: string, badgeIndex: number) => (
                               <span
                                 key={badgeIndex}
                                 className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
@@ -562,7 +589,7 @@ function ProjectCarousel({
                         </CardHeader>
                         {project.badges && (
                           <div className="mt-4 flex flex-wrap gap-2">
-                            {project.badges.map((badge, badgeIndex) => (
+                            {project.badges.map((badge: string, badgeIndex: number) => (
                               <span
                                 key={badgeIndex}
                                 className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
@@ -587,7 +614,6 @@ function ProjectCarousel({
 }
 
 export default function PricingPage() {
-  // Add state for Pro toggle
   const [isPro, setIsPro] = useState(false);
 
   // Derive projects for each row
@@ -604,7 +630,7 @@ export default function PricingPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-auto mb-xl max-w-4xl text-center md:mb-3xl"
+        className="mx-auto mb-s max-w-4xl text-center md:mb-s"
       >
         <h1 className="mb-l text-4xl font-bold md:mb-xl md:text-6xl">
           Developer marketing, simplified.
@@ -677,6 +703,13 @@ export default function PricingPage() {
         </div>
       </motion.div>
 
+      <section className="w-full py-s">
+        <div className="">
+          <p className="mb-s mt-m text-center text-muted-foreground">Trusted by content teams at</p>
+          <LogoCarousel />
+        </div>
+      </section>
+
       {/* Projects Section - Updated spacing and layout */}
       <div className="carousel-mask">
         <motion.div
@@ -686,7 +719,7 @@ export default function PricingPage() {
           className="mx-0 mb-xl space-y-4 md:mb-3xl"
           id="showcase"
         >
-          <div className="mb-m text-center md:mb-l">
+          <div className="mb-m mt-s text-center md:mb-l">
             <h2 className="mb-s text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
             <p className="text-muted-foreground">A showcase of previous work and collaborations</p>
           </div>
@@ -700,7 +733,7 @@ export default function PricingPage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mb-xl max-w-3xl md:mb-3xl"
+        className="mx-auto mb-xl max-w-6xl md:mb-3xl"
         id="breakdown"
       >
         <div className="mb-xl text-center">
@@ -983,9 +1016,6 @@ export default function PricingPage() {
           </div>
         </motion.div>
       </div>
-
-      {/* Add the case study section here, before the FAQ */}
-      <CaseStudy />
 
       {/* FAQ Section - Updated spacing */}
       <motion.div

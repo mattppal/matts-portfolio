@@ -59,6 +59,7 @@ export const assets = {
   projects: {
     'magnetic-feel':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/magnetic-feel.gif',
+    'orm-adt': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/orm-adt.png',
     uetl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/uetl.png',
     vid2gif: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/vid2gif.gif',
     wtw: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/wtw.gif',

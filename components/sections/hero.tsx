@@ -8,7 +8,7 @@ import { siteConfig } from '@/app/metadata';
 export function Hero() {
   return (
     <section className="section-padding relative flex w-full flex-col justify-center">
-      <div className="container mx-auto flex flex-col items-center space-y-m text-center">
+      <div className="container mx-auto flex flex-col items-center space-y-m pt-m text-center">
         <motion.div
           initial={{ scale: 0.5, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -20,7 +20,7 @@ export function Hero() {
             alt="Profile picture"
             width={192}
             height={192}
-            className="aspect-square w-[clamp(8rem,20vw,16rem)] rounded-full object-cover"
+            className="aspect-square w-[clamp(8rem,20vw,16rem)] rounded-full border-4 border-purple-700/80 object-cover transition-colors duration-300 hover:border-purple-500/80"
             priority
           />
         </motion.div>
@@ -38,7 +38,7 @@ export function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          {siteConfig.description}
+          I build and educate about developer tools and platforms.
         </motion.p>
       </div>
     </section>

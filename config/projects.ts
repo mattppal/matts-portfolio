@@ -14,7 +14,7 @@ export const projects: Project[] = [
     category: 'content',
   },
   {
-    title: 'Adding databases with Replit Agent',
+    title: 'Databases with Replit Agent',
     description: 'A tutorial on how to add databases to your Replit projects using Replit Agent.',
     videoId: 'hdfKtfOZg6A',
     imageUrl: 'https://i.ytimg.com/vi/hdfKtfOZg6A/maxresdefault.jpg',
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     description:
       "100-page technical data engineering whitepaper, written in collaboration with O'Reilly Media for Databricks.",
     imageUrl: assets.projects.uetl,
-    liveUrl: assets.whitepapers['orm-data-transformation'],
+    liveUrl: assets.whitepapers['orm-uetl'],
     badges: ['Writing', 'Data Engineering'],
     category: 'content',
   },
@@ -56,7 +56,7 @@ export const projects: Project[] = [
     description:
       "Technical guide on Data Transformation, written in collaboration with O'Reilly Media for Coalesce.",
     imageUrl: assets.projects['orm-adt'],
-    liveUrl: assets.whitepapers['orm-uetl'],
+    liveUrl: assets.whitepapers['orm-data-transformation'],
     badges: ['Writing', 'Tutorial'],
     category: 'content',
   },

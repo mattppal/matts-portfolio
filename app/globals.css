@@ -136,15 +136,27 @@ number-flow-react {
 /* Update the embla base styles */
 .embla {
   overflow: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  --slide-spacing: 1rem;
+  --slide-size: auto;
 }
 
 .embla__container {
   display: flex;
+  gap: 1rem;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: calc(var(--slide-spacing) * -1);
 }
 
 .embla__slide {
-  flex: 0 0 100%;
+  position: relative;
+  flex: 0 0 auto;
   min-width: 0;
+  padding-left: var(--slide-spacing);
 }
 
 /* Update container styles */
@@ -183,7 +195,7 @@ number-flow-react {
 }
 
 .carousel-reverse .embla__container {
-  animation: slideAnimationReverse 60s linear infinite;
+  animation: slideAnimationReverse 40s linear infinite;
 }
 
 @keyframes slideAnimation {
@@ -292,4 +304,14 @@ number-flow-react {
   display: flex;
   gap: 1rem;
   will-change: transform;
+}
+
+.carousel-mask-container {
+  @apply relative w-full overflow-hidden;
+}
+
+.carousel-mask {
+  @apply relative mx-auto max-w-[100vw] overflow-hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
