@@ -495,6 +495,14 @@ export default function PricingPage() {
         animate={{ opacity: 1, y: 0 }}
         className="mx-auto mb-s max-w-4xl text-center md:mb-s"
       >
+        <Image
+          src="/launch.svg"
+          alt="Matt"
+          width={300}
+          height={300}
+          className="mx-auto mb-l h-[150px] w-auto dark:invert sm:h-[200px] md:mb-xl md:h-[250px] lg:h-[300px]"
+          priority
+        />
         <h1 className="mb-l text-4xl font-bold md:mb-xl md:text-6xl">
           Developer marketing, simplified.
         </h1>
