@@ -12,19 +12,20 @@ export interface Video {
 
 const videos: Video[] = [
   {
-    id: 'dead',
-    title: 'Deadlift',
-    thumbnail: assets.lifts.dead,
+    id: 'squat',
+    title: 'Squat',
+    thumbnail: assets.lifts.squat,
   },
   {
     id: 'bench',
     title: 'Bench Press',
     thumbnail: assets.lifts.bench,
   },
+
   {
-    id: 'squat',
-    title: 'Squat',
-    thumbnail: assets.lifts.squat,
+    id: 'dead',
+    title: 'Deadlift',
+    thumbnail: assets.lifts.dead,
   },
 ];
 
@@ -77,7 +78,7 @@ export function VideoGallery() {
       onViewportEnter={() => setIsInView(true)}
       onViewportLeave={() => setIsInView(false)}
       viewport={{ once: false, margin: '-20%' }}
-      className="mx-auto grid w-full grid-cols-3 gap-xs overflow-hidden rounded-[var(--radius)]"
+      className="mx-auto grid w-full grid-cols-3 gap-2xs overflow-hidden rounded-[var(--radius)]"
     >
       {videos.map((video, index) => (
         <motion.div
