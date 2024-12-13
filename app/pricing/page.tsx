@@ -496,7 +496,7 @@ export default function PricingPage() {
         className="mx-auto mb-s max-w-4xl text-center md:mb-s"
       >
         <Image
-          src="/launch.svg"
+          src={assets.launch}
           alt="Matt"
           width={300}
           height={300}

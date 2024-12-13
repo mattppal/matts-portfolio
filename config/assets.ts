@@ -37,6 +37,7 @@ export const assets = {
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin-2.png',
     workin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin.png',
   },
+  launch: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/launch.svg',
   lifts: {
     bench: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/bench.mp4',
     dead: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/dead.mp4',
