@@ -3,20 +3,28 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { assets } from '@/config/assets';
-
-interface Video {
-  src: string;
+import { Card, CardContent } from '@/components/ui/card';
+export interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
 }
 
 const videos: Video[] = [
   {
-    src: assets.lifts.dead,
+    id: 'dead',
+    title: 'Deadlift',
+    thumbnail: assets.lifts.dead,
   },
   {
-    src: assets.lifts.bench,
+    id: 'bench',
+    title: 'Bench Press',
+    thumbnail: assets.lifts.bench,
   },
   {
-    src: assets.lifts.squat,
+    id: 'squat',
+    title: 'Squat',
+    thumbnail: assets.lifts.squat,
   },
 ];
 
@@ -73,8 +81,8 @@ export function VideoGallery() {
     >
       {videos.map((video, index) => (
         <motion.div
-          key={video.src}
-          className="relative w-full overflow-hidden rounded-[var(--radius)] bg-black"
+          key={video.id}
+          className="relative w-full"
           style={{
             aspectRatio: '9/16',
             height: 'auto',
@@ -85,18 +93,26 @@ export function VideoGallery() {
           }}
           transition={{ duration: 0.5 }}
         >
-          <video
-            ref={(el) => {
-              if (el) videoRefs.current[index] = el;
-            }}
-            src={video.src}
-            className="h-full w-full object-cover"
-            muted
-            playsInline
-            autoPlay
-            preload="metadata"
-            onEnded={playNextVideo}
-          />
+          <Card
+            className={`overflow-hidden transition-all duration-300 ${
+              currentIndex === index ? 'border-primary/50' : 'border-border'
+            }`}
+          >
+            <CardContent className="p-0">
+              <video
+                ref={(el) => {
+                  if (el) videoRefs.current[index] = el;
+                }}
+                src={video.thumbnail}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                autoPlay
+                preload="metadata"
+                onEnded={playNextVideo}
+              />
+            </CardContent>
+          </Card>
         </motion.div>
       ))}
     </motion.div>

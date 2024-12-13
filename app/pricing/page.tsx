@@ -1,7 +1,8 @@
 'use client';
 
+import { LogoCarousel } from '@/components/logo-carousel';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useMemo, useCallback, useRef } from 'react';
 import {
   Clock,
   Pause,
@@ -16,9 +17,14 @@ import {
   Camera,
   GraduationCap,
   DollarSign,
+  // Remove unused imports:
+  // Trophy,
+  // Users,
+  // TrendingUp,
+  // Target,
 } from 'lucide-react';
 import NumberFlow from '@number-flow/react';
-import { ProjectGrid, type Project } from '@/components/project-grid';
+import { type Project } from '@/components/project-grid';
 import { assets } from '@/config/assets';
 import {
   Accordion,
@@ -27,7 +33,10 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { VideoModal } from '@/components/video-modal';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import Image from 'next/image';
+import { useScroll, useTransform } from 'framer-motion';
 
 const container = {
   hidden: { opacity: 0 },
@@ -68,10 +77,26 @@ const projects: Project[] = [
   {
     title: 'Agent + Assistant Explainer',
     description:
-      'An explainer video breaking down the differences between AI agents and assistants.',
-    liveUrl: 'https://www.youtube.com/watch?v=1a1-B4kIWpA',
-    videoId: '1a1-B4kIWpA',
-    imageUrl: 'https://i.ytimg.com/vi/1a1-B4kIWpA/maxresdefault.jpg',
+      'A 1-minute explainer breaking down the difference between Replit Agent and Assistant.',
+    liveUrl: 'https://youtu.be/rkB4PT5yuhw',
+    videoId: 'rkB4PT5yuhw',
+    imageUrl: 'https://i.ytimg.com/vi/rkB4PT5yuhw/maxresdefault.jpg',
+    imageAlt: 'Agent + Assistant Explainer thumbnail',
+  },
+  {
+    title: 'First Look: Replit Assistant',
+    description: 'An introduction to the new Replit Assistant.',
+    liveUrl: 'https://youtu.be/ooYwXr2lPaA',
+    videoId: 'ooYwXr2lPaA',
+    imageUrl: 'https://i.ytimg.com/vi/ooYwXr2lPaA/maxresdefault.jpg',
+    imageAlt: 'First Look: Replit Assistant thumbnail',
+  },
+  {
+    title: 'Assistant Launch',
+    description: 'Replit Assistant launch video.',
+    liveUrl: 'https://youtu.be/Do_lq8RZ9GU',
+    videoId: 'Do_lq8RZ9GU',
+    imageUrl: 'https://i.ytimg.com/vi/Do_lq8RZ9GU/maxresdefault.jpg',
     imageAlt: 'Agent + Assistant Explainer thumbnail',
   },
   {
@@ -102,20 +127,20 @@ const projects: Project[] = [
     imageUrl: assets.projects.xai,
     liveUrl: 'https://x.com/mattppal/status/1845583077692903884',
   },
-  {
-    title: 'Understanding ETL',
-    description:
-      "100-page technical data engineering whitepaper, written in collaboration with O'Reilly Media for Databricks.",
-    imageUrl: assets.projects.uetl,
-    liveUrl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-uetl.pdf',
-  },
-  {
-    title: 'X Receipts',
-    description:
-      'Generate a receipt from your X profile, built on the X API and deployed on Replit.',
-    imageUrl: assets.projects['x-receipts'],
-    liveUrl: 'https://x-receipts.replit.app',
-  },
+  // {
+  //   title: 'Understanding ETL',
+  //   description:
+  //     "100-page technical data engineering whitepaper, written in collaboration with O'Reilly Media for Databricks.",
+  //   imageUrl: assets.projects.uetl,
+  //   liveUrl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/whitepapers/orm-uetl.pdf',
+  // },
+  // {
+  //   title: 'X Receipts',
+  //   description:
+  //     'Generate a receipt from your X profile, built on the X API and deployed on Replit.',
+  //   imageUrl: assets.projects['x-receipts'],
+  //   liveUrl: 'https://x-receipts.replit.app',
+  // },
   // ... other projects with their categories
 ];
 
@@ -164,121 +189,149 @@ function CostBreakdown() {
   const totalMonthly = calculateTotalMonthly(monthlyCosts);
 
   return (
-    <div ref={ref} className="space-y-l">
-      <div className="rounded-lg border border-border p-l">
-        <h3 className="mb-m text-xl font-semibold">One-Time Setup Costs</h3>
+    <div ref={ref} className="grid gap-m lg:grid-cols-2">
+      {/* Traditional Costs Column */}
+      <div className="space-y-s">
+        <h3 className="text-xl font-semibold text-muted-foreground">Traditional Approach</h3>
         <div className="space-y-s">
-          {setupCosts.map((cost) => (
-            <div key={cost.name} className="flex items-center justify-between">
-              <span>{cost.name}</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={cost.amount}
-                  prefix="$"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+          <div className="rounded-lg border border-border p-m">
+            <h4 className="mb-s text-lg font-medium">One-Time Setup Costs</h4>
+            <div className="space-y-s">
+              {setupCosts.map((cost) => (
+                <div key={cost.name} className="flex items-center justify-between">
+                  <span>{cost.name}</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={cost.amount}
+                      prefix="$"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              ))}
+              <div className="border-t border-border pt-s">
+                <div className="flex items-center justify-between font-semibold">
+                  <span>Initial Investment</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={totalSetup}
+                      prefix="$"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
-          ))}
-          <div className="border-t border-border pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>Initial Investment</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={totalSetup}
-                  prefix="$"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+          </div>
+
+          <div className="rounded-lg border border-border p-m">
+            <h4 className="mb-s text-lg font-medium">Monthly Operating Costs</h4>
+            <div className="space-y-s">
+              {monthlyCosts.map((cost) => (
+                <div key={cost.name} className="flex items-center justify-between">
+                  <span>{cost.name}</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={cost.amount}
+                      prefix="$"
+                      suffix={`/${cost.period}`}
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              ))}
+              <div className="border-t border-border pt-s">
+                <div className="flex items-center justify-between font-semibold">
+                  <span>Total Monthly Cost</span>
+                  <span className="font-mono">
+                    <NumberFlow
+                      value={totalMonthly}
+                      prefix="$"
+                      suffix="/mo"
+                      animated={isInView}
+                      format={{ minimumFractionDigits: 0 }}
+                      transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                      continuous
+                    />
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="rounded-lg border border-border p-l">
-        <h3 className="mb-m text-xl font-semibold">Monthly Operating Costs</h3>
-        <div className="space-y-s">
-          {monthlyCosts.map((cost) => (
-            <div key={cost.name} className="flex items-center justify-between">
-              <span>{cost.name}</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={cost.amount}
-                  prefix="$"
-                  suffix={`/${cost.period}`}
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
+      {/* Working with Matt Column */}
+      <div className="space-y-s">
+        <h3 className="text-xl font-semibold text-primary">Working with Matt</h3>
+        <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+          <h4 className="mb-m text-lg font-medium">All-Inclusive Package</h4>
+          <div className="space-y-s">
+            <div className="flex items-center justify-between">
+              <span>All Equipment</span>
+              <span className="font-mono">$0</span>
             </div>
-          ))}
-          <div className="border-t border-border pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>Total Monthly Cost</span>
-              <span className="font-mono">
-                <NumberFlow
-                  value={totalMonthly}
-                  prefix="$"
-                  suffix="/mo"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
+            <div className="flex items-center justify-between">
+              <span>All Software</span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>Video Editing</span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="flex items-center justify-between">
+              <span className="flex items-center gap-xs">
+                Event Planning & Coordination
+                <Zap className="h-3.5 w-3.5 text-primary" />
               </span>
+              <span className="font-mono">$0</span>
+            </div>
+            <div className="border-t border-primary/20 pt-s">
+              <div className="flex items-center justify-between font-semibold">
+                <span>DevRel as a Service</span>
+                <span className="font-mono text-primary">
+                  Starting at{' '}
+                  <NumberFlow
+                    value={3995}
+                    prefix="$"
+                    suffix="/mo"
+                    animated={isInView}
+                    format={{ minimumFractionDigits: 0 }}
+                    transformTiming={{ duration: 1000, easing: 'ease-out' }}
+                    continuous
+                  />
+                </span>
+              </div>
+              <p className="mt-xs text-sm text-muted-foreground">
+                No setup costs. No hidden fees. Pause or cancel anytime.
+              </p>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="rounded-lg border border-primary/20 bg-primary/5 p-l">
-        <h3 className="mb-m text-xl font-semibold text-primary">The Alternative: Work with Matt</h3>
-        <div className="space-y-s">
-          <div className="flex items-center justify-between">
-            <span>All Equipment</span>
-            <span className="font-mono">$0</span>
+        {/* Additional value props */}
+        <div className="grid gap-s sm:grid-cols-2">
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+            <Clock className="mb-s h-5 w-5 text-primary" />
+            <h4 className="mb-xs font-medium">Quick Setup</h4>
+            <p className="text-sm text-muted-foreground">
+              Start working together immediately with no setup time
+            </p>
           </div>
-          <div className="flex items-center justify-between">
-            <span>All Software</span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span>Video Editing</span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="flex items-center gap-xs">
-              Event Planning & Coordination
-              <Zap className="h-3.5 w-3.5 text-primary" />
-            </span>
-            <span className="font-mono">$0</span>
-          </div>
-          <div className="border-t border-primary/20 pt-s">
-            <div className="flex items-center justify-between font-semibold">
-              <span>Monthly Subscription</span>
-              <span className="font-mono text-primary">
-                Starting at{' '}
-                <NumberFlow
-                  value={3995}
-                  prefix="$"
-                  suffix="/mo"
-                  animated={isInView}
-                  format={{ minimumFractionDigits: 0 }}
-                  transformTiming={{ duration: 1000, easing: 'ease-out' }}
-                  continuous
-                />
-              </span>
-            </div>
-            <p className="mt-xs text-sm text-muted-foreground">
-              No setup costs. No hidden fees. Pause or cancel anytime.
+          <div className="rounded-lg border border-primary/20 bg-primary/5 p-m">
+            <DollarSign className="mb-s h-5 w-5 text-primary" />
+            <h4 className="mb-xs font-medium">Cost Effective</h4>
+            <p className="text-sm text-muted-foreground">
+              Save over $15k/month compared to traditional hiring
             </p>
           </div>
         </div>
@@ -287,11 +340,290 @@ function CostBreakdown() {
   );
 }
 
+// function CaseStudy() {
+//   const ref = useRef(null);
+//   const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0 }}
+//       animate={{ opacity: 1 }}
+//       transition={{ delay: 0.3 }}
+//       className="mx-auto mt-xl max-w-4xl md:mt-2xl"
+//       ref={ref}
+//     >
+//       <div className="mb-l text-center md:mb-xl">
+//         <h2 className="mb-s text-2xl font-bold md:text-3xl">Case Study: Replit</h2>
+//         <p className="text-muted-foreground">
+//           How strategic developer content transformed Replit&apos;s product launches
+//         </p>
+//       </div>
+
+//       {/* Metrics Grid */}
+//       <div className="mb-l grid grid-cols-3 gap-m sm:grid-cols-3 lg:grid-cols-3">
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.1 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <Trophy className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={4000000}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="+"
+//             animated={isInView}
+//             format={{ notation: 'compact', maximumFractionDigits: 1 }}
+//           />
+//           <p className="text-sm text-muted-foreground">Video impressions</p>
+//         </motion.div>
+
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.2 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <Users className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={12500}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="+"
+//             animated={isInView}
+//             format={{ notation: 'compact', maximumFractionDigits: 1 }}
+//           />
+//           <p className="text-sm text-muted-foreground">New developers reached</p>
+//         </motion.div>
+
+//         <motion.div
+//           initial={{ opacity: 0, y: 20 }}
+//           animate={{ opacity: 1, y: 0 }}
+//           transition={{ delay: 0.3 }}
+//           className="flex flex-col items-center rounded-lg border border-border bg-card p-m text-center"
+//         >
+//           <TrendingUp className="mb-s h-8 w-8 text-primary" />
+//           <NumberFlow
+//             value={300}
+//             className="mb-xs text-2xl font-bold"
+//             suffix="%"
+//             animated={isInView}
+//           />
+//           <p className="text-sm text-muted-foreground">Increase in conversions</p>
+//         </motion.div>
+//       </div>
+
+//       {/* Story Section */}
+//       <div className="mb-l space-y-m rounded-lg border border-border bg-card p-l">
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">The Challenge</h3>
+//           <p className="text-muted-foreground">
+//             Replit needed to effectively communicate complex AI tools to their developer community
+//             while maintaining high engagement and technical accuracy. The challenge was to break
+//             down sophisticated features like AI Agents and Assistants into digestible, actionable
+//             content.
+//           </p>
+//         </div>
+
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">The Solution</h3>
+//           <p className="text-muted-foreground">
+//             We developed a multi-format content strategy that included:
+//           </p>
+//           <ul className="mt-s space-y-xs text-muted-foreground">
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Short-form technical videos explaining key features
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Interactive tutorials and documentation
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Strategic product launch campaigns
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Developer education workshops
+//             </li>
+//           </ul>
+//         </div>
+
+//         <div>
+//           <h3 className="mb-s text-xl font-semibold">Key Outcomes</h3>
+//           <ul className="space-y-xs text-muted-foreground">
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Reached over 2.8M developers through targeted video content
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               48% increase in product adoption following launch campaigns
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               92% positive feedback on educational content
+//             </li>
+//             <li className="flex items-center gap-xs">
+//               <div className="h-1.5 w-1.5 rounded-full bg-primary" />
+//               Successfully launched 5+ major product features
+//             </li>
+//           </ul>
+//         </div>
+//       </div>
+//     </motion.div>
+//   );
+// }
+
+interface ProjectCarouselProps {
+  projects: Project[];
+  reverse?: boolean;
+}
+
+function ProjectCarousel({ projects, reverse = false }: ProjectCarouselProps) {
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const handleVideoClick = useCallback((id: string) => {
+    setVideoId(id);
+  }, []);
+
+  const duplicatedProjects = useMemo(() => [...projects, ...projects, ...projects], [projects]);
+
+  const videoModalProps = useMemo(
+    () => ({
+      isOpen: !!videoId,
+      videoId: videoId || '',
+      onClose: () => setVideoId(null),
+    }),
+    [videoId]
+  );
+
+  return (
+    <>
+      <div className="carousel-mask-container">
+        <div className="carousel-mask">
+          <motion.div
+            ref={ref}
+            className="flex gap-4 py-2"
+            style={{
+              x: useTransform(
+                useScroll({
+                  target: ref,
+                  offset: ['start end', 'end start'],
+                }).scrollYProgress,
+                [0, 1],
+                reverse ? ['5%', '-15%'] : ['-15%', '5%']
+              ),
+            }}
+          >
+            {duplicatedProjects.map((project: Project, index: number) => (
+              <motion.div
+                key={`${project.title}-${index}`}
+                className="w-[260px] flex-shrink-0 sm:w-[320px]"
+              >
+                {project.videoId ? (
+                  <button
+                    onClick={() => handleVideoClick(project.videoId!)}
+                    className="block h-full w-full"
+                  >
+                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                      <CardContent className="p-3">
+                        <div className="group relative mb-4 aspect-video overflow-hidden rounded-md">
+                          {project.imageUrl && (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.imageAlt || project.title}
+                              width={480}
+                              height={270}
+                              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            />
+                          )}
+                          <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+                            <div className="rounded-full border-2 border-white/80 p-2 transition-transform group-hover:scale-110">
+                              <PlaySquare className="h-6 w-6 text-white/90" strokeWidth={1.5} />
+                            </div>
+                          </div>
+                        </div>
+                        <CardHeader className="p-0">
+                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                          <CardDescription>{project.description}</CardDescription>
+                        </CardHeader>
+                        {project.badges && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {project.badges.map((badge: string, badgeIndex: number) => (
+                              <span
+                                key={badgeIndex}
+                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                              >
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </button>
+                ) : (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block h-full"
+                  >
+                    <Card className="h-full transition-all duration-300 hover:border-primary/50">
+                      <CardContent className="p-3">
+                        <div className="relative mb-4 aspect-video overflow-hidden rounded-md">
+                          {project.imageUrl && (
+                            <Image
+                              src={project.imageUrl}
+                              alt={project.imageAlt || project.title}
+                              width={480}
+                              height={270}
+                              className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                            />
+                          )}
+                        </div>
+                        <CardHeader className="p-0">
+                          <CardTitle className="mb-2 text-lg">{project.title}</CardTitle>
+                          <CardDescription>{project.description}</CardDescription>
+                        </CardHeader>
+                        {project.badges && (
+                          <div className="mt-4 flex flex-wrap gap-2">
+                            {project.badges.map((badge: string, badgeIndex: number) => (
+                              <span
+                                key={badgeIndex}
+                                className="rounded-full bg-primary/10 px-2 py-1 text-xs text-primary"
+                              >
+                                {badge}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </a>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+      <VideoModal {...videoModalProps} />
+    </>
+  );
+}
+
 export default function PricingPage() {
   const [isPro, setIsPro] = useState(false);
 
+  // Derive projects for each row
+  const evenProjects = useMemo(() => projects.filter((_, i) => i % 2 === 0), []);
+  const oddProjects = useMemo(() => projects.filter((_, i) => i % 2 === 1), []);
+
+  // Derive pricing values
   const currentPriceValue = isPro ? 6995 : 3995;
-  const currentDescription = isPro ? 'Double the requests.' : 'One request at a time.';
+  const currentDescription = isPro ? 'Take it to the next level.' : 'Start working with Matt.';
 
   return (
     <div className="container relative mx-auto mt-xl px-s py-l md:mt-2xl md:py-2xl">
@@ -299,9 +631,9 @@ export default function PricingPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mx-auto mb-xl max-w-4xl text-center md:mb-3xl"
+        className="mx-auto mb-s max-w-4xl text-center md:mb-s"
       >
-        <h1 className="mb-l text-4xl font-bold leading-[1.2] tracking-tight md:mb-xl md:text-6xl">
+        <h1 className="mb-l text-4xl font-bold md:mb-xl md:text-6xl">
           Developer marketing, simplified.
         </h1>
         <p className="mb-l text-lg leading-relaxed text-muted-foreground md:mb-xl md:text-xl">
@@ -315,7 +647,7 @@ export default function PricingPage() {
             <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Clock className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-xs font-semibold">Monthly subscription</h3>
+            <h3 className="mb-xs font-semibold">DevRel as a Service</h3>
             <p className="text-sm text-muted-foreground">
               Subscribe monthly and pause or cancel anytime. No long-term commitments.
             </p>
@@ -335,9 +667,9 @@ export default function PricingPage() {
             <div className="mb-s flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
               <Zap className="h-6 w-6 text-primary" />
             </div>
-            <h3 className="mb-xs font-semibold">72 hour delivery</h3>
+            <h3 className="mb-xs font-semibold">Consistent delivery</h3>
             <p className="text-sm text-muted-foreground">
-              Most requests are completed within 72 hours. Complex projects may take longer.
+              Matt has been compared to a robot (with empathy for developers).
             </p>
           </div>
 
@@ -372,34 +704,37 @@ export default function PricingPage() {
         </div>
       </motion.div>
 
-      {/* Projects Section - Updated spacing */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="mx-auto mb-xl max-w-7xl md:mb-3xl"
-        id="showcase"
-      >
-        <div className="mb-l text-center md:mb-xl">
-          <h2 className="mb-s text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
-          <p className="text-muted-foreground">
-            A showcase of Matt&apos;s previous work and collaborations
-          </p>
+      <section className="w-full py-s">
+        <div className="">
+          <p className="mb-s mt-m text-center text-muted-foreground">Trusted by content teams at</p>
+          <LogoCarousel />
         </div>
+      </section>
 
-        <ProjectGrid
-          projects={projects}
-          columns={{ mobile: 1, tablet: 2, desktop: 3 }}
-          className="mx-auto gap-m"
-        />
-      </motion.div>
+      {/* Projects Section - Updated spacing and layout */}
+      <div className="carousel-mask">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className="mx-0 mb-xl space-y-4 md:mb-3xl"
+          id="showcase"
+        >
+          <div className="mb-m mt-s text-center md:mb-l">
+            <h2 className="mb-s text-2xl font-bold md:text-3xl">See what you can accomplish</h2>
+            <p className="text-muted-foreground">A showcase of previous work and collaborations</p>
+          </div>
 
+          <ProjectCarousel projects={evenProjects} />
+          <ProjectCarousel projects={oddProjects} reverse={true} />
+        </motion.div>
+      </div>
       {/* Cost Breakdown Section - Updated spacing */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
-        className="mx-auto mb-xl max-w-3xl md:mb-3xl"
+        className="mx-auto mb-xl max-w-6xl md:mb-3xl"
         id="breakdown"
       >
         <div className="mb-xl text-center">
@@ -579,16 +914,16 @@ export default function PricingPage() {
                   <MessageSquare className="h-5 w-5 text-primary" />
                   <span>
                     <NumberFlow
-                      value={isPro ? 2 : 1}
+                      value={isPro ? 1 : 1}
                       className="font-medium tabular-nums"
                       continuous
                     />{' '}
-                    request{isPro ? 's' : ''} at a time
+                    request{isPro ? ' at a time' : ' per week'}
                   </span>
                 </li>
                 <li className="flex items-center gap-s">
                   <Clock className="h-5 w-5 text-primary" />
-                  <span>Average 72 hour delivery</span>
+                  <span>Average {isPro ? ' 72h' : 'weekly'} delivery</span>
                 </li>
                 <li className="flex items-center gap-s">
                   <Pause className="h-5 w-5 text-primary" />

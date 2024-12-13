@@ -102,7 +102,7 @@ body {
   .section-padding {
     @apply py-20 sm:py-12 md:py-12 lg:py-12;
   }
-  
+
   .btn-scale {
     @apply transform transition-all duration-300 ease-out hover:scale-[1.02] active:scale-[0.98];
   }
@@ -122,4 +122,209 @@ number-flow-react {
   --number-flow-mask-height: 0.25em;
   --number-flow-mask-width: 0.5em;
   --number-flow-char-height: 1em;
+}
+
+/* First, let's create a base layer promotion class */
+.promote-layer {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Update the embla base styles */
+.embla {
+  overflow: hidden;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  --slide-spacing: 1rem;
+  --slide-size: auto;
+}
+
+.embla__container {
+  display: flex;
+  gap: 1rem;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -khtml-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+/* Update container styles */
+.embla__container {
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+  @apply promote-layer;
+}
+
+/* Update slide styles */
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+  @apply promote-layer;
+}
+
+/* Promote the card content to its own layer */
+.embla__slide > * {
+  @apply promote-layer;
+}
+
+/* Update animations to be more performant */
+.embla__container {
+  animation: none; /* Reset any existing animation */
+  transform: translateZ(0); /* Force GPU acceleration */
+}
+
+/* Separate animations for each direction using only transform */
+.embla__container {
+  animation: slideAnimation 60s linear infinite;
+  will-change: transform; /* Hint to browser to create GPU layer */
+  backface-visibility: hidden;
+}
+
+.carousel-reverse .embla__container {
+  animation: slideAnimationReverse 40s linear infinite;
+}
+
+@keyframes slideAnimation {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1; /* Add opacity to prevent flicker */
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideAnimationReverse {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+/* Smooth out pausing */
+.embla:hover .embla__container,
+.carousel-reverse:hover .embla__container {
+  animation-play-state: paused;
+}
+
+/* Update responsive sizes */
+@media (min-width: 768px) {
+  .embla {
+    --slide-size: 35%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .embla {
+    --slide-size: 25%;
+  }
+}
+
+/* Remove any transition that might cause flickering */
+.embla__slide img,
+.embla__slide .group {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  @apply promote-layer;
+}
+
+/* Add these new styles for the carousel mask effect */
+.carousel-mask {
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Add this class for the mask container */
+.carousel-mask-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Add hover effect for clickable cards */
+.embla__slide a:hover {
+  text-decoration: none;
+}
+
+.embla__slide a:focus {
+  outline: none;
+}
+
+.embla__slide a:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* Add GPU acceleration to carousel items */
+.embla__slide > * {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Add hardware acceleration to all animated elements */
+.embla,
+.embla__container,
+.embla__slide,
+.embla__slide > * {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Add these new styles */
+.parallax-wrapper {
+  position: relative;
+  overflow: hidden;
+  mask-image: none;
+  -webkit-mask-image: none;
+}
+
+.parallax-content {
+  display: flex;
+  gap: 1rem;
+  will-change: transform;
+}
+
+.carousel-mask-container {
+  @apply relative w-full overflow-hidden;
+}
+
+.carousel-mask {
+  @apply relative mx-auto max-w-[100vw] overflow-hidden;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.embla {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+}
+
+.embla__slide {
+  flex: 0 0 33%;
+  min-width: 0;
 }

@@ -7,17 +7,16 @@ import { Card, CardContent, CardHeader } from './ui/card';
 import { useState } from 'react';
 import { VideoModal } from './video-modal';
 
-export type Project = {
+export interface Project {
   title: string;
   description: string;
-  imageUrl?: string;
+  imageUrl: string;
   imageAlt?: string;
-  videoId?: string;
   liveUrl?: string;
-  githubUrl?: string;
+  videoId?: string;
   badges?: string[];
   category?: 'event' | 'code' | 'content';
-};
+}
 
 interface ProjectCardProps {
   project: Project;
@@ -142,17 +141,27 @@ export function ProjectGrid({
 
     return (
       <div className={`grid gap-8 md:grid-cols-3 ${className}`}>
-        <CategorySection
-          title="Events"
-          icon={<Calendar className="h-5 w-5" />}
-          projects={eventProjects}
-        />
-        <CategorySection title="Code" icon={<Code className="h-5 w-5" />} projects={codeProjects} />
-        <CategorySection
-          title="Content"
-          icon={<Film className="h-5 w-5" />}
-          projects={contentProjects}
-        />
+        {eventProjects.length > 0 && (
+          <CategorySection
+            title="Events"
+            icon={<Calendar className="h-5 w-5" />}
+            projects={eventProjects}
+          />
+        )}
+        {codeProjects.length > 0 && (
+          <CategorySection
+            title="Code"
+            icon={<Code className="h-5 w-5" />}
+            projects={codeProjects}
+          />
+        )}
+        {contentProjects.length > 0 && (
+          <CategorySection
+            title="Content"
+            icon={<Film className="h-5 w-5" />}
+            projects={contentProjects}
+          />
+        )}
       </div>
     );
   }
