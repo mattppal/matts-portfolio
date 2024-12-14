@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { FaLinkedin, FaXTwitter, FaYoutube, FaCalendar } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 

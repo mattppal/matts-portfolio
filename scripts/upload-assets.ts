@@ -9,6 +9,11 @@ import { execSync } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
 
+// Add these type definitions at the top
+type AssetStructure = {
+  [key: string]: string | string[] | AssetStructure;
+};
+
 // Load environment variables
 dotenv.config({ path: '.env.local' });
 
@@ -39,12 +44,10 @@ async function calculateFileHash(filePath: string): Promise<string> {
   return hashSum.digest('hex');
 }
 
-// Add these type definitions at the top
-type AssetStructure = {
-  [key: string]: string | string[] | AssetStructure;
-};
-
-function organizeByDirectory(blobs: { pathname: string; url: string }[], useLocalUrls: boolean = false) {
+function organizeByDirectory(
+  blobs: { pathname: string; url: string }[],
+  useLocalUrls: boolean = false
+) {
   const structure: AssetStructure = {};
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 

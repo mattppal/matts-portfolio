@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ProjectCarousel } from '@/components/project-carousel';
 import { projects } from '@/config/projects';
 import { useMemo } from 'react';

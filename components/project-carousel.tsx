@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { PlaySquare } from 'lucide-react';
 import Image from 'next/image';
 import { useState, useMemo, useCallback, useRef, type FC } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 import { VideoModal } from './video-modal';
 
 interface ProjectCarouselProps {

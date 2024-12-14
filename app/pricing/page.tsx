@@ -1,7 +1,7 @@
 'use client';
 
 import { LogoCarousel } from '@/components/logo-carousel';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { useState, useMemo, useCallback, useRef } from 'react';
 import {
   Clock,
@@ -32,11 +32,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useInView } from 'framer-motion';
+import { useInView } from 'motion/react';
 // import { VideoModal } from '@/components/video-modal';
 // import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import Image from 'next/image';
-// import { useScroll, useTransform } from 'framer-motion';
+// import { useScroll, useTransform } from 'motion/react';;
 import { ProjectCarousel } from '@/components/project-carousel';
 
 const container = {

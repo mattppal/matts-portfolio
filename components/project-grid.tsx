@@ -1,7 +1,7 @@
 'use client';
 
 import { Calendar, Code, Film } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader } from './ui/card';
 import { useState } from 'react';

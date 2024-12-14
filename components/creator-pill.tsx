@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
 
@@ -14,7 +14,7 @@ export function CreatorPill() {
     >
       <Badge
         variant="secondary"
-        className="gap-2xs px-xs py-2xs flex items-center text-base shadow-lg transition-shadow hover:shadow-xl"
+        className="flex items-center gap-2xs px-xs py-2xs text-base shadow-lg transition-shadow hover:shadow-xl"
       >
         <span>the technical marketer behind</span>
         <Image

@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useMemo } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import { assets } from '@/config/assets';
 import { Card } from '@/components/ui/card';

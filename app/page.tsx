@@ -8,7 +8,7 @@ import { ContactSection } from '@/components/sections/contact';
 import { Skeleton } from '@/components/ui/skeleton';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { HeroCarousel } from '@/components/hero-carousel';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 
 export default function Home() {
   return (
