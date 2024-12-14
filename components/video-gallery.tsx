@@ -4,6 +4,8 @@ import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { assets } from '@/config/assets';
 import { Card, CardContent } from '@/components/ui/card';
+import type { SyntheticEvent } from 'react';
+
 export interface Video {
   id: string;
   title: string;
@@ -33,6 +35,8 @@ export function VideoGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const [videoErrors, setVideoErrors] = useState<Record<string, string>>({});
+  const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
 
   const playNextVideo = () => {
     const nextIndex = (currentIndex + 1) % videos.length;
@@ -56,7 +60,10 @@ export function VideoGallery() {
     if (isInView) {
       const firstVideo = videoRefs.current[0];
       if (firstVideo) {
-        firstVideo.play().catch((err) => console.log('Initial playback error:', err));
+        firstVideo.play().catch((err) => {
+          console.error('Initial playback error:', err);
+          setVideoErrors((prev) => ({ ...prev, '0': err.message }));
+        });
       }
     }
 
@@ -72,6 +79,23 @@ export function VideoGallery() {
       videoRefs.current.forEach((video) => video?.pause());
     }
   }, [isInView]);
+
+  // Add error handling for video loading
+  const handleVideoError = (index: number, event: SyntheticEvent<HTMLVideoElement>) => {
+    const video = event.currentTarget;
+    console.error(`Error loading video ${index}:`, video.error);
+    setVideoErrors((prev) => ({ ...prev, [index]: video.error?.message || 'Unknown error' }));
+  };
+
+  const handleVideoLoadStart = (index: number) => {
+    setLoadingStates((prev) => ({ ...prev, [index]: true }));
+    console.log(`Video ${index} loading started`);
+  };
+
+  const handleVideoLoadedData = (index: number) => {
+    setLoadingStates((prev) => ({ ...prev, [index]: false }));
+    console.log(`Video ${index} loaded successfully`);
+  };
 
   return (
     <motion.div
@@ -95,11 +119,18 @@ export function VideoGallery() {
           transition={{ duration: 0.5 }}
         >
           <Card
-            className={`overflow-hidden transition-all duration-300 ${
+            className={`relative overflow-hidden transition-all duration-300 ${
               currentIndex === index ? 'border-primary/50' : 'border-border'
             }`}
           >
-            <CardContent className="p-0">
+            <CardContent className="relative p-0">
+              {/* Loading indicator */}
+              {loadingStates[index] && (
+                <div className="absolute inset-0 flex items-center justify-center bg-background/80">
+                  <div className="text-sm text-muted-foreground">Loading...</div>
+                </div>
+              )}
+
               <video
                 ref={(el) => {
                   if (el) videoRefs.current[index] = el;
@@ -109,9 +140,35 @@ export function VideoGallery() {
                 muted
                 playsInline
                 autoPlay
-                preload="metadata"
+                preload="auto"
+                onLoadStart={() => handleVideoLoadStart(index)}
+                onLoadedData={() => handleVideoLoadedData(index)}
+                onError={(e) => handleVideoError(index, e)}
                 onEnded={playNextVideo}
+                poster={`/api/video-thumbnail?url=${encodeURIComponent(video.thumbnail)}`}
               />
+
+              {/* Error message */}
+              {videoErrors[index] && (
+                <div className="absolute inset-0 flex items-center justify-center bg-background/80 p-2 text-center text-sm text-muted-foreground">
+                  <div>
+                    Failed to load video
+                    <button
+                      onClick={() => {
+                        const videoEl = videoRefs.current[index];
+                        if (videoEl) {
+                          setVideoErrors((prev) => ({ ...prev, [index]: '' }));
+                          videoEl.load();
+                          videoEl.play().catch(console.error);
+                        }
+                      }}
+                      className="ml-2 text-primary hover:underline"
+                    >
+                      Retry
+                    </button>
+                  </div>
+                </div>
+              )}
             </CardContent>
           </Card>
         </motion.div>
