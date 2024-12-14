@@ -34,6 +34,11 @@ export const assets = {
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/speaking-3.png',
     speaking: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/speaking.png',
     'workin-2':
+  "lifts": {
+    "bench": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/bench.mp4",
+    "dead": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/dead.mp4",
+    "squat": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/squat.mp4"
+  },
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin-2.png',
     workin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin.png',
   },
