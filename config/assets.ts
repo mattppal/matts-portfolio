@@ -1,34 +1,4 @@
 export const assets = {
-<<<<<<< HEAD
-  '.og-backgrounds': {
-    '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/.gitignore',
-  },
-||||||| 4659d6e
-  '.og-backgrounds': {
-    '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/.gitignore',
-    'bg-0': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-0.png',
-    'bg-1': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-1.png',
-    'bg-10': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-10.png',
-    'bg-11': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-11.png',
-    'bg-12': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-12.png',
-    'bg-13': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-13.png',
-    'bg-14': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-14.png',
-    'bg-15': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-15.png',
-    'bg-16': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-16.png',
-    'bg-17': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-17.png',
-    'bg-18': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-18.png',
-    'bg-19': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-19.png',
-    'bg-2': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-2.png',
-    'bg-3': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-3.png',
-    'bg-4': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-4.png',
-    'bg-5': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-5.png',
-    'bg-6': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-6.png',
-    'bg-7': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-7.png',
-    'bg-8': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-8.png',
-    'bg-9': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-9.png',
-  },
-=======
->>>>>>> 71c050e36da95a3d10fb172ba8a6c29157dfefbb
   bg: {
     'bg-0': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-0.jpg',
     'bg-1': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-1.jpg',
@@ -68,11 +38,6 @@ export const assets = {
     workin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin.png',
   },
   launch: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/launch.svg',
-  lifts: {
-    bench: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/bench.mp4',
-    dead: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/dead.mp4',
-    squat: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/squat.mp4',
-  },
   'logo-carousel': {
     Linkedin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/Linkedin.svg',
     a16z: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/a16z.svg',
