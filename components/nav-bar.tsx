@@ -107,7 +107,7 @@ function NavigationContent() {
           </Link>
         </motion.div>
         <motion.div whileHover={{ scale: 1.05 }}>
-          <Link href="/pricing">
+          <Link href="https://yourdevrel.com/" target="_blank">
             <Badge
               variant="secondary"
               className="flex items-center gap-2xs bg-primary/10 px-2xs py-2xs text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
