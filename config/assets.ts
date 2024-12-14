@@ -1,7 +1,34 @@
 export const assets = {
+<<<<<<< HEAD
   '.og-backgrounds': {
     '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/.gitignore',
   },
+||||||| 4659d6e
+  '.og-backgrounds': {
+    '': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/.gitignore',
+    'bg-0': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-0.png',
+    'bg-1': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-1.png',
+    'bg-10': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-10.png',
+    'bg-11': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-11.png',
+    'bg-12': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-12.png',
+    'bg-13': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-13.png',
+    'bg-14': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-14.png',
+    'bg-15': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-15.png',
+    'bg-16': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-16.png',
+    'bg-17': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-17.png',
+    'bg-18': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-18.png',
+    'bg-19': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-19.png',
+    'bg-2': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-2.png',
+    'bg-3': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-3.png',
+    'bg-4': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-4.png',
+    'bg-5': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-5.png',
+    'bg-6': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-6.png',
+    'bg-7': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-7.png',
+    'bg-8': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-8.png',
+    'bg-9': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/.og-backgrounds/bg-9.png',
+  },
+=======
+>>>>>>> 71c050e36da95a3d10fb172ba8a6c29157dfefbb
   bg: {
     'bg-0': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-0.jpg',
     'bg-1': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/bg/bg-1.jpg',
@@ -26,6 +53,7 @@ export const assets = {
   },
   headshot: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/headshot.jpg',
   'hero-carousel': {
+    buildin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/buildin.jpeg',
     eatin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/eatin.png',
     'hiking-2':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/hiking-2.png',
@@ -39,6 +67,7 @@ export const assets = {
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin-2.png',
     workin: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/hero-carousel/workin.png',
   },
+  launch: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/launch.svg',
   lifts: {
     bench: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/bench.mp4',
     dead: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/lifts/dead.mp4',
@@ -62,6 +91,7 @@ export const assets = {
   projects: {
     'magnetic-feel':
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/magnetic-feel.gif',
+    'orm-adt': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/orm-adt.png',
     uetl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/uetl.png',
     vid2gif: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/vid2gif.gif',
     wtw: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/wtw.gif',

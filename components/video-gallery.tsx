@@ -3,20 +3,29 @@
 import { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { assets } from '@/config/assets';
-
-interface Video {
-  src: string;
+import { Card, CardContent } from '@/components/ui/card';
+export interface Video {
+  id: string;
+  title: string;
+  thumbnail: string;
 }
 
 const videos: Video[] = [
   {
-    src: assets.lifts.dead,
+    id: 'squat',
+    title: 'Squat',
+    thumbnail: assets.lifts.squat,
   },
   {
-    src: assets.lifts.bench,
+    id: 'bench',
+    title: 'Bench Press',
+    thumbnail: assets.lifts.bench,
   },
+
   {
-    src: assets.lifts.squat,
+    id: 'dead',
+    title: 'Deadlift',
+    thumbnail: assets.lifts.dead,
   },
 ];
 
@@ -69,12 +78,12 @@ export function VideoGallery() {
       onViewportEnter={() => setIsInView(true)}
       onViewportLeave={() => setIsInView(false)}
       viewport={{ once: false, margin: '-20%' }}
-      className="mx-auto grid w-full grid-cols-3 gap-xs overflow-hidden rounded-[var(--radius)]"
+      className="mx-auto grid w-full grid-cols-3 gap-2xs overflow-hidden rounded-[var(--radius)]"
     >
       {videos.map((video, index) => (
         <motion.div
-          key={video.src}
-          className="relative w-full overflow-hidden rounded-[var(--radius)] bg-black"
+          key={video.id}
+          className="relative w-full"
           style={{
             aspectRatio: '9/16',
             height: 'auto',
@@ -85,18 +94,26 @@ export function VideoGallery() {
           }}
           transition={{ duration: 0.5 }}
         >
-          <video
-            ref={(el) => {
-              if (el) videoRefs.current[index] = el;
-            }}
-            src={video.src}
-            className="h-full w-full object-cover"
-            muted
-            playsInline
-            autoPlay
-            preload="metadata"
-            onEnded={playNextVideo}
-          />
+          <Card
+            className={`overflow-hidden transition-all duration-300 ${
+              currentIndex === index ? 'border-primary/50' : 'border-border'
+            }`}
+          >
+            <CardContent className="p-0">
+              <video
+                ref={(el) => {
+                  if (el) videoRefs.current[index] = el;
+                }}
+                src={video.thumbnail}
+                className="h-full w-full object-cover"
+                muted
+                playsInline
+                autoPlay
+                preload="metadata"
+                onEnded={playNextVideo}
+              />
+            </CardContent>
+          </Card>
         </motion.div>
       ))}
     </motion.div>

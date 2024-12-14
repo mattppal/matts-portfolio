@@ -1,24 +1,34 @@
+'use client';
 import { Suspense } from 'react';
 import { Hero } from '@/components/sections/hero';
 import { About } from '@/components/sections/about';
 import { BlogSection } from '@/components/sections/blog';
 import { ProjectsSection } from '@/components/sections/projects';
 import { ContactSection } from '@/components/sections/contact';
-import { ImageGallery } from '@/components/image-gallery';
 import { Skeleton } from '@/components/ui/skeleton';
-import { LogoCarousel } from '@/components/logo-carousel';
-import { CreatorPill } from '@/components/creator-pill';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
+import { HeroCarousel } from '@/components/hero-carousel';
+import { motion } from 'framer-motion';
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-s">
-      <div className="mt-xl">
-        <CreatorPill />
-      </div>
-      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-        <ImageGallery />
-      </Suspense>
+    <motion.main
+      initial="initial"
+      animate="animate"
+      className="flex min-h-screen flex-col items-center justify-between"
+    >
+      <motion.div
+        variants={{
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+        }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
+        <div className="w-full max-w-[100vw] overflow-hidden">
+          <HeroCarousel />
+        </div>
+      </motion.div>
+
       <Suspense
         fallback={
           <div className="space-y-m">
@@ -28,43 +38,27 @@ export default function Home() {
         }
       >
         <Hero />
-        <p className="text-center text-muted-foreground mt-m mb-s">Trusted by content teams at</p>
-        <LogoCarousel />
       </Suspense>
-      <Suspense
-        fallback={
-          <div className="w-full max-w-4xl mx-auto px-m">
-            <Skeleton className="h-[200px]" />
-          </div>
-        }
+      <motion.div
+        className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.7 }}
       >
         <NewsletterSubscription />
-      </Suspense>
-      <Suspense
-        fallback={
-          <div className="flex gap-s py-m">
-            {Array.from({ length: 5 }).map((_, i) => (
-              <Skeleton key={i} className="h-12 w-32" />
-            ))}
-          </div>
-        }
-      ></Suspense>
-
-      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
-        <About />
-      </Suspense>
-
-      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+      </motion.div>
+      <motion.div
+        variants={{
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+        }}
+        transition={{ delay: 1.2, duration: 0.5 }}
+      >
         <ProjectsSection />
-      </Suspense>
-
-      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
+        <About />
         <BlogSection />
-      </Suspense>
-
-      <Suspense fallback={<Skeleton className="h-[400px] w-full" />}>
         <ContactSection />
-      </Suspense>
-    </main>
+      </motion.div>
+    </motion.main>
   );
 }

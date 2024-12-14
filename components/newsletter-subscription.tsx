@@ -43,7 +43,7 @@ export function NewsletterSubscription() {
   };
 
   return (
-    <section className="mx-auto w-full max-w-3xl px-s py-m md:py-l">
+    <section className="mx-auto w-full max-w-3xl px-s py-s">
       <motion.div
         className="space-y-m text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -52,7 +52,7 @@ export function NewsletterSubscription() {
         transition={{ duration: 0.5 }}
       >
         <p className="text-base text-muted-foreground md:text-lg">
-          Weekly{' '}
+          I also write weekly{' '}
           <a
             href="#writing"
             className="underline decoration-primary transition-colors hover:text-foreground"
