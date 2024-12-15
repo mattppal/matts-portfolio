@@ -9,6 +9,11 @@ import { execSync } from 'child_process';
 import chalk from 'chalk';
 import ora from 'ora';
 
+// Add these type definitions at the top
+type AssetStructure = {
+  [key: string]: string | string[] | AssetStructure;
+};
+
 // Load environment variables
 dotenv.config({ path: '.env.local' });
 
@@ -39,8 +44,12 @@ async function calculateFileHash(filePath: string): Promise<string> {
   return hashSum.digest('hex');
 }
 
-function organizeByDirectory(blobs: { pathname: string; url: string }[]) {
-  const structure: Record<string, any> = {};
+function organizeByDirectory(
+  blobs: { pathname: string; url: string }[],
+  useLocalUrls: boolean = false
+) {
+  const structure: AssetStructure = {};
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   // Filter out .DS_Store files before processing
   const filteredBlobs = blobs.filter((blob) => !blob.pathname.includes('.DS_Store'));
@@ -48,6 +57,9 @@ function organizeByDirectory(blobs: { pathname: string; url: string }[]) {
   filteredBlobs.forEach(({ pathname, url }) => {
     const parts = pathname.split('/');
     let current = structure;
+
+    // If using local URLs, construct local URL instead of using CDN URL
+    const finalUrl = useLocalUrls ? `${baseUrl}/${pathname}` : url;
 
     parts.forEach((part, index) => {
       // Get the name without extension for the final part
@@ -57,27 +69,27 @@ function organizeByDirectory(blobs: { pathname: string; url: string }[]) {
         // If there's already an entry, convert to array
         if (current[key]) {
           if (Array.isArray(current[key])) {
-            current[key].push(url);
+            (current[key] as string[]).push(finalUrl);
           } else {
-            current[key] = [current[key], url];
+            current[key] = [current[key] as string, finalUrl];
           }
         } else {
-          current[key] = url;
+          current[key] = finalUrl;
         }
       } else {
         current[key] = current[key] || {};
-        current = current[key];
+        current = current[key] as AssetStructure;
       }
     });
   });
 
   // Sort any arrays in the structure
-  const sortArrays = (obj: any) => {
+  const sortArrays = (obj: AssetStructure) => {
     for (const key in obj) {
       if (Array.isArray(obj[key])) {
-        obj[key].sort();
+        (obj[key] as string[]).sort();
       } else if (typeof obj[key] === 'object') {
-        sortArrays(obj[key]);
+        sortArrays(obj[key] as AssetStructure);
       }
     }
   };
@@ -86,8 +98,17 @@ function organizeByDirectory(blobs: { pathname: string; url: string }[]) {
   return structure;
 }
 
-function generateTypeScriptCode(structure: Record<string, any>): string {
-  return `export const assets = ${JSON.stringify(structure, null, 2)} as const;
+function generateTypeScriptCode(structure: AssetStructure, localStructure: AssetStructure): string {
+  return `// CDN URLs for production
+const productionAssets = ${JSON.stringify(structure, null, 2)} as const;
+
+// Local URLs for development
+const localAssets = ${JSON.stringify(localStructure, null, 2)} as const;
+
+// Export the appropriate version based on NEXT_PUBLIC_BASE_URL
+export const assets = process.env.NEXT_PUBLIC_BASE_URL?.includes('localhost')
+  ? localAssets
+  : productionAssets;
 
 export type AssetUrl = string;
 `;
@@ -251,8 +272,9 @@ async function uploadAssets() {
 
     mainSpinner.start('Generating assets.ts');
     const finalBlobs = await list();
-    const assetStructure = organizeByDirectory(finalBlobs.blobs);
-    const tsCode = generateTypeScriptCode(assetStructure);
+    const productionStructure = organizeByDirectory(finalBlobs.blobs, false);
+    const localStructure = organizeByDirectory(finalBlobs.blobs, true);
+    const tsCode = generateTypeScriptCode(productionStructure, localStructure);
     await fs.writeFile(ASSETS_FILE, tsCode);
     mainSpinner.succeed('Generated assets.ts');
 

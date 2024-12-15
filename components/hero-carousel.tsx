@@ -5,7 +5,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import { assets } from '@/config/assets';
 import { Card } from '@/components/ui/card';
-import { cn } from '@/lib/utils';
 
 function shuffleArray<T>(array: T[]): T[] {
   const newArray = [...array];

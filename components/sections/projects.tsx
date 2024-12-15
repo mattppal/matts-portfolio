@@ -11,7 +11,7 @@ export function ProjectsSection() {
   const oddProjects = useMemo(() => projects.filter((_: Project, i: number) => i % 2 === 1), []);
 
   return (
-    <section className="w-full py-m" id="projects">
+    <section className="section-padding" id="projects">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
