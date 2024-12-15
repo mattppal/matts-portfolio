@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { formatDistanceToNow } from 'date-fns';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';

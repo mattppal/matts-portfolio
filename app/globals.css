@@ -100,7 +100,7 @@ body {
 
 @layer components {
   .section-padding {
-    @apply py-20 sm:py-12 md:py-12 lg:py-12;
+    @apply py-8 sm:py-8 md:py-8 lg:py-8;
   }
 
   .btn-scale {
@@ -327,4 +327,22 @@ number-flow-react {
 .embla__slide {
   flex: 0 0 33%;
   min-width: 0;
+}
+
+/* Add these styles to your globals.css */
+.stack-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stack-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transition: all 0.3s ease-in-out;
 }

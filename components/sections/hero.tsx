@@ -1,19 +1,14 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { assets } from '@/config/assets';
 import Image from 'next/image';
 
 export function Hero() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="space-y-4 px-4 text-center"
-    >
+    <div className="section-padding">
       <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
+        initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="flex justify-center"
@@ -27,31 +22,26 @@ export function Hero() {
           priority
         />
       </motion.div>
-      <motion.h1 className="text-4xl font-bold md:text-6xl">
+      <h1 className="text-4xl font-bold md:text-6xl">
         <motion.span
           animate={{
-            rotate: [0, -20, 20, -20, 20, 0],
+            rotate: [0, -10, 10, -10, 10, 0],
           }}
           transition={{
-            duration: 1.5,
+            duration: 1,
             delay: 0.5,
             repeat: Infinity,
-            repeatDelay: 3,
+            repeatDelay: 5,
           }}
           className="inline-block"
         >
           👋
         </motion.span>{' '}
         Hi, I&apos;m Matt
-      </motion.h1>
-      <motion.p
-        className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-      >
+      </h1>
+      <p className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl">
         I build great products and make complex tools simple.
-      </motion.p>
-    </motion.div>
+      </p>
+    </div>
   );
 }

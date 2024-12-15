@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { ProjectCarousel } from '@/components/project-carousel';
 import { projects } from '@/config/projects';
 import { useMemo } from 'react';
@@ -11,7 +11,7 @@ export function ProjectsSection() {
   const oddProjects = useMemo(() => projects.filter((_: Project, i: number) => i % 2 === 1), []);
 
   return (
-    <section className="w-full py-m" id="projects">
+    <section className="section-padding" id="projects">
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

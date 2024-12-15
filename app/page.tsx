@@ -8,57 +8,72 @@ import { ContactSection } from '@/components/sections/contact';
 import { Skeleton } from '@/components/ui/skeleton';
 import { NewsletterSubscription } from '@/components/newsletter-subscription';
 import { HeroCarousel } from '@/components/hero-carousel';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'motion/react';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5 },
+};
+
+const stagger = {
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
 
 export default function Home() {
   return (
-    <motion.main
-      initial="initial"
-      animate="animate"
-      className="flex min-h-screen flex-col items-center justify-between"
-    >
-      <motion.div
-        variants={{
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-        }}
-        transition={{ delay: 1.2, duration: 0.5 }}
+    <AnimatePresence>
+      <motion.main
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="flex min-h-screen flex-col items-center justify-between"
       >
-        <div className="w-full max-w-[100vw] overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-[100vw] overflow-hidden"
+        >
           <HeroCarousel />
-        </div>
-      </motion.div>
+        </motion.div>
 
-      <Suspense
-        fallback={
-          <div className="space-y-m">
-            <Skeleton className="h-12 w-[300px]" />
-            <Skeleton className="h-6 w-[500px]" />
-          </div>
-        }
-      >
-        <Hero />
-      </Suspense>
-      <motion.div
-        className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.7 }}
-      >
-        <NewsletterSubscription />
-      </motion.div>
-      <motion.div
-        variants={{
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-        }}
-        transition={{ delay: 1.2, duration: 0.5 }}
-      >
-        <ProjectsSection />
-        <About />
-        <BlogSection />
-        <ContactSection />
-      </motion.div>
-    </motion.main>
+        <Suspense
+          fallback={
+            <div className="space-y-m">
+              <Skeleton className="h-12 w-[300px]" />
+              <Skeleton className="h-6 w-[500px]" />
+            </div>
+          }
+        >
+          <Hero />
+        </Suspense>
+
+        <motion.div
+          {...fadeInUp}
+          className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl"
+        >
+          <NewsletterSubscription />
+        </motion.div>
+
+        <motion.div variants={stagger} initial="initial" animate="animate" className="w-full">
+          <motion.div {...fadeInUp}>
+            <ProjectsSection />
+          </motion.div>
+          <motion.div {...fadeInUp}>
+            <About />
+          </motion.div>
+          <motion.div {...fadeInUp}>
+            <BlogSection />
+          </motion.div>
+          <motion.div {...fadeInUp}>
+            <ContactSection />
+          </motion.div>
+        </motion.div>
+      </motion.main>
+    </AnimatePresence>
   );
 }

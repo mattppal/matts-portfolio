@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { assets } from '@/config/assets';
 import { Card, CardContent } from '@/components/ui/card';
 export interface Video {

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion } from 'motion/react';
 import { FaLinkedin, FaXTwitter, FaYoutube, FaCalendar } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 
@@ -73,7 +73,7 @@ const SocialIcon = ({ social }: { social: (typeof socials)[number] }) => {
 
 export function ContactSection() {
   return (
-    <section id="contact" className="py-16 md:py-24">
+    <section id="contact" className="section-padding">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           initial="hidden"
