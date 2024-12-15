@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 export function Hero() {
   return (
-    <div className="section-padding">
+    <div className="section-padding flex flex-col items-center text-center">
       <motion.div
         initial={{ scale: 0.95, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
@@ -22,7 +22,7 @@ export function Hero() {
           priority
         />
       </motion.div>
-      <h1 className="text-4xl font-bold md:text-6xl">
+      <h1 className="mt-6 text-4xl font-bold md:text-6xl">
         <motion.span
           animate={{
             rotate: [0, -10, 10, -10, 10, 0],
@@ -39,7 +39,7 @@ export function Hero() {
         </motion.span>{' '}
         Hi, I&apos;m Matt
       </h1>
-      <p className="max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl">
+      <p className="mt-4 max-w-[min(320px,90vw)] text-lg text-muted-foreground sm:max-w-2xl sm:text-xl md:text-2xl">
         I build great products and make complex tools simple.
       </p>
     </div>
