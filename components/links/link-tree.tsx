@@ -6,7 +6,7 @@ import { Card, CardDescription, CardHeader, CardTitle } from '../ui/card';
 import Image from 'next/image';
 import { assets } from '../../config/assets';
 import Link from 'next/link';
-import { FaXTwitter, FaYoutube, FaRocket, FaHouse, FaPen } from 'react-icons/fa6';
+import { FaXTwitter, FaYoutube, FaRocket, FaHouse, FaPen, FaLinkedin } from 'react-icons/fa6';
 import type { IconType } from 'react-icons';
 import { ModeToggle } from './mode-toggle';
 
