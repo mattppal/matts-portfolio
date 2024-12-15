@@ -45,6 +45,15 @@ const nextConfig = {
       // Add other domains where your images are hosted
     ],
   },
+  redirects: async () => {
+    return [
+      {
+        source: '/pricing',
+        destination: 'https://yourdevrel.com',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
