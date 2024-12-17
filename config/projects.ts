@@ -96,4 +96,12 @@ export const projects: Project[] = [
     badges: ['Web App', 'Tools'],
     category: 'code',
   },
+  {
+    title: 'msftmd',
+    description: 'Convert Office documents to Markdown.',
+    imageUrl: assets.projects['msftmd'],
+    liveUrl: 'https://msftmd.replit.app/',
+    badges: ['Web App', 'Tools'],
+    category: 'code',
+  },
 ];
