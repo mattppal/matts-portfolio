@@ -56,6 +56,7 @@ export const assets = {
     replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/replit.svg',
     tobiko: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/tobiko.svg',
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
+    "remove-bg": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/remove-bg.jpeg",
     yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/yc.svg',
   },
   projects: {
