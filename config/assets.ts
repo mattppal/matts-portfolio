@@ -56,7 +56,6 @@ export const assets = {
     replit: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/replit.svg',
     tobiko: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/tobiko.svg',
     xai: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/xai.svg',
-    "remove-bg": "https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/remove-bg.jpeg",
     yc: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/logo-carousel/yc.svg',
   },
   projects: {
@@ -64,6 +63,7 @@ export const assets = {
       'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/magnetic-feel.gif',
     msftmd: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/msftmd.jpg',
     'orm-adt': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/orm-adt.png',
+    'remove-bg': 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/remove-bg.jpeg',
     uetl: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/uetl.png',
     vid2gif: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/vid2gif.gif',
     wtw: 'https://zdntzuxuw3xqvcia.public.blob.vercel-storage.com/projects/wtw.gif',
