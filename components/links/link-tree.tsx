@@ -25,18 +25,6 @@ const links: SocialLink[] = [
     icon: FaHouse,
   },
   {
-    title: 'Work with Matt',
-    description: 'Need devrel? Need technical marketing? Click here.',
-    href: 'https://yourdevrel.com',
-    icon: FaRocket,
-  },
-  {
-    title: 'Blog',
-    description: 'Weekly thoughts on building and life.',
-    href: 'https://blog.mattpalmer.io',
-    icon: FaPen,
-  },
-  {
     title: 'X',
     description: 'Follow me for updates',
     href: 'https://x.com/mattppal',
@@ -49,10 +37,22 @@ const links: SocialLink[] = [
     icon: FaYoutube,
   },
   {
+    title: 'Blog',
+    description: 'Weekly thoughts on building and life.',
+    href: 'https://blog.mattpalmer.io',
+    icon: FaPen,
+  },
+  {
     title: 'LinkedIn',
     description: 'Connect with me professionally',
     href: 'https://linkedin.com/in/mattppal',
     icon: FaLinkedin,
+  },
+  {
+    title: 'Work with Matt',
+    description: 'Need devrel? Need technical marketing? Click here.',
+    href: 'https://yourdevrel.com',
+    icon: FaRocket,
   },
 ];
 

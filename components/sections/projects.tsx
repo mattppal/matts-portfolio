@@ -4,7 +4,6 @@ import { motion } from 'motion/react';
 import { ProjectCarousel } from '@/components/project-carousel';
 import { projects } from '@/config/projects';
 import { useMemo } from 'react';
-import { type Project } from '@/components/project-grid';
 
 export function ProjectsSection() {
   const [firstHalf, secondHalf] = useMemo(() => {
