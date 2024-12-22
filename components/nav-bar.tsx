@@ -13,7 +13,6 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-// import { Badge } from '@/components/ui/badge';
 import { AnimatedLogo } from '@/components/animated-logo';
 const menuItems = [
   { name: 'About', id: 'about' },
@@ -106,16 +105,6 @@ function NavigationContent() {
             <AnimatedLogo />
           </Link>
         </motion.div>
-        {/* <motion.div whileHover={{ scale: 1.05 }}>
-          <Link href="https://yourdevrel.com/" target="_blank">
-            <Badge
-              variant="secondary"
-              className="flex items-center gap-2xs bg-primary/10 px-2xs py-2xs text-sm font-medium text-primary shadow-sm transition-all hover:bg-primary/20 hover:shadow-md"
-            >
-              Work with me
-            </Badge>
-          </Link>
-        </motion.div> */}
       </div>
 
       {/* Desktop Navigation */}

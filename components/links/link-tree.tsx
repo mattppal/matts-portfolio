@@ -9,7 +9,7 @@ import Link from 'next/link';
 import { FaXTwitter, FaYoutube, FaRocket, FaHouse, FaPen, FaLinkedin } from 'react-icons/fa6';
 import type { IconType } from 'react-icons';
 import { ModeToggle } from './mode-toggle';
-
+import { ContactSection } from '../sections/contact';
 interface SocialLink {
   title: string;
   description?: string;
@@ -25,28 +25,10 @@ const links: SocialLink[] = [
     icon: FaHouse,
   },
   {
-    title: 'X',
-    description: 'Follow me for updates',
-    href: 'https://x.com/mattppal',
-    icon: FaXTwitter,
-  },
-  {
-    title: 'YouTube',
-    description: 'Watch my content',
-    href: 'https://youtube.com/@mattpalmer',
-    icon: FaYoutube,
-  },
-  {
     title: 'Blog',
     description: 'Weekly thoughts on building and life.',
     href: 'https://blog.mattpalmer.io',
     icon: FaPen,
-  },
-  {
-    title: 'LinkedIn',
-    description: 'Connect with me professionally',
-    href: 'https://linkedin.com/in/mattppal',
-    icon: FaLinkedin,
   },
   {
     title: 'Work with Matt',
@@ -79,12 +61,20 @@ export function LinkTree() {
           Building great products and making complex tools simple
         </p>
       </motion.div>
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.2 }}
+        className="w-full"
+      >
+        <ContactSection />
+      </motion.div>
 
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2 }}
-        className="mt-8 w-full space-y-4"
+        className="w-full space-y-2"
       >
         {links.map((link, index) => (
           <Link

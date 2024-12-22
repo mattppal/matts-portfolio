@@ -2,9 +2,9 @@
 
 import { type Project } from '@/components/project-grid';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { PlaySquare } from 'lucide-react';
+import { Play } from 'lucide-react';
 import Image from 'next/image';
-import { useState, useMemo, useCallback, useRef, type FC } from 'react';
+import { useState, useMemo, useCallback, useRef, type FC, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { VideoModal } from './video-modal';
 
@@ -12,6 +12,21 @@ interface ProjectCarouselProps {
   projects: Project[];
   reverse?: boolean;
 }
+
+// Client-side only wrapper component
+const ClientOnly: FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [hasMounted, setHasMounted] = useState(false);
+
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
+  return <>{children}</>;
+};
 
 export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = false }) => {
   const [videoId, setVideoId] = useState<string | null>(null);
@@ -21,10 +36,8 @@ export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = 
     setVideoId(id);
   }, []);
 
-  // Get 5 random projects for mobile
-  const randomProjects = useMemo(() => {
-    const shuffled = [...projects].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 5);
+  const mobileProjects = useMemo(() => {
+    return projects.slice(0, 5);
   }, [projects]);
 
   const videoModalProps = useMemo(
@@ -60,7 +73,7 @@ export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = 
                 )}
                 <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
                   <div className="rounded-full border-2 border-white/80 p-2 transition-transform group-hover:scale-110">
-                    <PlaySquare className="h-6 w-6 text-white/90" strokeWidth={1.5} />
+                    <Play className="h-5 w-5 translate-x-[1px] text-white/90" strokeWidth={1.5} />
                   </div>
                 </div>
               </div>
@@ -126,12 +139,11 @@ export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = 
     </motion.div>
   );
 
-  // Explicitly return the JSX
-  return (
+  const content = (
     <>
       {/* Mobile Layout */}
       <div className="block space-y-4 px-s md:hidden">
-        {randomProjects.map((project, index) => (
+        {mobileProjects.map((project, index) => (
           <ProjectCard key={`${project.title}-mobile-${index}`} project={project} index={index} />
         ))}
       </div>
@@ -147,9 +159,10 @@ export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = 
                 useScroll({
                   target: ref,
                   offset: ['start end', 'end start'],
+                  layoutEffect: false,
                 }).scrollYProgress,
                 [0, 1],
-                reverse ? ['5%', '-15%'] : ['-15%', '5%']
+                reverse ? ['15%', '-35%'] : ['-35%', '15%']
               ),
             }}
           >
@@ -166,4 +179,6 @@ export const ProjectCarousel: FC<ProjectCarouselProps> = ({ projects, reverse = 
       <VideoModal {...videoModalProps} />
     </>
   );
+
+  return <ClientOnly>{content}</ClientOnly>;
 };

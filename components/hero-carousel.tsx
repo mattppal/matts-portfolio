@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useMemo } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'motion/react';
 import Image from 'next/image';
 import { assets } from '@/config/assets';
@@ -17,18 +17,20 @@ function shuffleArray<T>(array: T[]): T[] {
 
 export function HeroCarousel() {
   const ref = useRef(null);
-  const heroImages = Object.values(assets['hero-carousel']);
+  const heroImages = useMemo(() => Object.values(assets['hero-carousel']), []);
+  const [shuffledImages, setShuffledImages] = useState({
+    mobile: heroImages.slice(0, 4),
+    desktop: [...heroImages, ...heroImages, ...heroImages],
+  });
 
-  const shuffledImages = useMemo(() => {
+  useEffect(() => {
     const shuffled = shuffleArray(heroImages);
-    // For mobile, we'll only show first 4 images
     const mobileImages = shuffled.slice(0, 4);
-    // For desktop carousel, we'll still use the triple-repeated array
-    return {
+    setShuffledImages({
       mobile: mobileImages,
       desktop: [...shuffled, ...shuffled, ...shuffled],
-    };
-  }, [heroImages]);
+    });
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -52,7 +54,7 @@ export function HeroCarousel() {
               width={480}
               height={270}
               className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              priority={index < 2}
+              priority={true}
             />
           </Card>
         ))}
@@ -71,7 +73,7 @@ export function HeroCarousel() {
                     width={480}
                     height={270}
                     className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    priority={index < 3}
+                    priority={true}
                   />
                 </Card>
               </motion.div>

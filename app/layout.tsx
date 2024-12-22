@@ -31,7 +31,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           <div className="relative min-h-screen">
             <GradientBlur intensity="strong" position="top" />
-            <GradientBlur intensity="medium" position="center" />
             <NavigationWrapper>{children}</NavigationWrapper>
             <Footer />
           </div>

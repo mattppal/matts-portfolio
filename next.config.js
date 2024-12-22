@@ -40,10 +40,6 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-    domains: [
-      'images.unsplash.com',
-      // Add other domains where your images are hosted
-    ],
   },
   redirects: async () => {
     return [
