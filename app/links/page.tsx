@@ -2,7 +2,7 @@ import { LinkTree } from '@/components/links/link-tree';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Links | Matt Palmer',
+  title: 'Links',
   description: 'Connect with Matt Palmer across various platforms',
 };
 
