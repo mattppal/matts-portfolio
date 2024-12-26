@@ -24,12 +24,12 @@ const socials = [
     url: 'https://youtube.com/@mattpalmer',
     alt: 'YouTube',
   },
-  {
-    name: 'Email',
-    icon: MdEmail,
-    url: 'mailto:hello@mattpalmer.io',
-    alt: 'Email',
-  },
+  // {
+  //   name: 'Email',
+  //   icon: MdEmail,
+  //   url: 'mailto:hello@mattpalmer.io',
+  //   alt: 'Email',
+  // },
   {
     name: 'TikTok',
     icon: FaTiktok,
